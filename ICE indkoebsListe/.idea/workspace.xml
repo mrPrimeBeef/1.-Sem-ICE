@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="918fcb30-4647-4c8d-aba6-51368ea01a6b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ICE indkoebsListe.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Value Proposition Canvas-20231.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/src/Opgave/Value Proposition Canvas-20231.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../funktionelle krav v1.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Opgave/funktionelle krav v1.docx" afterDir="false" />
-    </list>
+    <list default="true" id="918fcb30-4647-4c8d-aba6-51368ea01a6b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,22 +13,22 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "mrPrimeBeef"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;mrPrimeBeef&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/mrPrimeBeef/1.-Sem-ICE.git",
-    "accountId": "853aecbe-016c-4ef8-a864-61c325eea097"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/mrPrimeBeef/1.-Sem-ICE.git&quot;,
+    &quot;accountId&quot;: &quot;853aecbe-016c-4ef8-a864-61c325eea097&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 3
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2g8COcAA1aPWCnCwkOkm4MiCc6P" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -48,6 +40,10 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "C:/Users/Rolfj/Documents/GitHub/Cph Busniess Data/1Sem ICE/1.-Sem-ICE/ICE indkoebsListe/src/Main.java",
     "vue.rearranger.settings.migration": "true"
@@ -55,6 +51,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Rolfj\Documents\GitHub\Cph Busniess Data\1Sem ICE\1.-Sem-ICE\ICE indkoebsListe\Opgave" />
+      <recent name="C:\Users\Rolfj\Documents\GitHub\Cph Busniess Data\1Sem ICE\1.-Sem-ICE\ICE indkoebsListe" />
       <recent name="C:\Users\Rolfj\Documents\GitHub\Cph Busniess Data\1Sem ICE\1.-Sem-ICE\ICE indkoebsListe\src\Opgave" />
     </key>
   </component>
@@ -75,6 +73,7 @@
       <option name="presentableId" value="Default" />
       <updated>1715069787426</updated>
       <workItem from="1715069788639" duration="40000" />
+      <workItem from="1715069869767" duration="778000" />
     </task>
     <servers />
   </component>
