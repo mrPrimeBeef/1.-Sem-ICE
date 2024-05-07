@@ -117,6 +117,10 @@ package utilty{
 '+ ArrayList<User> readUserData()
 '}
 
+class dBconnecter{
+
+}
+
 
 class TextUI {
 - Scanner scanner
@@ -132,6 +136,7 @@ class TextUI {
 Main *-- Program
 Program *-- Bruger
 Program *-- TextUI
+Program *-- dBconnecter
 Program <|-- AProdukt
 
 Retter <|-- AProdukt

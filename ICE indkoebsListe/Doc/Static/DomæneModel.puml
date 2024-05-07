@@ -5,7 +5,6 @@ object Bruger
 object indskøbsListe
 object Madplan
 object Køleskab
-object titleListe
 object Uge
 object Retter
 object Vare
@@ -16,22 +15,22 @@ object Opskrifter
 
 
 
-Bruger *-- indskøbsListe
-Bruger *-- Madplan
-Bruger *-- Køleskab
-Bruger *-- Retter
+Bruger *-- indskøbsListe :2
+Bruger *-- Madplan: 1
+Bruger *-- Køleskab: 1
+Bruger *-- Retter: ..999
 
-indskøbsListe <|-- titleListe
-titleListe o-- Vare
 
-Madplan *-- Uge
+indskøbsListe o-- Vare
 
-Køleskab <|-- Ingredienser
-Køleskab <|-- fryserListe
-fryserListe <|-- Vare
-Ingredienser <|-- Vare
+Madplan *-- Uge: 1
 
-Retter <|-- Opskrifter
+Køleskab o-- Ingredienser: ..999
+Køleskab o-- fryserListe: 1
+fryserListe o-- Vare: ...999
+Ingredienser o-- Vare: ...999
+
+Retter o-- Opskrifter
 Opskrifter o-- Vare
 
 

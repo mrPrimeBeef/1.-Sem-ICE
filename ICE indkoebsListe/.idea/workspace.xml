@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="918fcb30-4647-4c8d-aba6-51368ea01a6b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Doc/Static/DomæneModel.puml" beforeDir="false" afterPath="$PROJECT_DIR$/Doc/Static/DomæneModel.puml" afterDir="false" />
-    </list>
+    <list default="true" id="918fcb30-4647-4c8d-aba6-51368ea01a6b" name="Changes" comment="Usecases" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,10 +14,16 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="UML Sequence" />
+        <option value="UML Use Case" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="KlasseDiagram" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -45,7 +49,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "DefaultPlantUmlFileTemplate": "UML Sequence",
+    "DefaultPlantUmlFileTemplate": "UML Use Case",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
@@ -84,11 +88,33 @@
       <option name="presentableId" value="Default" />
       <updated>1715069787426</updated>
       <workItem from="1715069788639" duration="40000" />
-      <workItem from="1715069869767" duration="1726000" />
+      <workItem from="1715069869767" duration="11552000" />
     </task>
+    <task id="LOCAL-00001" summary="KlasseDiagram v1.puml">
+      <option name="closed" value="true" />
+      <created>1715080720466</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1715080720466</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Usecases">
+      <option name="closed" value="true" />
+      <created>1715083526684</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1715083526684</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="KlasseDiagram v1.puml" />
+    <MESSAGE value="Usecases" />
+    <option name="LAST_COMMIT_MESSAGE" value="Usecases" />
   </component>
 </project>
