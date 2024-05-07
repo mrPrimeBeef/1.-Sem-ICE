@@ -1,0 +1,154 @@
+@startuml
+
+class Database{
+Brugere(Indkøbslister, retter, køleskabsListe, fryserListe)
+}
+
+class Main {
++ static void main(String[] args)
+}
+
+
+
+
+
+class Bruger {
+- String username
+- String password
+- HashSet<Retter> retter
+- HashSet<AProdukt> fryserListe
+- HashSet<AProdukt> køleskabsListe
+- TreeMap<AProdukt> indkøbsListe
+
+Bruger(String username, String password)
+
++ String getUsername()
++ String getPassword()
+
++ void viewRetter()
++ void viewFryserListe()
++ void viewKøleskabsListe()
++ void viewIndkøbsliste()
+}
+
+class Program {
+- String name
+- Bruger currentUser
+- TextUI ui
+- AProdukt produkt
+'- FileIO io
+- ArrayList<Bruger> userList
+-ArrayList<String> startmenu
+-ArrayList<String> mainMenu
+- HashSet<Retter> retter
+- HashSet<AProdukt> fryserListe
+- HashSet<AProdukt> køleskabsListe
+- TreeMap<AProdukt> indkøbsListe
+
++ Bruger createUser()
++ Boolean login()
++ Boolean checkCredentialAvailability(String credential)
++ void setCurrentUser(User currentUser)
++ void logOut()
+}
+
+class Retter{
+- String navn
+- int antal
+- String ingrediens1
+- String ingrediens2
+- String ingrediens3
+- String ingrediens4
+- String ingrediens5
+- String ingrediens6
+- String ingrediens7
+- double mængde
+
+Retter(String Navn, String ingrediens)
+
++ double mængde(int antal)
+
++ void toString()
+
+}
+
+package Produkt {
+class AProdukt{
+- String vareNavn
+- String holdbarhed
+
+}
+
+class Vare{
+- int pris
++ Vare(int pris, String vareNavn, String holdbarhed)
++ ToString()
+}
+
+class Ingredienser{
++ Ingredienser(String vareNavn, String holdbarhed)
++ ToString()
+}
+}
+
+
+package utilty{
+'class FileIO {
+'- ArrayList<Movie> listOfMovies
+'- ArrayList<Series> listOfSeries
+'- String moviePath
+'- String seriePath
+'- String favoritesPath
+'- String watchedPath
+'- String userSavePath
+
+'+ ArrayList<String> readMovieData()
+'+ ArrayList<String> readSerieData()
+'- ArrayList<String> scanFile(String path)
+'+ void saveFavorites(User currentUser, AMedia media)
+'+ void saveWatched(User currentUser, AMedia media)
+'+ void deleteFavorites(String title, User currentUser)
+'- void mediaSaveOrRemove(User currentUser, String title, String path, boolean willRemove)
+'+ String getFavorites(User currentUser)
+'+ String getWatched(User currentUser)
+'- String getMedia(User currentUser, String path)
+'+ void saveUserData(User currentUser)
+'+ ArrayList<User> readUserData()
+'}
+
+
+class TextUI {
+- Scanner scanner
++ String promptText(String msg)
++ int promptNumeric(String msg)
++ int promptChoice(List<String> optionslist, String msg)
++ void displayList(List<String> list, String msg)
++ void displayMessage(String msg)
+}
+}
+
+
+Main *-- Program
+Program *-- Bruger
+Program *-- TextUI
+Program <|-- AProdukt
+
+Retter <|-- AProdukt
+Program o-- Retter
+
+AProdukt <|-- Ingredienser
+AProdukt <|-- Vare
+
+
+
+'https://devhints.io/plantuml
+'Car <|-- SmallCar      # extension
+'Car *-- Engine         # composition
+'Cars o-- Car           # aggregation
+'Car <|.. SmallCar      # dotted line (use .. instead of --)
+'Car <|--* Car
+
+'-left->
+'-right->
+
+@enduml
