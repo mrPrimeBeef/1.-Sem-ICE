@@ -1,11 +1,48 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+'https://plantuml.com/object-diagram
 
-autonumber
+object Bruger
+object indskøbsListe
+object Madplan
+object Køleskab
+object titleListe
+object Uge
+object Retter
+object Vare
+object Ingredienser
+object fryserListe
+object Opskrifter
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+
+
+Bruger *-- indskøbsListe
+Bruger *-- Madplan
+Bruger *-- Køleskab
+Bruger *-- Retter
+
+indskøbsListe <|-- titleListe
+titleListe o-- Vare
+
+Madplan *-- Uge
+
+Køleskab <|-- Ingredienser
+Køleskab <|-- fryserListe
+fryserListe <|-- Vare
+Ingredienser <|-- Vare
+
+Retter <|-- Opskrifter
+Opskrifter o-- Vare
+
+
+
+
+
+
+
+
+
+
+
+
 @enduml
