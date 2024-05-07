@@ -45,6 +45,7 @@ class Program {
 - HashSet<AProdukt> køleskabsListe
 - TreeMap<AProdukt> indkøbsListe
 
++ void runProgram()
 + Bruger createUser()
 + Boolean login()
 + Boolean checkCredentialAvailability(String credential)
