@@ -8,7 +8,7 @@ usecase logind
 
 usecase seHovedmenu
 
-usecase tilføjIngrediens
+
 
 'seRet
 usecase vælgRet
@@ -19,7 +19,8 @@ usecase seUge
 
 'seKøleskab
 usecase seFryseliste
-usecase seIngrediens
+usecase seIngredienser
+usecase tilføjIngrediens
 
 'seIndkøbsliste
 usecase seVare
@@ -54,10 +55,10 @@ seRet --> opretRet
 vælgRet --> seHovedmenu
 tilføjTilMadplan --> seHovedmenu
 
-seKøleskab --> seIngrediens
+seKøleskab --> seIngredienser
 seKøleskab --> seFryseliste
 seFryseliste --> seHovedmenu
-seIngrediens --> seHovedmenu
+seIngredienser --> seHovedmenu
 
 seMadplan --> seUge
 seUge --> seHovedmenu
@@ -70,7 +71,8 @@ seVare --> seHovedmenu
 tilføjVare --> seHovedmenu
 fjernVare --> seHovedmenu
 
-seIngrediens --> seHovedmenu
+seIngredienser --> seHovedmenu
+
 
 
 
