@@ -61,6 +61,7 @@ public class TextUI {
 
     public void displayListHashMap(HashMap<AProdukt,String> list, String msg){
         displayMessage(msg);
+        int counter = 1;
         // Group the keys by their values
         Map<String, List<AProdukt>> groupedMap = new HashMap<>();
         for (Map.Entry<AProdukt, String> entry : list.entrySet()) {
@@ -72,7 +73,9 @@ public class TextUI {
         for (Map.Entry<String, List<AProdukt>> group : groupedMap.entrySet()) {
             System.out.println(group.getKey() + ":");
             for (AProdukt produkt : group.getValue()) {
-                System.out.println(produkt);
+
+                System.out.println(counter + ") " + produkt);
+            counter++;
             }
         }
 

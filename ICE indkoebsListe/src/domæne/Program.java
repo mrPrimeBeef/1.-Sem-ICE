@@ -15,11 +15,11 @@ public class Program {
     ArrayList<Bruger> brugerList;
     ArrayList<String> startMenu;
     ArrayList<String> mainMenu;
-    Collection<HashSet<Ret>> retter;
-    Collection<HashSet<String>> madplan;
-    Collection<HashSet<AProdukt>> fryseListe = new HashSet<>();
-    Collection<HashSet<AProdukt>> køleskabsListe;
-    Collection<HashMap<AProdukt, String>> indkøbsliste;
+   HashSet<Ret> retter;
+   HashSet<String> madplan;
+   HashSet<AProdukt> fryseListe = new HashSet<>();
+   HashSet<AProdukt> køleskabsListe = new HashSet<>();
+   HashMap<AProdukt, String> indkøbsListe = new HashMap<>();
 
     public Program() {
         this.navn = navn;
@@ -48,7 +48,7 @@ public class Program {
 
     }
 
-    //                      Start domæne.Program
+    //                      Start Program
     public void logIndProgram() {
 
         ui.displayMessage("Velkommen");
@@ -75,8 +75,8 @@ public class Program {
 
         menuChoice = ui.promptChoice(mainMenu, "", 1, 5);
         switch (menuChoice) {
-            case 1: // seIndkøbsliste
-                //ui.displayMessage("Oversigt af din indkøbsliste");
+            case 1: // se Indkøbslister
+                ui.displayMessage("Oversigt af din indkøbslister");
                 kørIndkøbsliste();
                 break;
             case 2: // seMadplan
@@ -100,25 +100,31 @@ public class Program {
     private void kørIndkøbsliste() {
 
         // Test
-        HashMap<AProdukt, String> indkøbsliste = new HashMap<>();
         Vare vare1 = new Vare(10, "argurk");
         Vare vare2 = new Vare(2, "æble");
         Vare vare3 = new Vare(12, "mælk");
-        indkøbsliste.put(vare1, "Grønt");
-        indkøbsliste.put(vare2, "Grønt");
-        indkøbsliste.put(vare3, "Mejeri");
+        indkøbsListe.put(vare1, "Grønt");
+        indkøbsListe.put(vare2, "Grønt");
+        indkøbsListe.put(vare3, "Mejeri");
         // Test
 
         ArrayList<String> liste = new ArrayList();
         liste.add("Indkøbsliste");
         liste.add("Lav ny");
-        int choice = ui.promptChoice(liste, "vælg 1\n", 1, 2);
+        liste.add("tilbage");
+        int choice = ui.promptChoice(liste, "\nvælg 1", 1, 3);
 
         if (choice == 1) {
-            brugIndkøbsliste(indkøbsliste);
+            brugIndkøbsliste(indkøbsListe);
         } else if (choice == 2) {
-
+            lavIndkøbsListe();
+        } else if (choice == 3) {
+            kørProgram();
         }
+    }
+
+    public void seIndkøbsListe(HashMap<AProdukt, String> indkøbsliste){
+        ui.displayListHashMap(indkøbsliste, "");
     }
 
     public void brugIndkøbsliste(HashMap<AProdukt, String> indkøbsliste) {
@@ -126,19 +132,23 @@ public class Program {
         valg.add("Tiløj vare");
         valg.add("Slet vare");
         valg.add("Køb vare");
-        valg.add("Se indkøbsedle");
-        ui.displayListHashMap(indkøbsliste, "");
-        int input = ui.promptChoice(valg, "vælg 1", 1, 4);
+        valg.add("Se Indkøbsseddel");
+        valg.add("tilbage");
+        seIndkøbsListe(indkøbsliste);
+        int input = ui.promptChoice(valg, "\nvælg 1", 1, 5);
 
 
         if (input == 1) {
             føjTilIndkøbsliste(input, valg, indkøbsliste);
         } else if (input == 2) {
-
+            sletVare();
         } else if (input == 3) {
-
+            købVare();
         } else if (input == 4) {
-            kørIndkøbsliste();
+            seIndkøbsListe(indkøbsliste);
+            brugIndkøbsliste(indkøbsliste);
+        } else if (input == 5) {
+            kørProgram();
         }
     }
 
@@ -146,23 +156,42 @@ public class Program {
         while (input == 1) {
             String vareNavn = ui.promptText("Skrive varens navn");
             int pris = ui.promptNumeric("Skriv varens pris");
-            Vare vare6 = new Vare(pris, vareNavn);
+            Vare vare = new Vare(pris, vareNavn);
             String afdeling = ui.promptText("Skriv hvilken afdeling varen befinder sig i");
 
-            indkøbsliste.put(vare6, afdeling);
+            indkøbsliste.put(vare, afdeling);
 
             input = ui.promptChoice(valg, "", 1, 4);
             if (input == 1) {
                 føjTilIndkøbsliste(input, valg, indkøbsliste);
             } else if (input == 2) {
-
+                sletVare();
             } else if (input == 3) {
-
+                købVare();
             } else if (input == 4) {
                 kørIndkøbsliste();
+            } else if (input == 5) {
+                brugIndkøbsliste(indkøbsliste);
             }
         }
     }
+
+   public void lavIndkøbsListe(){
+
+   }
+
+   public void sletVare(){
+       String slet =  ui.promptText("Hvilken vare til du slette?");
+       // der skal laves Aprodukt
+       indkøbsListe.remove(slet);
+   }
+
+   public void  købVare(){
+        String køb =  ui.promptText("Hvilken vare til du købe?");
+       // der skal laves Aprodukt
+        køleskabsListe.add(køb);
+        indkøbsListe.remove(køb);
+   }
 
 
         public void kørMadplan () {
@@ -182,7 +211,7 @@ public class Program {
         }
 
 
-//                      Domæne.Bruger Metoder
+//                      Bruger Metoder
         public Bruger opretBruger () {
             while (true) {
                 String brugerNavn = ui.promptText("Skriv dit bruger navn");
@@ -192,7 +221,7 @@ public class Program {
                     Bruger nyBruger = new Bruger(brugerNavn, password);
                     brugerList.add(nyBruger);
                     setnuværendeBruger(nyBruger);
-                    ui.displayMessage("Domæne.Bruger oprettet");
+                    ui.displayMessage("Bruger oprettet");
                     return nyBruger;
                 } else {
                     ui.displayMessage("bruger navn er allered i brug, vælg et andet.");
