@@ -1,4 +1,6 @@
 package produkt;
 
-public class AProdukt {
+public abstract class AProdukt{
+    String vareNavn;
+    String holdbarHed;
 }

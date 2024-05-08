@@ -21,7 +21,6 @@ public class Program {
         this.navn = navn;
 
         brugerList = new ArrayList();
-
                         // Test
         Bruger rolf = new Bruger("Rolf","Rolf");
         brugerList.add(rolf);
