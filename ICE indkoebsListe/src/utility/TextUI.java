@@ -1,8 +1,8 @@
 package utility;
 
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 public class TextUI {
     private Scanner scanner = new Scanner(System.in);
@@ -76,6 +76,30 @@ public class TextUI {
         int input = promptNumeric("");
         return input;
     }
+    /*
+    public int promptChoiceNew(ArrayList<String> valgmuligheder, String besked)
+    {
+        displayMessage(besked);
+        displayList(valgmuligheder, "");
+        int valg = promptNumeric("Dit valg: ");
+
+        switch(valg)
+        {
+            case 1: // indkøbliste
+
+                break;
+            case 2: // madplan
+                break;
+            case 3: // køleskab
+                break;
+            case 4: // retter
+                break;
+            case 5: // log ud
+                break;
+        }
+
+        return 0;
+    } */
     public int promptChoiceLogin(ArrayList<String> optionslist, String msg){
         displayMessage(msg);
         displayList(optionslist, "");

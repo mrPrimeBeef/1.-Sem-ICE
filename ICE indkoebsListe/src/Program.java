@@ -14,10 +14,11 @@ public class Program {
     ArrayList<Bruger> brugerList;
     ArrayList<String> startMenu;
     ArrayList<String> mainMenu;
-    Collection<HashSet<Ret>> retter = new HashSet<>();
+    Collection<HashSet<Ret>> retter);
+    Collection<HashSet<String>> madplan;
     Collection<HashSet<AProdukt>> fryseListe = new HashSet<>();
-    Collection<HashSet<AProdukt>> køleskabsListe = new HashSet<>();
-    Collection<TreeMap<AProdukt, String>> indkøbsliste = new ArrayList<>();
+    Collection<HashSet<AProdukt>> køleskabsListe;
+    Collection<TreeMap<AProdukt, String>> indkøbsliste;
     // TreeMap<AProdukt, sted> indkøbsliste;
 
     Program(){
@@ -71,27 +72,83 @@ public void kørProgram(){
     mainMenu.add("4) Se retter");
     mainMenu.add("5) Log ud");
 
-    menuChoice = ui.promptChoice(startMenu, "Vælg fra menuen");
+    menuChoice = promptChoiceNew(startMenu, "Vælg fra menuen");
     switch(menuChoice){
         case 1: // seIndkøbsliste
             ui.displayMessage("Oversigt af din indkøbsliste");
+            kørIndkøbsliste();
             break;
         case 2: // seMadplan
             ui.displayMessage("Oversigt af din madplan");
+            kørMadplan();
             break;
         case 3: // seKøleskab
-            ui.displayMessage("Oversigt af dine ingrendienser i køleskabet");
+            ui.displayMessage("Oversigt af dine ingredienser i køleskabet");
+            kørKøleskab();
             break;
         case 4: // se Retter
             ui.displayMessage("Oversigt af dine tilgængelige retter");
+            kørRetter();
             break;
         case 5: // log Ud
+            nuværendeBruger = null;
             afslutProgram();
             break;
 
     }
 
 }
+
+    public void promptChoiceNew(ArrayList<String> valgmuligheder, String besked)
+    {
+        ui.displayMessage(besked);
+        ui.displayList(valgmuligheder, "");
+        int valg = ui.promptNumeric("Dit valg: ");
+
+        switch(valg)
+        {
+            case 1: // indkøbliste
+                kørIndkøbsliste();
+                ui.displayMessage("Indlæser indkøbsliste...");
+                break;
+            case 2: // madplan
+                kørMadplan();
+                ui.displayMessage("Indlæser din madplan...");
+                break;
+            case 3: // køleskab
+                kørKøleskab();
+                ui.displayMessage("Åbner din køleskab...");
+                break;
+            case 4: // retter
+                kørRetter();
+                ui.displayMessage("Indlæser dine retter...");
+                break;
+            case 5: // log ud
+                break;
+        }
+    }
+
+//
+    public void kørIndkøbsliste()
+    {
+        indkøbsliste = new ArrayList<>();
+    }
+
+    public void kørMadplan()
+    {
+        madplan = new HashSet<>();
+
+    }
+
+    public void kørKøleskab()
+    {
+        køleskabsListe = new HashSet<>();
+    }
+
+    public void kørRetter()
+    {
+        retter = new HashSet<>();
+    }
 
 private void afslutProgram()
 {
