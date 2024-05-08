@@ -104,10 +104,6 @@ public void kørProgram(){
     }
 
 
-
-
-
-
     //                      Bruger Metoder
     public Bruger opretBruger() {
         while (true) {
