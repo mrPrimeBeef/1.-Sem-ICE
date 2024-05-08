@@ -14,7 +14,7 @@ public class Program {
     ArrayList<Bruger> brugerList;
     ArrayList<String> startMenu;
     ArrayList<String> mainMenu;
-    Collection<HashSet<Ret>> retter);
+    Collection<HashSet<Ret>> retter;
     Collection<HashSet<String>> madplan;
     Collection<HashSet<AProdukt>> fryseListe = new HashSet<>();
     Collection<HashSet<AProdukt>> køleskabsListe;
@@ -44,21 +44,26 @@ public void logIndProgram(){
 
     ui.displayMessage("Velkommen");
 
-    int choice;
-    choice = ui.promptChoiceLogin(startMenu, "Opret en bruger eller log ind");
 
-    switch (choice) {
-        case 1:
-            this.opretBruger();
-            kørProgram();
-            
-            break;
-        case 2:
-            if (this.logInd()) {
+        int choice;
+
+        choice = ui.promptChoiceLogin(startMenu, "Opret en bruger eller log ind");
+
+        switch (choice) {
+            case 1:
+                this.opretBruger();
                 kørProgram();
-            }
-            break;
-    }
+
+                break;
+            case 2:
+                if (this.logInd()) {
+                    kørProgram();
+                }
+                break;
+        }
+
+
+
 }
 
 public void kørProgram(){
@@ -66,13 +71,15 @@ public void kørProgram(){
     int menuChoice;
 
     mainMenu = new ArrayList<>();
-    mainMenu.add("1) Se indkøbsliste");
-    mainMenu.add("2) Se Madplan");
-    mainMenu.add("3) Se Køleskab");
-    mainMenu.add("4) Se retter");
-    mainMenu.add("5) Log ud");
+    mainMenu.add("Se indkøbsliste");
+    mainMenu.add("Se Madplan");
+    mainMenu.add("Se Køleskab");
+    mainMenu.add("Se retter");
+    mainMenu.add("Log ud");
 
-    menuChoice = promptChoiceNew(startMenu, "Vælg fra menuen");
+
+    ui.displayList(mainMenu, "Vælg fra menuen");
+    menuChoice  = ui.validerInput(1, 5);
     switch(menuChoice){
         case 1: // seIndkøbsliste
             ui.displayMessage("Oversigt af din indkøbsliste");
@@ -91,42 +98,12 @@ public void kørProgram(){
             kørRetter();
             break;
         case 5: // log Ud
-            nuværendeBruger = null;
             afslutProgram();
             break;
 
     }
 
 }
-
-    public void promptChoiceNew(ArrayList<String> valgmuligheder, String besked)
-    {
-        ui.displayMessage(besked);
-        ui.displayList(valgmuligheder, "");
-        int valg = ui.promptNumeric("Dit valg: ");
-
-        switch(valg)
-        {
-            case 1: // indkøbliste
-                kørIndkøbsliste();
-                ui.displayMessage("Indlæser indkøbsliste...");
-                break;
-            case 2: // madplan
-                kørMadplan();
-                ui.displayMessage("Indlæser din madplan...");
-                break;
-            case 3: // køleskab
-                kørKøleskab();
-                ui.displayMessage("Åbner din køleskab...");
-                break;
-            case 4: // retter
-                kørRetter();
-                ui.displayMessage("Indlæser dine retter...");
-                break;
-            case 5: // log ud
-                break;
-        }
-    }
 
 //
     public void kørIndkøbsliste()
@@ -152,6 +129,7 @@ public void kørProgram(){
 
 private void afslutProgram()
 {
+    nuværendeBruger = null;
     ui.displayMessage("Du er nu logget ud");
 }
 
@@ -189,7 +167,6 @@ private void afslutProgram()
                 }
             }
             ui.displayMessage("Forkert brugernavn eller kodeord, prøv igen");
-
         }
     }
 

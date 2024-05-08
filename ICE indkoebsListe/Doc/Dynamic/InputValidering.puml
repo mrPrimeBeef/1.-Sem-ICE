@@ -1,5 +1,39 @@
 @startuml
 'https://plantuml.com/use-case-diagram
 
+actor bruger
+
+usecase seHovedmenu
+
+usecase seIndkøbsliste
+usecase seMadplan
+usecase seKøleskab
+usecase seRetter
+
+usecase indtastValg
+
+'input validering
+usecase "1"
+usecase "5 valgmuligheder"
+usecase validering
+
+top to bottom direction
+bruger --> seHovedmenu
+
+seHovedmenu --> indtastValg
+
+indtastValg --> "1"
+"1" --> validering
+
+
+
+
+
+
+
+
+
+
+
 
 @enduml
