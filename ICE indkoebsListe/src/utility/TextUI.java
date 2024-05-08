@@ -2,9 +2,7 @@ package utility;
 
 import produkt.AProdukt;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class TextUI {
@@ -63,6 +61,20 @@ public class TextUI {
 
     public void displayListHashMap(HashMap<AProdukt,String> list, String msg){
         displayMessage(msg);
+        // Group the keys by their values
+        Map<String, List<AProdukt>> groupedMap = new HashMap<>();
+        for (Map.Entry<AProdukt, String> entry : list.entrySet()) {
+            String value = entry.getValue();
+            groupedMap.computeIfAbsent(value, k -> new ArrayList<>()).add(entry.getKey());
+        }
+
+        // Display the grouped map
+        for (Map.Entry<String, List<AProdukt>> group : groupedMap.entrySet()) {
+            System.out.println(group.getKey() + ":");
+            for (AProdukt produkt : group.getValue()) {
+                System.out.println(produkt);
+            }
+        }
 
     }
 

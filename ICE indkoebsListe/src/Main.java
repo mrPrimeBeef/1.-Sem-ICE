@@ -1,3 +1,4 @@
+import domæne.Program;
 import utility.DBConnector;
 
 public class Main {

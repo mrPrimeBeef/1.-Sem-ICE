@@ -10,4 +10,9 @@ public class Vare extends AProdukt{
         this.vareNavn = vareNavn;
         //this.holdbarHed = holdbarHed;
     }
+
+    @Override
+    public String toString() {
+        return "" + vareNavn;
+    }
 }
