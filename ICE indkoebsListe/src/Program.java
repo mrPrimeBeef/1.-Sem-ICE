@@ -5,6 +5,8 @@ import utility.TextUI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.TreeMap;
+import java.util.Collection;
 import java.util.List;
 
 public class Program {
@@ -15,15 +17,18 @@ public class Program {
     ArrayList<Bruger> brugerList;
     ArrayList<String> startMenu;
     ArrayList<String> mainMenu;
-    HashSet<Ret> retter;
-    HashSet<AProdukt> fryserListe;
-    HashSet<AProdukt> køleskabsListe;
-    HashMap<AProdukt, String> indkøbsliste;
+    Collection<HashSet<Ret>> retter;
+    Collection<HashSet<String>> madplan;
+    Collection<HashSet<AProdukt>> fryseListe = new HashSet<>();
+    Collection<HashSet<AProdukt>> køleskabsListe;
+    Collection<TreeMap<AProdukt, String>> indkøbsliste;
+    // TreeMap<AProdukt, sted> indkøbsliste;
 
     Program(){
         this.navn = navn;
 
         brugerList = new ArrayList();
+
                         // Test
         Bruger rolf = new Bruger("Rolf","Rolf");
         brugerList.add(rolf);
@@ -70,26 +75,43 @@ public void kørProgram(){
     mainMenu.add("Se retter");
     mainMenu.add("Log ud");
 
-    menuChoice = ui.promptChoiceMenu(mainMenu, "Vælg fra menuen");
+
+    ui.displayList(mainMenu, "Vælg fra menuen");
+    menuChoice  = ui.validerInput(1, 5);
     switch(menuChoice){
-    case 1:
-        //indkøbsListe();
-    break;
-    case 2:
-        madPlan();
-    break;
-    case 3:
-        køleskab();
-    break;
-    case 4:
-        retter();
-    break;
-    case 5:
-        logUd();
-    break;
-    default:
-    break;
+        case 1: // seIndkøbsliste
+            ui.displayMessage("Oversigt af din indkøbsliste");
+            kørIndkøbsliste();
+            break;
+        case 2: // seMadplan
+            ui.displayMessage("Oversigt af din madplan");
+            kørMadplan();
+            break;
+        case 3: // seKøleskab
+            ui.displayMessage("Oversigt af dine ingredienser i køleskabet");
+            kørKøleskab();
+            break;
+        case 4: // se Retter
+            ui.displayMessage("Oversigt af dine tilgængelige retter");
+            kørRetter();
+            break;
+        case 5: // log Ud
+            afslutProgram();
+            break;
+
     }
+
+}
+
+//
+    public void kørIndkøbsliste()
+    {
+        indkøbsliste = new ArrayList<>();
+    }
+
+    public void kørMadplan()
+    {
+        madplan = new HashSet<>();
 
 }
 
@@ -127,9 +149,24 @@ public void kørProgram(){
         nuværendeBruger = null;
         ui.displayMessage("Du er nu logget ud \n \n \n ");
     }
+    public void kørKøleskab()
+    {
+        køleskabsListe = new HashSet<>();
+    }
+
+    public void kørRetter()
+    {
+        retter = new HashSet<>();
+    }
+
+private void afslutProgram()
+{
+    nuværendeBruger = null;
+    ui.displayMessage("Du er nu logget ud");
+}
 
 
-    //                      Bruger Metoder
+//                      Bruger Metoder
     public Bruger opretBruger() {
         while (true) {
             String brugerNavn = ui.promptText("Skriv dit bruger navn");

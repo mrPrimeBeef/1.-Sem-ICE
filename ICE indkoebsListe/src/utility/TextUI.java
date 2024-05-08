@@ -1,5 +1,6 @@
 package utility;
 
+import java.lang.reflect.Array;
 import produkt.AProdukt;
 
 import java.util.ArrayList;
@@ -15,19 +16,7 @@ public class TextUI {
         return scanner.nextLine();
     }
 
-    public String promptTextYN(String msg){
-        displayMessage(msg);
-        String input = scanner.nextLine().toLowerCase();
-        switch (input){
-            case "y":
-                return input;
-            case "n":
-                return input;
-            default:
-                displayMessage("Invalid input");
-                return promptTextYN(msg);
-        }
-    }
+
     public int promptNumeric(String msg) {
         String input = promptText(msg);
         if (!input.matches("^[0-9]+$")) { // Brug matches() til at sammenligne med regex
@@ -67,7 +56,7 @@ public class TextUI {
             case "5":
                 return Integer.parseInt(input);
             default:
-                displayMessage("ugyldigt input, prøv igen");
+                displayMessage("Invalid input, try again");
                 return promptNumericFive(msg);
         }
     }
@@ -79,10 +68,25 @@ public class TextUI {
         int input = promptNumeric("");
         return input;
     }
+    // ArrayList options
+    // ui.validerInput(5, "Vælg en af valgmulighederne");
+    public int validerInput(int min, int max)
+    {
+        String regex = String.format("[%d-%d]", min, max);
+
+        String valg = promptText("\nDit valg: ");
+        if (!valg.matches(regex))
+        {
+            displayMessage("Ugyldigt input. Prøv igen");
+            return promptNumeric(valg);
+        } else {
+            return Integer.parseInt(valg);
+        }
+    }
     public int promptChoiceLogin(ArrayList<String> optionslist, String msg){
         displayMessage(msg);
         displayList(optionslist, "");
-        int input = promptNumericTwo("");
+        int input = validerInput(1, 2);
         return input;
     }
     public int promptChoiceMenu(ArrayList<String> optionslist, String msg){
