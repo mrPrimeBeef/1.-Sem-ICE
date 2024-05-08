@@ -1,10 +1,8 @@
 import produkt.AProdukt;
+import produkt.Vare;
 import utility.TextUI;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.TreeMap;
-import java.util.Collection;
+import java.util.*;
 
 public class Program {
     private String navn;
@@ -95,76 +93,64 @@ public void kørProgram(){
         case 5: // log Ud
             afslutProgram();
             break;
-
     }
-
 }
 
-//
-    public void kørIndkøbsliste()
-    {
-        indkøbsliste = new ArrayList<>();
-    }
+    private void kørIndkøbsliste() {
 
-    public void kørMadplan()
-    {
+        // Test
+        HashMap<AProdukt, String> prøve = new HashMap<>();
+        Vare vare1 = new Vare(10,"argurk");
+        Vare vare2 = new Vare(2,"æble");
+        Vare vare3 = new Vare(12,"mælk");
+        prøve.put(vare1, "Grønt");
+        prøve.put(vare2, "Grønt");
+        prøve.put(vare3, "Mejeri");
+        // Test
+
+        ArrayList<String> lister = new ArrayList();
+        lister.add("Indkøbsliste");
+        lister.add("Lav ny");
+        int choice = ui.promptChoice(lister, "vælg 1",1,2);
+
+        if (choice == 1) {
+            // Group the keys by their values
+            Map<String, List<AProdukt>> groupedMap = new HashMap<>();
+            for (Map.Entry<AProdukt, String> entry : prøve.entrySet()) {
+                String value = entry.getValue();
+                groupedMap.computeIfAbsent(value, k -> new ArrayList<>()).add(entry.getKey());
+            }
+
+            // Display the grouped map
+            for (Map.Entry<String, List<AProdukt>> group : groupedMap.entrySet()) {
+                System.out.println(group.getKey() + ":");
+                for (AProdukt produkt : group.getValue()) {
+                    System.out.println(produkt);
+                }
+            }
+        } else if (choice == 2) {
+
+        }
+    }
+    public void kørMadplan(){
         madplan = new HashSet<>();
-
-}
-
-//    private void indkøbsListe() {
-//
-//        // Test
-//        int choice = ui.promptChoiceLogin(lister, "vælg 1");
-//
-//        if (choice == 1) {
-//            // Group the keys by their values
-//            Map<String, List<AProdukt>> groupedMap = new HashMap<>();
-//            for (Map.Entry<AProdukt, String> entry : prøve.entrySet()) {
-//                String value = entry.getValue();
-//                groupedMap.computeIfAbsent(value, k -> new ArrayList<>()).add(entry.getKey());
-//            }
-//
-//            // Display the grouped map
-//            for (Map.Entry<String, List<AProdukt>> group : groupedMap.entrySet()) {
-//                System.out.println(group.getKey() + ":");
-//                for (AProdukt produkt : group.getValue()) {
-//                    System.out.println(produkt);
-//                }
-//            }
-//        } else if (choice == 2) {
-//
-//        }
-//    }
-    private void madPlan() {
     }
-    private void køleskab() {
-    }
-    private void retter() {
-    }
-    public void logUd(){
-        nuværendeBruger = null;
-        ui.displayMessage("Du er nu logget ud \n \n \n ");
-    }
-    public void kørKøleskab()
-    {
+    public void kørKøleskab(){
         køleskabsListe = new HashSet<>();
     }
 
-    public void kørRetter()
-    {
+    public void kørRetter(){
         retter = new HashSet<>();
     }
 
-private void afslutProgram()
-{
+private void afslutProgram(){
     nuværendeBruger = null;
     ui.displayMessage("Du er nu logget ud");
 }
 
 
 //                      Bruger Metoder
-    public Bruger opretBruger() {
+    public Bruger opretBruger(){
         while (true) {
             String brugerNavn = ui.promptText("Skriv dit bruger navn");
 
