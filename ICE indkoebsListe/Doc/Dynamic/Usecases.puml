@@ -1,66 +1,81 @@
 @startuml
 'https://plantuml.com/use-case-diagram
 
-actor user
+actor bruger
 
-usecase createUser
-usecase login
-usecase menu
-usecase Køleskab
-usecase Retter
-usecase IndkøbsListe
-usecase Madplan
-usecase titleListe
+usecase opretBruger
+usecase logind
+
+usecase seHovedmenu
+
+usecase tilføjIngrediens
+
+'seRet
+usecase vælgRet
+usecase opretRet
+usecase tilføjTilMadplan
+
+usecase seUge
+
+'seKøleskab
+usecase seFryseliste
+usecase seIngrediens
+
+'seIndkøbsliste
+usecase seVare
+usecase fjernVare
 usecase tilføjVare
-usecase tilføjIngredienser
-usecase tilføjRet
-usecase brugeRet
-usecase SeRetter
-usecase vælgTilMadplan
-usecase seIngredienser
-usecase tastRet
-usecase tilføjListe
-usecase købt
-usecase slet
 
+'sehovedmenu
+usecase seIndkøbsliste
+usecase seMadplan
+usecase seKøleskab
+usecase seRet
 
 
 top to bottom direction
-user --> createUser
-user --> login
+bruger --> opretBruger
+bruger --> logind
 
-createUser --> login
+opretBruger --> logind
 
-login --> menu
+logind --> seHovedmenu
 
-menu <--> IndkøbsListe
-menu <--> Madplan
-menu <--> Køleskab
-menu <--> Retter
-
-IndkøbsListe <--> titleListe
-IndkøbsListe <--> tilføjListe
-tilføjListe --> titleListe
-titleListe --> slet
-titleListe <--> tilføjVare
+seHovedmenu <--> seIndkøbsliste
+seHovedmenu <--> seMadplan
+seHovedmenu <--> seKøleskab
+seHovedmenu <--> seRet
 
 
-Madplan --> brugeRet
-Madplan <--> tastRet
-tastRet --> brugeRet
-brugeRet <--> tilføjVare
+seRet --> vælgRet
+seRet --> tilføjTilMadplan: en ret
+seRet --> opretRet
 
-Retter <--> tilføjRet
-Retter <--> SeRetter
-SeRetter <--> vælgTilMadplan
-vælgTilMadplan --> Madplan
+vælgRet --> seHovedmenu
+tilføjTilMadplan --> seHovedmenu
 
-Køleskab <--> tilføjIngredienser
-Køleskab <--> seIngredienser
+seKøleskab --> seIngrediens
+seKøleskab --> seFryseliste
+seFryseliste --> seHovedmenu
+seIngrediens --> seHovedmenu
 
-titleListe --> købt
-købt --> slet
-købt --> tilføjIngredienser
+seMadplan --> seUge
+seUge --> seHovedmenu
+
+seIndkøbsliste --> seVare
+seIndkøbsliste --> tilføjVare
+seIndkøbsliste --> fjernVare
+
+seVare --> seHovedmenu
+tilføjVare --> seHovedmenu
+fjernVare --> seHovedmenu
+
+seIngrediens --> seHovedmenu
+
+
+
+
+
 
 
 
