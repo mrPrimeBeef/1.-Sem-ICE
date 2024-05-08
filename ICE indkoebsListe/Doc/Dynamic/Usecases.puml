@@ -23,9 +23,9 @@ usecase seIngredienser
 usecase tilføjIngrediens
 
 'seIndkøbsliste
-usecase seVare
 usecase fjernVare
 usecase tilføjVare
+usecase købVare
 
 'sehovedmenu
 usecase seIndkøbsliste
@@ -63,15 +63,18 @@ seIngredienser --> seHovedmenu
 seMadplan --> seUge
 seUge --> seHovedmenu
 
-seIndkøbsliste --> seVare
+
 seIndkøbsliste --> tilføjVare
 seIndkøbsliste --> fjernVare
+seIndkøbsliste --> købVare
+købVare --> tilføjIngrediens
 
-seVare --> seHovedmenu
+
 tilføjVare --> seHovedmenu
 fjernVare --> seHovedmenu
 
 seIngredienser --> seHovedmenu
+seKøleskab <--> tilføjIngrediens
 
 
 
