@@ -13,47 +13,47 @@ class Main {
 
 
 class Bruger {
-- String username
-- String password
-- HashSet<Retter> retter
+- String brugernavn
+- String kodeord
+- HashSet<Ret> retter
 - HashSet<AProdukt> fryserListe
 - HashSet<AProdukt> køleskabsListe
 - TreeMap<AProdukt> indkøbsListe
 
-Bruger(String username, String password)
+Bruger(String brugernavn, String kodeord)
 
-+ String getUsername()
-+ String getPassword()
++ String hentBrugernavn()
++ String hentKodeord()
 
-+ void viewRetter()
-+ void viewFryserListe()
-+ void viewKøleskabsListe()
-+ void viewIndkøbsliste()
++ void seRet()
++ void seFryseliste()
++ void seKøleskabsListe()
++ void seIndkøbsliste()
 }
 
 class Program {
-- String name
-- Bruger currentUser
+- String navn
+- Bruger nuværendeBruger
 - TextUI ui
 - AProdukt produkt
 '- FileIO io
-- ArrayList<Bruger> userList
--ArrayList<String> startmenu
--ArrayList<String> mainMenu
-- HashSet<Retter> retter
+- ArrayList<Bruger> brugerListe
+-ArrayList<String> startMenu
+-ArrayList<String> hovedMenu
+- HashSet<Ret> retter
 - HashSet<AProdukt> fryserListe
 - HashSet<AProdukt> køleskabsListe
 - TreeMap<AProdukt> indkøbsListe
 
 + void runProgram()
-+ Bruger createUser()
-+ Boolean login()
-+ Boolean checkCredentialAvailability(String credential)
-+ void setCurrentUser(User currentUser)
-+ void logOut()
++ Bruger opretBruger()
++ Boolean logind()
++ Boolean checkKredentiatilgængelighed(String kredential)
++ void indstilNuværendeBruger(User currentUser)
++ void logUd()
 }
 
-class Retter{
+class Ret{
 - String navn
 - int antal
 - String ingrediens1
@@ -65,7 +65,7 @@ class Retter{
 - String ingrediens7
 - double mængde
 
-Retter(String Navn, String ingrediens)
+Ret(String Navn, String ingrediens)
 
 + double mængde(int antal)
 
@@ -139,8 +139,8 @@ Program *-- TextUI
 Program *-- dBconnecter
 Program <|-- AProdukt
 
-Retter <|-- AProdukt
-Program o-- Retter
+Ret <|-- AProdukt
+Program o-- Ret
 
 AProdukt <|-- Ingredienser
 AProdukt <|-- Vare

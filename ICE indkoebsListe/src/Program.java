@@ -3,6 +3,8 @@ import utility.TextUI;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.TreeMap;
+import java.util.Collection;
 
 public class Program {
     private String navn;
@@ -12,9 +14,10 @@ public class Program {
     ArrayList<Bruger> brugerList;
     ArrayList<String> startMenu;
     ArrayList<String> mainMenu;
-    HashSet<Ret> retter;
-    HashSet<AProdukt> fryserListe;
-    HashSet<AProdukt> køleskabsListe;
+    Collection<HashSet<Ret>> retter = new HashSet<>();
+    Collection<HashSet<AProdukt>> fryseListe = new HashSet<>();
+    Collection<HashSet<AProdukt>> køleskabsListe = new HashSet<>();
+    Collection<TreeMap<AProdukt, String>> indkøbsliste = new ArrayList<>();
     // TreeMap<AProdukt, sted> indkøbsliste;
 
     Program(){
@@ -62,20 +65,38 @@ public void kørProgram(){
     int menuChoice;
 
     mainMenu = new ArrayList<>();
-    mainMenu.add("Se indkøbsliste");
-    mainMenu.add("Se Madplan");
-    mainMenu.add("Se Køleskab");
-    mainMenu.add("Se retter");
-    mainMenu.add("Log ud");
+    mainMenu.add("1) Se indkøbsliste");
+    mainMenu.add("2) Se Madplan");
+    mainMenu.add("3) Se Køleskab");
+    mainMenu.add("4) Se retter");
+    mainMenu.add("5) Log ud");
 
     menuChoice = ui.promptChoice(startMenu, "Vælg fra menuen");
     switch(menuChoice){
-        case 1:
+        case 1: // seIndkøbsliste
+            ui.displayMessage("Oversigt af din indkøbsliste");
+            break;
+        case 2: // seMadplan
+            ui.displayMessage("Oversigt af din madplan");
+            break;
+        case 3: // seKøleskab
+            ui.displayMessage("Oversigt af dine ingrendienser i køleskabet");
+            break;
+        case 4: // se Retter
+            ui.displayMessage("Oversigt af dine tilgængelige retter");
+            break;
+        case 5: // log Ud
+            afslutProgram();
+            break;
 
     }
 
 }
 
+private void afslutProgram()
+{
+    ui.displayMessage("Du er nu logget ud");
+}
 
 
 //                      Bruger Metoder
