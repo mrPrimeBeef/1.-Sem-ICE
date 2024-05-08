@@ -1,13 +1,10 @@
 import produkt.AProdukt;
-import produkt.Vare;
 import utility.TextUI;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.TreeMap;
 import java.util.Collection;
-import java.util.List;
 
 public class Program {
     private String navn;
@@ -48,7 +45,7 @@ public void logIndProgram(){
     ui.displayMessage("Velkommen");
 
     int choice;
-    choice = ui.promptChoiceLogin(startMenu, "Opret en bruger eller log ind");
+    choice = ui.promptChoice(startMenu, "Opret en bruger eller log ind",1,2);
 
     switch (choice) {
         case 1:
@@ -76,8 +73,8 @@ public void kørProgram(){
     mainMenu.add("Log ud");
 
 
-    ui.displayList(mainMenu, "Vælg fra menuen");
-    menuChoice  = ui.validerInput(1, 5);
+
+    menuChoice  = ui.promptChoice(mainMenu,"",1,5);
     switch(menuChoice){
         case 1: // seIndkøbsliste
             ui.displayMessage("Oversigt af din indkøbsliste");

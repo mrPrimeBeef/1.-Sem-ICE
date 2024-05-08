@@ -1,6 +1,5 @@
 package utility;
 
-import java.lang.reflect.Array;
 import produkt.AProdukt;
 
 import java.util.ArrayList;
@@ -28,73 +27,28 @@ public class TextUI {
     }
 
 
-
-    public int promptNumericTwo(String msg) {
-        String input = promptText(msg);
-        switch (input) {
-            case "1":
-                return Integer.parseInt(input);
-            case "2":
-                return Integer.parseInt(input);
-            default:
-                displayMessage("ugyldigt input, prøv igen");
-                return promptNumericTwo(msg);
-        }
-    }
-
-    public int promptNumericFive(String msg) {
-        String input = promptText(msg);
-        switch (input) {
-            case "1":
-                return Integer.parseInt(input);
-            case "2":
-                return Integer.parseInt(input);
-            case "3":
-                return Integer.parseInt(input);
-            case "4":
-                return Integer.parseInt(input);
-            case "5":
-                return Integer.parseInt(input);
-            default:
-                displayMessage("Invalid input, try again");
-                return promptNumericFive(msg);
-        }
-    }
-
-
-    public int promptChoice(ArrayList<String> optionslist, String msg){
-        displayMessage(msg);
-        displayList(optionslist, "");
-        int input = promptNumeric("");
-        return input;
-    }
     // ArrayList options
     // ui.validerInput(5, "Vælg en af valgmulighederne");
     public int validerInput(int min, int max)
     {
         String regex = String.format("[%d-%d]", min, max);
 
-        String valg = promptText("\nDit valg: ");
+        String valg = promptText("");
         if (!valg.matches(regex))
         {
             displayMessage("Ugyldigt input. Prøv igen");
-            return promptNumeric(valg);
+            return validerInput(min,max);
         } else {
             return Integer.parseInt(valg);
         }
     }
-    public int promptChoiceLogin(ArrayList<String> optionslist, String msg){
+    public int promptChoice(ArrayList<String> optionslist, String msg, int min, int max){
         displayMessage(msg);
         displayList(optionslist, "");
-        int input = validerInput(1, 2);
+        int input = validerInput(min, max);
         return input;
     }
-    public int promptChoiceMenu(ArrayList<String> optionslist, String msg){
-        displayMessage(msg);
-        displayList(optionslist, "");
-        int input = promptNumericFive("");
-        return input;
-    }
+
 
 
     public void displayList(ArrayList<String> list, String msg){
