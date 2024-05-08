@@ -1,9 +1,13 @@
 package produkt;
 
 public class Vare extends AProdukt{
-    public int pris;
+    private int pris;
+    String vareNavn;
+    //String holdbarHed;
 
-    public Vare(int pris) {
+    public Vare(int pris, String vareNavn) {
         this.pris = pris;
+        this.vareNavn = vareNavn;
+        //this.holdbarHed = holdbarHed;
     }
 }

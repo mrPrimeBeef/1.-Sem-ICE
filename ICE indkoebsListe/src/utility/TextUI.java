@@ -1,8 +1,11 @@
 package utility;
 
+import produkt.AProdukt;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
+
 
 public class TextUI {
     private Scanner scanner = new Scanner(System.in);
@@ -91,13 +94,18 @@ public class TextUI {
 
 
     public void displayList(ArrayList<String> list, String msg){
-        System.out.println(msg);
+       displayMessage(msg);
         int counter = 1;
         for (String option : list) {
             System.out.print(counter + ") ");
             counter++;
             System.out.println(option);
         }
+    }
+
+    public void displayListHashMap(HashMap<AProdukt,String> list, String msg){
+        displayMessage(msg);
+
     }
 
 

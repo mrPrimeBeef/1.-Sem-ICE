@@ -1,4 +1,3 @@
-import java.util.LinkedHashSet;
 
 public class Bruger {
     private String brugerNavn;

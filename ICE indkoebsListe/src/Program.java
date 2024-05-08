@@ -1,8 +1,11 @@
 import produkt.AProdukt;
+import produkt.Vare;
 import utility.TextUI;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 public class Program {
     private String navn;
@@ -15,7 +18,7 @@ public class Program {
     HashSet<Ret> retter;
     HashSet<AProdukt> fryserListe;
     HashSet<AProdukt> køleskabsListe;
-    // TreeMap<AProdukt, sted> indkøbsliste;
+    HashMap<AProdukt, String> indkøbsliste;
 
     Program(){
         this.navn = navn;
@@ -70,7 +73,7 @@ public void kørProgram(){
     menuChoice = ui.promptChoiceMenu(mainMenu, "Vælg fra menuen");
     switch(menuChoice){
     case 1:
-        indkøbsListe();
+        //indkøbsListe();
     break;
     case 2:
         madPlan();
@@ -90,8 +93,30 @@ public void kørProgram(){
 
 }
 
-    private void indkøbsListe() {
-    }
+//    private void indkøbsListe() {
+//
+//        // Test
+//        int choice = ui.promptChoiceLogin(lister, "vælg 1");
+//
+//        if (choice == 1) {
+//            // Group the keys by their values
+//            Map<String, List<AProdukt>> groupedMap = new HashMap<>();
+//            for (Map.Entry<AProdukt, String> entry : prøve.entrySet()) {
+//                String value = entry.getValue();
+//                groupedMap.computeIfAbsent(value, k -> new ArrayList<>()).add(entry.getKey());
+//            }
+//
+//            // Display the grouped map
+//            for (Map.Entry<String, List<AProdukt>> group : groupedMap.entrySet()) {
+//                System.out.println(group.getKey() + ":");
+//                for (AProdukt produkt : group.getValue()) {
+//                    System.out.println(produkt);
+//                }
+//            }
+//        } else if (choice == 2) {
+//
+//        }
+//    }
     private void madPlan() {
     }
     private void køleskab() {
@@ -131,7 +156,7 @@ public void kørProgram(){
             for (Bruger u : brugerList) {
                 if (username.equals(u.getBrugerNavn()) && password.equals(u.getKodeOrd())) {
                     setnuværendeBruger(u);
-                    ui.displayMessage("Login successful");
+                    ui.displayMessage("Log ind succesfuld");
                     return true;
 
                 }
