@@ -12,15 +12,20 @@ public class Program {
     private String navn;
     private Bruger nuværendeBruger;
     private TextUI ui;
-    private DBConnector dbConnector = new DBConnector();
-    private IndkøbsListeKlasse indkøbsListeklasse = new IndkøbsListeKlasse();
-    private MadPlanKlasse madPlanKlasse = new MadPlanKlasse();
+    private AProdukt produkt;
+    private IndkøbsListeKlasse indkøbsListeklasse;
+    private DBConnector dbConnector;
+    private MadPlanKlasse madPlanKlasse;
     private ArrayList<String> startMenu;
     private ArrayList<String> mainMenu;
     private HashSet<Ret> retter;
     private HashSet<AProdukt> køleskabsListe = new HashSet<>();
 
     public Program() {
+        dbConnector = new DBConnector();
+        indkøbsListeklasse = new IndkøbsListeKlasse(dbConnector);
+        madPlanKlasse = new MadPlanKlasse(dbConnector);
+
         this.navn = navn;
 
         this.ui = new TextUI();

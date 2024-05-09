@@ -1,8 +1,7 @@
 package utility;
 
-import domæne.Program;
 import domæne.Bruger;
-import utility.TextUI;
+import produkt.Vare;
 
 import java.sql.*;
 
@@ -10,13 +9,15 @@ import java.sql.*;
 public class DBConnector {
     TextUI ui;
     Bruger nuværendeBruger;
+    String brugerNavn;
+    Vare vare;
 
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/icedatabase";
+    static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/ice";
 
     //  Database credentials
     static final String USER = "root";
-    static final String PASS = "Esn64mjy:1";
+    static final String PASS = "atx33xmw!";
 
     public DBConnector() {
         this.ui = new TextUI();
@@ -44,12 +45,13 @@ public class DBConnector {
                     pstmt.executeUpdate();
 
                     // Opret køleskab og indkøbsliste for den nye bruger
-                    opretKøleskab(brugerNavn);
-                    opretIndkøbsliste(brugerNavn);
+                  //  opretKøleskab(brugerNavn);
+                   // opretIndkøbsliste(brugerNavn);
 
                     ui.displayMessage("Bruger oprettet");
                     Bruger bruger = new Bruger(brugerNavn, password);
-                    setnuværendeBruger(bruger);
+                    setCurrentUsername(brugerNavn);
+
                     return bruger;
 
                 } catch (SQLException e) {
@@ -61,14 +63,14 @@ public class DBConnector {
     }
 
 
-    private void opretKøleskab(String brugerNavn)  {
+    private void opretKøleskab(String brugerNavn) {
         try (
                 Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
                 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO koeleskab (brugernavn) VALUES (?)")
         ) {
             pstmt.setString(1, brugerNavn);
             pstmt.executeUpdate();
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             ui.displayMessage("Fejl under oprettelse af bruger: " + e.getMessage());
         }
     }
@@ -80,7 +82,7 @@ public class DBConnector {
         ) {
             pstmt.setString(1, brugerNavn);
             pstmt.executeUpdate();
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             ui.displayMessage("Fejl under oprettelse af bruger: " + e.getMessage());
         }
     }
@@ -112,12 +114,13 @@ public class DBConnector {
             return false; // Returner false i tilfælde af en fejl
         }
     }
+
     public boolean logInd() {
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         while (true) {
-            String brugerNavn = ui.promptText("Skriv dit brugernavn");
+            brugerNavn = ui.promptText("Skriv dit brugernavn");
             String kodeord = ui.promptText("Skriv dit kodeord");
 
             try {
@@ -136,8 +139,10 @@ public class DBConnector {
                     // Brugernavn og kodeord findes i databasen
                     ui.displayMessage("Log ind succesfuld");
                     Bruger bruger = new Bruger(brugerNavn, kodeord);
-                    setnuværendeBruger(bruger); // Set the current user
+                    setCurrentUsername(brugerNavn);// Set the current user
+
                     return true;
+
                 } else {
                     // Forkert brugernavn eller kodeord
                     ui.displayMessage("Forkert brugernavn eller kodeord, prøv igen");
@@ -173,8 +178,38 @@ public class DBConnector {
             }
         }
     }
-    public void setnuværendeBruger (Bruger nuværendeBruger){
-        this.nuværendeBruger = nuværendeBruger;
+
+    public void setCurrentUsername(String brugerNavn) {
+        this.brugerNavn = brugerNavn;
     }
+
+
+    public void gemTilListe(Vare vare) {
+
+
+        try {
+            // Opret forbindelse til databasen
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            // SQL-forespørgsel til at indsætte brugeroplysninger i databasen
+
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO liste (brugernavn, Varer, mængde, pris) VALUES (?, ?, ?, ?)");
+
+            // Sæt parameterne for PreparedStatement
+           pstmt.setString(1, this.brugerNavn);
+            pstmt.setString(2, vare.getVareNavn());
+            pstmt.setInt(3, vare.getMængde());
+            pstmt.setInt(4, vare.getPris());
+
+            // Udfør SQL-forespørgslen for at indsætte brugeren i databasen
+            pstmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            ui.displayMessage("Fejl under indsæt af vare: " + e.getMessage());
+
+        }
+    }
+
 }
+
 

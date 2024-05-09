@@ -13,6 +13,18 @@ public class Vare extends AProdukt{
         this.mængde = mængde;
     }
 
+    public int getPris() {
+        return pris;
+    }
+
+    public String getVareNavn() {
+        return vareNavn;
+    }
+
+    public int getMængde() {
+        return mængde;
+    }
+
     @Override
     public String toString() {
         return "" + vareNavn + ". Mængde: " + mængde;

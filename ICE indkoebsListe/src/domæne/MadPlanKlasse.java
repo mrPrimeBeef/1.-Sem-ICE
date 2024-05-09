@@ -2,6 +2,7 @@ package domæne;
 
 import produkt.AProdukt;
 import produkt.Ret;
+import utility.DBConnector;
 import utility.TextUI;
 
 import java.util.ArrayList;
@@ -20,7 +21,8 @@ public class MadPlanKlasse {
     HashSet<AProdukt> køleskabsListe = new HashSet<>();
     HashMap<AProdukt, String> indkøbsListe = new HashMap<>();
 
-    public MadPlanKlasse() {
+
+    public MadPlanKlasse(DBConnector dbConnector) {
         madplan = new ArrayList<>();
 
         madplan.add("Mandag: ");
