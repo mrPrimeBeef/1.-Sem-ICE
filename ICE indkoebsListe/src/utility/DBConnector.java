@@ -1,9 +1,11 @@
 package utility;
 
 import domæne.Bruger;
+import produkt.AProdukt;
 import produkt.Vare;
 
 import java.sql.*;
+import java.util.HashMap;
 
 
 public class DBConnector {
@@ -50,7 +52,7 @@ public class DBConnector {
 
                     ui.displayMessage("Bruger oprettet");
                     Bruger bruger = new Bruger(brugerNavn, password);
-                    setCurrentUsername(brugerNavn);
+                    setBrugerNavn(brugerNavn);
 
                     return bruger;
 
@@ -139,7 +141,7 @@ public class DBConnector {
                     // Brugernavn og kodeord findes i databasen
                     ui.displayMessage("Log ind succesfuld");
                     Bruger bruger = new Bruger(brugerNavn, kodeord);
-                    setCurrentUsername(brugerNavn);// Set the current user
+                    setBrugerNavn(brugerNavn);// Set the current user
 
                     return true;
 
@@ -179,10 +181,13 @@ public class DBConnector {
         }
     }
 
-    public void setCurrentUsername(String brugerNavn) {
+    public void setBrugerNavn(String brugerNavn) {
         this.brugerNavn = brugerNavn;
     }
 
+    public String getBrugerNavn() {
+        return brugerNavn;
+    }
 
     public void gemTilListe(Vare vare) {
 
@@ -192,13 +197,14 @@ public class DBConnector {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             // SQL-forespørgsel til at indsætte brugeroplysninger i databasen
 
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO liste (brugernavn, Varer, mængde, pris) VALUES (?, ?, ?, ?)");
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO liste (brugernavn, Varer, mængde, pris, afdeling) VALUES (?, ?, ?, ?, ?)");
 
             // Sæt parameterne for PreparedStatement
            pstmt.setString(1, this.brugerNavn);
             pstmt.setString(2, vare.getVareNavn());
             pstmt.setInt(3, vare.getMængde());
             pstmt.setInt(4, vare.getPris());
+            pstmt.setString(5, vare.getAfdeling());
 
             // Udfør SQL-forespørgslen for at indsætte brugeren i databasen
             pstmt.executeUpdate();
@@ -209,6 +215,69 @@ public class DBConnector {
 
         }
     }
+
+    public HashMap<AProdukt, String> visIndkøbsListe(String brugernavn){
+            HashMap<AProdukt, String> vareMap = new HashMap<>();
+            try {
+                // Opret forbindelse til databasen
+                Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+                // SQL-forespørgsel til at hente vareoplysninger for den angivne bruger
+                PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM liste WHERE brugernavn = ?");
+                // Sæt parameteren for PreparedStatement
+                pstmt.setString(1, brugernavn);
+                // Udfør SQL-forespørgslen
+                ResultSet rs = pstmt.executeQuery();
+                // Iterér gennem resultatet og opret Vare-objekter
+                while (rs.next()) {
+                    String vareNavn = rs.getString("Varer");
+                    int mængde = rs.getInt("mængde");
+                    int pris = rs.getInt("pris");
+                    String afdeling = rs.getString("afdeling");
+                    // Opret Vare-objekt
+                    Vare vare = new Vare(vareNavn, mængde, pris, afdeling);
+                    // Tilføj Vare-objektet til HashMap med varenavnet som nøgle
+                    vareMap.put(vare, afdeling);
+                }
+                // Luk ResultSet, PreparedStatement og Connection
+                rs.close();
+                pstmt.close();
+                conn.close();
+            } catch (SQLException e) {
+                ui.displayMessage("Fejl under hentning af vareliste: " + e.getMessage());
+            }
+            return vareMap;
+    }
+
+    public void fjernVAre(String vareNavn) {
+        try {
+            // Establish connection to the database
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            // Prepare the SQL statement to delete the item
+            String sql = "DELETE FROM liste WHERE varer = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            // Set the parameter for the PreparedStatement
+            pstmt.setString(1, vareNavn);
+
+            // Execute the delete statement
+            int rowsAffected = pstmt.executeUpdate();
+
+            // Check if any rows were affected (i.e., if the item was deleted successfully)
+            if (rowsAffected > 0) {
+                System.out.println("varen er slettet.");
+            } else {
+                System.out.println("varen er ikke fundet.");
+            }
+
+            // Close PreparedStatement and Connection
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
 

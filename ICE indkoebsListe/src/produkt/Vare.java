@@ -4,13 +4,15 @@ public class Vare extends AProdukt{
     private int pris;
     private String vareNavn;
     private int mængde;
+    private String afdeling;
     //String holdbarHed;
 
 
-    public Vare(String vareNavn, int mængde, int pris) {
+    public Vare(String vareNavn, int mængde, int pris, String afdeling) {
         this.pris = pris;
         this.vareNavn = vareNavn;
         this.mængde = mængde;
+        this.afdeling = afdeling;
     }
 
     public int getPris() {
@@ -23,6 +25,10 @@ public class Vare extends AProdukt{
 
     public int getMængde() {
         return mængde;
+    }
+
+    public String getAfdeling() {
+        return afdeling;
     }
 
     @Override
