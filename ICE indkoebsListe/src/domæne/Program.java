@@ -23,7 +23,7 @@ public class Program {
 
     public Program() {
         this.navn = navn;
-        this.gui = gui;
+        gui = new GUI();
 
 
 
