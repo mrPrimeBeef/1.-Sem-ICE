@@ -12,28 +12,17 @@ public class Program {
     private String navn;
     private Bruger nuværendeBruger;
     private TextUI ui;
-    AProdukt produkt;
-    IndkøbsListeKlasse indkøbsListeklasse;
-    MadPlanKlasse madPlanKlasse = new MadPlanKlasse();
-    ArrayList<Bruger> brugerList;
-    ArrayList<String> startMenu;
-    ArrayList<String> mainMenu;
-   HashSet<Ret> retter;
-   HashSet<String> madplan;
-   HashSet<AProdukt> fryseListe = new HashSet<>();
-   HashSet<AProdukt> køleskabsListe = new HashSet<>();
-   HashMap<AProdukt, String> indkøbsListe = new HashMap<>();
+    private DBConnector dbConnector = new DBConnector();
+    private AProdukt produkt;
+    private IndkøbsListeKlasse indkøbsListeklasse;
+    private MadPlanKlasse madPlanKlasse = new MadPlanKlasse();
+    private ArrayList<String> startMenu;
+    private ArrayList<String> mainMenu;
+    private HashSet<Ret> retter;
+    private HashSet<AProdukt> køleskabsListe = new HashSet<>();
 
     public Program() {
         this.navn = navn;
-
-
-        brugerList = new ArrayList();
-
-        // Test
-        Bruger rolf = new Bruger("Rolf", "Rolf");
-        brugerList.add(rolf);
-        // Test
 
         this.ui = new TextUI();
 
@@ -103,8 +92,6 @@ public class Program {
 
 
 
-
-
         public void kørKøleskab () {
             køleskabsListe = new HashSet<>();
         }
@@ -116,59 +103,6 @@ public class Program {
         private void afslutProgram () {
             nuværendeBruger = null;
             ui.displayMessage("Du er nu logget ud");
-        }
-
-
-//                      Bruger Metoder
-        public Bruger opretBruger () {
-            while (true) {
-                String brugerNavn = ui.promptText("Skriv dit bruger navn");
-
-                if (checkCredentialAvailability(brugerNavn)) {
-                    String password = ui.promptText("Skriv et kodeord");
-                    Bruger nyBruger = new Bruger(brugerNavn, password);
-                    brugerList.add(nyBruger);
-                    setnuværendeBruger(nyBruger);
-                    ui.displayMessage("Bruger oprettet");
-                    return nyBruger;
-                } else {
-                    ui.displayMessage("bruger navn er allered i brug, vælg et andet.");
-
-                }
-            }
-        }*/
-
-        /*public boolean logInd () {
-            while (true) {
-                String username = ui.promptText("Skriv dit bruger navn");
-                String password = ui.promptText("Skriv dit kodeord");
-
-                for (Bruger u : brugerList) {
-                    if (username.equals(u.getBrugerNavn()) && password.equals(u.getKodeOrd())) {
-                        setnuværendeBruger(u);
-                        ui.displayMessage("Log ind succesfuld");
-                        return true;
-
-                    }
-                }
-                ui.displayMessage("Forkert brugernavn eller kodeord, prøv igen");
-
-            }
-        }*/
-
-
-       /*public boolean checkCredentialAvailability (String credential){
-            for (Bruger bruger : brugerList) {
-                if (bruger.getBrugerNavn().equals(credential)) {
-                    return false; // Credential exists
-                }
-            }
-            ui.displayMessage(credential + " er ledig");
-            return true; // Credential is available
-        }*/
-
-        public void setnuværendeBruger (Bruger nuværendeBruger){
-            this.nuværendeBruger = nuværendeBruger;
         }
 
     }

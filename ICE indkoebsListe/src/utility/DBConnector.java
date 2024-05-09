@@ -9,18 +9,14 @@ import java.sql.*;
 
 public class DBConnector {
     TextUI ui;
+    Bruger nuværendeBruger;
 
-
-
-
-
-    // JDBC driver name and database URL
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost:3306/ice";
+    static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/icedatabase";
 
     //  Database credentials
     static final String USER = "root";
-    static final String PASS = "atx33xmw!";
+    static final String PASS = "Esn64mjy:1";
 
     public DBConnector() {
         this.ui = new TextUI();
@@ -52,7 +48,10 @@ public class DBConnector {
                     opretIndkøbsliste(brugerNavn);
 
                     ui.displayMessage("Bruger oprettet");
-                    return new Bruger(brugerNavn, password);
+                    Bruger bruger = new Bruger(brugerNavn, password);
+                    setnuværendeBruger(bruger);
+                    return bruger;
+
                 } catch (SQLException e) {
                     ui.displayMessage("Fejl under oprettelse af bruger: " + e.getMessage());
                     return null; // Returner null i tilfælde af en fejl
@@ -121,8 +120,6 @@ public class DBConnector {
             String brugerNavn = ui.promptText("Skriv dit brugernavn");
             String kodeord = ui.promptText("Skriv dit kodeord");
 
-
-
             try {
                 // Opret forbindelse til databasen
                 conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -138,6 +135,8 @@ public class DBConnector {
                 if (rs.next()) {
                     // Brugernavn og kodeord findes i databasen
                     ui.displayMessage("Log ind succesfuld");
+                    Bruger bruger = new Bruger(brugerNavn, kodeord);
+                    setnuværendeBruger(bruger); // Set the current user
                     return true;
                 } else {
                     // Forkert brugernavn eller kodeord
@@ -173,6 +172,9 @@ public class DBConnector {
                 }
             }
         }
+    }
+    public void setnuværendeBruger (Bruger nuværendeBruger){
+        this.nuværendeBruger = nuværendeBruger;
     }
 }
 
