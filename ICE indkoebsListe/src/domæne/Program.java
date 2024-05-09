@@ -3,6 +3,7 @@ package domæne;
 import produkt.AProdukt;
 import produkt.Ret;
 import produkt.Vare;
+import utility.DBConnector;
 import utility.TextUI;
 
 import java.util.*;
@@ -20,9 +21,12 @@ public class Program {
     Collection<HashSet<AProdukt>> fryseListe = new HashSet<>();
     Collection<HashSet<AProdukt>> køleskabsListe;
     Collection<HashMap<AProdukt, String>> indkøbsliste;
+    DBConnector dbConnector = new DBConnector();
+
 
     public Program() {
         this.navn = navn;
+
 
         brugerList = new ArrayList();
 
@@ -58,12 +62,13 @@ public class Program {
 
         switch (choice) {
             case 1:
-                this.opretBruger();
+                 // Opret en instans af DBConnector-klassen
+                dbConnector.opretBruger();
                 kørProgram();
-
                 break;
             case 2:
-                if (this.logInd()) {
+
+                if (dbConnector.logInd()) {
                     kørProgram();
                 }
                 break;
@@ -183,7 +188,7 @@ public class Program {
 
 
 //                      Domæne.Bruger Metoder
-        public Bruger opretBruger () {
+       /* public Bruger opretBruger () {
             while (true) {
                 String brugerNavn = ui.promptText("Skriv dit bruger navn");
 
@@ -199,9 +204,9 @@ public class Program {
 
                 }
             }
-        }
+        }*/
 
-        public boolean logInd () {
+        /*public boolean logInd () {
             while (true) {
                 String username = ui.promptText("Skriv dit bruger navn");
                 String password = ui.promptText("Skriv dit kodeord");
@@ -217,10 +222,10 @@ public class Program {
                 ui.displayMessage("Forkert brugernavn eller kodeord, prøv igen");
 
             }
-        }
+        }*/
 
 
-        boolean checkCredentialAvailability (String credential){
+       /*public boolean checkCredentialAvailability (String credential){
             for (Bruger bruger : brugerList) {
                 if (bruger.getBrugerNavn().equals(credential)) {
                     return false; // Credential exists
@@ -228,7 +233,7 @@ public class Program {
             }
             ui.displayMessage(credential + " er ledig");
             return true; // Credential is available
-        }
+        }*/
 
         public void setnuværendeBruger (Bruger nuværendeBruger){
             this.nuværendeBruger = nuværendeBruger;
