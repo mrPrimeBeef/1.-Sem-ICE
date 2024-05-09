@@ -1,6 +1,6 @@
-package utility;
+package model;
 
-import domæne.Bruger;
+import utility.TextUI;
 
 import java.sql.*;
 

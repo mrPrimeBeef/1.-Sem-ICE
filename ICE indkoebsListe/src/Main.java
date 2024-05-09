@@ -1,5 +1,5 @@
-import domæne.Program;
-import utility.DBConnector;
+import model.Program;
+import model.DBConnector;
 import utility.GUI;
 
 import javax.swing.*;

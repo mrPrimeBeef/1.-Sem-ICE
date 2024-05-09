@@ -1,4 +1,4 @@
-package gui_interfaces;
+package views;
 
 public class OprettetBruger {
 }

@@ -1,8 +1,7 @@
-package domæne;
+package model;
 
 import produkt.AProdukt;
 import produkt.Ret;
-import utility.DBConnector;
 import utility.GUI;
 
 import java.util.*;
