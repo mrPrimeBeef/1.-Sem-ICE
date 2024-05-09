@@ -1,4 +1,4 @@
-package domain;
+package domæne;
 
 import produkt.AProdukt;
 import produkt.Ret;
@@ -10,20 +10,20 @@ import java.util.*;
 public class Program {
     private String navn;
     private Bruger nuværendeBruger;
-    private GUI gui;
+    public GUI gui;
     private DBConnector dbConnector = new DBConnector();
     private AProdukt produkt;
     private IndkøbsListeKlasse indkøbsListeklasse;
     private MadPlanKlasse madPlanKlasse = new MadPlanKlasse();
-    private ArrayList<String> startMenu;
-    private ArrayList<String> mainMenu;
+    public ArrayList<String> startMenu;
+    public ArrayList<String> mainMenu;
     private HashSet<Ret> retter;
     private HashSet<AProdukt> køleskabsListe = new HashSet<>();
 
     public Program() {
         this.navn = navn;
 
-        this.gui = gui;
+
 
         startMenu = new ArrayList<>();
 
@@ -39,6 +39,10 @@ public class Program {
 
 
     }
+
+
+
+
 
     //                      Start Program
     public void startProgram() {

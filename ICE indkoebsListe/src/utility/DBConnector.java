@@ -1,7 +1,6 @@
 package utility;
 
-import domæne.Program;
-import domain.Bruger;
+import domæne.Bruger;
 
 import java.sql.*;
 

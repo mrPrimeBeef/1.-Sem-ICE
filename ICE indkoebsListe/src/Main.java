@@ -1,6 +1,6 @@
-import domain.Program;
-import utility.GUI;
+import domæne.Program;
 import utility.DBConnector;
+import utility.GUI;
 
 import javax.swing.*;
 /*
@@ -13,16 +13,21 @@ public class Main {
 
         program.startProgram();
     }
-}/*
-public static void main(String[] args) {
-    SwingUtilities.invokeLater(new Runnable() {
-        @Override
-        public void run() {
-            GUI gui = new GUI();
-            Program program = new Program(gui);
-            DBConnector db = new DBConnector();
-        }
-    });
-
-}
 }*/
+public class Main {
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                GUI gui = new GUI();
+                Program program = new Program(); // Pass GUI object to Program constructor
+                DBConnector db = new DBConnector();
+
+                db.dbConnect();
+
+                program.startProgram();
+            }
+        });
+    }
+}
+

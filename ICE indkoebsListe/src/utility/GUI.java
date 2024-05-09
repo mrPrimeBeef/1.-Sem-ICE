@@ -1,12 +1,13 @@
 package utility;
 
-import domain.Program;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import domæne.Program;
+
 
 public class GUI extends JFrame {
     private JPanel mainWindow;
@@ -15,17 +16,17 @@ public class GUI extends JFrame {
     private JButton opretBrugerKnap;
     private JButton logIndKnap = new JButton();
 
-
-
+    private Program program;
     private JButton logindKnap;
 
 
-    Program program = new Program();
 
 
 
 
     public GUI() {
+        this.program = program;
+
         // primære vindue "container"
         mainWindow = new JPanel();
         setContentPane(mainWindow);
@@ -42,22 +43,12 @@ public class GUI extends JFrame {
         mainWindow.add(logindKnap);
 
 
+    }
 
+          // opret en bruger knap til forsiden
 
-
-
-        setSize(600, 600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
-
-
-
-
-
-
-
-
-        // opret en bruger knap til forsiden
+    private void addListeners()
+    {
         opretBrugerKnap.addActionListener( new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 program.opretBruger();
@@ -131,8 +122,8 @@ public class GUI extends JFrame {
             }
         });
 
-
     }
+
 
     public void displayMessage(String besked)
     {
@@ -150,13 +141,11 @@ public class GUI extends JFrame {
             //JOptionPane.showMessageDialog(option);
         }
     }
-    /*
-    public int promptChoice(ArrayList<String> optionslist, String besked, int min, int max){
-        displayMessage(besked);
+
+    public void promptChoiceMainMenu(ArrayList<String> optionslist, String besked){
         displayList(optionslist, "");
-        int input = validerInput(min, max);
-        return input;
-    }*/
+        //int input = validerInput(min, max);
+    }
     /*
     public int validerInput(int min, int max)
     {
@@ -171,10 +160,10 @@ public class GUI extends JFrame {
             return Integer.parseInt(valg);
         }*/
     }
-/*
-    public String promptText(String msg){
-        displayMessage(msg);
-        return scanner.nextLine();
+    /*
+    public String promptText(){
+        JOptionPane.showInputDialog("Indtast: ");
+
     }*/
 /*
     public static void main(String[] args) {
@@ -183,13 +172,4 @@ public class GUI extends JFrame {
 }*/
 
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new GUI();
-            }
-        });
 
-    }
-}

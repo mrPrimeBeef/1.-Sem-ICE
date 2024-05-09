@@ -1,4 +1,4 @@
-package domain;
+package domæne;
 
 import produkt.AProdukt;
 import produkt.Ret;
