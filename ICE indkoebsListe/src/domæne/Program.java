@@ -13,8 +13,7 @@ public class Program {
     private Bruger nuværendeBruger;
     private TextUI ui;
     private DBConnector dbConnector = new DBConnector();
-    private AProdukt produkt;
-    private IndkøbsListeKlasse indkøbsListeklasse;
+    private IndkøbsListeKlasse indkøbsListeklasse = new IndkøbsListeKlasse();
     private MadPlanKlasse madPlanKlasse = new MadPlanKlasse();
     private ArrayList<String> startMenu;
     private ArrayList<String> mainMenu;

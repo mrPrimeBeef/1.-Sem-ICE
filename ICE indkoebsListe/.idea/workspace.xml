@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="918fcb30-4647-4c8d-aba6-51368ea01a6b" name="Changes" comment="Login med database fungere" />
+    <list default="true" id="918fcb30-4647-4c8d-aba6-51368ea01a6b" name="Changes" comment="Opdatering af vare constructor">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domæne/IndkøbsListeKlasse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domæne/IndkøbsListeKlasse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domæne/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domæne/Program.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -223,7 +227,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715244817368</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Opdatering af vare constructor">
+      <option name="closed" value="true" />
+      <created>1715246362790</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1715246362790</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -253,6 +265,7 @@
     <MESSAGE value="indkøbsliste" />
     <MESSAGE value="IndkøbsListeKlasse" />
     <MESSAGE value="Login med database fungere" />
-    <option name="LAST_COMMIT_MESSAGE" value="Login med database fungere" />
+    <MESSAGE value="Opdatering af vare constructor" />
+    <option name="LAST_COMMIT_MESSAGE" value="Opdatering af vare constructor" />
   </component>
 </project>

@@ -11,7 +11,7 @@ import java.util.HashSet;
 
 public class IndkøbsListeKlasse {
     Program program;
-    TextUI ui;
+    TextUI ui = new TextUI();
     HashSet<Ret> retter;
     HashSet<String> madplan;
     HashSet<AProdukt> fryseListe = new HashSet<>();
