@@ -142,34 +142,34 @@ public class GUI extends JFrame {
         }
     }
 
-    public void promptChoiceMainMenu(ArrayList<String> optionslist, String besked){
+    public int promptChoice(ArrayList<String> optionslist, String besked, int min, int max){
         displayList(optionslist, "");
-        //int input = validerInput(min, max);
+        int input = validerInput(min, max);
+        return input;
     }
-    /*
-    public int validerInput(int min, int max)
-    {
+
+    public int validerInput(int min, int max) {
         String regex = String.format("[%d-%d]", min, max);
 
-        //String valg = promptText("");
-        if (!valg.matches(regex))
-        {
+        String valg = promptText();
+        if (!valg.matches(regex)) {
             displayMessage("Ugyldigt input. Prøv igen");
-            return validerInput(min,max);
+            return validerInput(min, max);
         } else {
             return Integer.parseInt(valg);
-        }*/
+        }
     }
-    /*
-    public String promptText(){
-        JOptionPane.showInputDialog("Indtast: ");
 
-    }*/
-/*
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(GUI::new);
+    public String promptText()
+    {
+        String besked = JOptionPane.showInputDialog("Indtast: ");
+        return besked;
     }
-}*/
+}
+
+
+
+
 
 
 

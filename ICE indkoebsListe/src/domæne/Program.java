@@ -7,6 +7,7 @@ import utility.GUI;
 
 import java.util.*;
 
+
 public class Program {
     private String navn;
     private Bruger nuværendeBruger;
@@ -22,6 +23,7 @@ public class Program {
 
     public Program() {
         this.navn = navn;
+        this.gui = gui;
 
 
 
@@ -46,21 +48,16 @@ public class Program {
 
     //                      Start Program
     public void startProgram() {
-
         gui.displayMessage("Velkommen");
 
-        int choice;
-        choice = gui.promptChoice(startMenu, "Opret en bruger eller log ind", 1, 2);
+        int choice = gui.promptChoice(startMenu, "Opret en bruger eller log ind", 1, 2);
 
         switch (choice) {
             case 1:
-                 // Opret en instans af DBConnector-klassen
                 dbConnector.opretBruger();
                 kørProgram();
-
                 break;
             case 2:
-
                 if (dbConnector.logInd()) {
                     kørProgram();
                 }
@@ -69,27 +66,27 @@ public class Program {
     }
 
     public void kørProgram() {
-        int menuChoice;
+        int menuChoice = gui.promptChoice(mainMenu, "", 1, 5);
 
-        menuChoice = gui.promptChoice(mainMenu, "", 1, 5);
         switch (menuChoice) {
-            case 1: // se Indkøbslister
+            case 1:
                 indkøbsListeklasse.kørIndkøbsliste();
                 break;
-            case 2: // seMadplan
+            case 2:
                 madPlanKlasse.kørMadplan();
                 break;
-            case 3: // seKøleskab
+            case 3:
                 kørKøleskab();
                 break;
-            case 4: // se Retter
+            case 4:
                 kørRetter();
                 break;
-            case 5: // log Ud
+            case 5:
                 afslutProgram();
                 break;
         }
     }
+
 
 
 
