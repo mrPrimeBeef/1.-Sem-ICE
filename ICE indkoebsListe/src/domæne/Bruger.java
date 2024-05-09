@@ -17,4 +17,7 @@ public class Bruger {
         return kodeOrd;
     }
 
+    public void setBrugerNavn(String brugerNavn) {
+        this.brugerNavn = brugerNavn;
+    }
 }

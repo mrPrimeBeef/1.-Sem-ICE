@@ -3,7 +3,9 @@ package domæne;
 import produkt.AProdukt;
 import produkt.Ret;
 import produkt.Vare;
+import utility.DBConnector;
 import utility.TextUI;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,12 +13,17 @@ import java.util.HashSet;
 
 public class IndkøbsListeKlasse {
     Program program;
-    TextUI ui;
+    TextUI ui = new TextUI();
+    DBConnector dbConnector;
     HashSet<Ret> retter;
     HashSet<String> madplan;
     HashSet<AProdukt> fryseListe = new HashSet<>();
     HashSet<AProdukt> køleskabsListe = new HashSet<>();
     HashMap<AProdukt, String> indkøbsListe = new HashMap<>();
+
+    public IndkøbsListeKlasse(DBConnector dbConnector) {
+       this.dbConnector = dbConnector;
+    }
 
     public void kørIndkøbsliste() {
 
@@ -79,9 +86,10 @@ public class IndkøbsListeKlasse {
             int pris = ui.promptNumeric("Skriv varens pris");
             int mængde = ui.promptNumeric("Mængde?");
             Vare vare = new Vare(vareNavn,mængde, pris);
-            String afdeling = ui.promptText("Skriv hvilken afdeling varen befinder sig i");
+            //String afdeling = ui.promptText("Skriv hvilken afdeling varen befinder sig i");
 
-            indkøbsliste.put(vare, afdeling);
+            dbConnector.gemTilListe(vare);
+
 
             input = ui.promptChoice(valg, "", 1, 4);
             if (input == 1) {
