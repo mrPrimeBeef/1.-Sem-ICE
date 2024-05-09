@@ -13,11 +13,11 @@ public class DBConnector {
     Vare vare;
 
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/ice";
+    static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/icedatabase";
 
     //  Database credentials
     static final String USER = "root";
-    static final String PASS = "atx33xmw!";
+    static final String PASS = "Esn64mjy:1";
 
     public DBConnector() {
         this.ui = new TextUI();
