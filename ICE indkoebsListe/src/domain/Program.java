@@ -1,17 +1,16 @@
-package domæne;
+package domain;
 
 import produkt.AProdukt;
 import produkt.Ret;
-import produkt.Vare;
 import utility.DBConnector;
-import utility.TextUI;
+import utility.GUI;
 
 import java.util.*;
 
 public class Program {
     private String navn;
     private Bruger nuværendeBruger;
-    private TextUI ui;
+    private GUI gui;
     private DBConnector dbConnector = new DBConnector();
     private AProdukt produkt;
     private IndkøbsListeKlasse indkøbsListeklasse;
@@ -24,7 +23,7 @@ public class Program {
     public Program() {
         this.navn = navn;
 
-        this.ui = new TextUI();
+        this.gui = gui;
 
         startMenu = new ArrayList<>();
 
@@ -42,12 +41,12 @@ public class Program {
     }
 
     //                      Start Program
-    public void logIndProgram() {
+    public void startProgram() {
 
-        ui.displayMessage("Velkommen");
+        gui.displayMessage("Velkommen");
 
         int choice;
-        choice = ui.promptChoice(startMenu, "Opret en bruger eller log ind", 1, 2);
+        choice = gui.promptChoice(startMenu, "Opret en bruger eller log ind", 1, 2);
 
         switch (choice) {
             case 1:
@@ -68,7 +67,7 @@ public class Program {
     public void kørProgram() {
         int menuChoice;
 
-        menuChoice = ui.promptChoice(mainMenu, "", 1, 5);
+        menuChoice = gui.promptChoice(mainMenu, "", 1, 5);
         switch (menuChoice) {
             case 1: // se Indkøbslister
                 indkøbsListeklasse.kørIndkøbsliste();
@@ -77,11 +76,9 @@ public class Program {
                 madPlanKlasse.kørMadplan();
                 break;
             case 3: // seKøleskab
-                //ui.displayMessage("Oversigt af dine ingredienser i køleskabet");
                 kørKøleskab();
                 break;
             case 4: // se Retter
-                //ui.displayMessage("Oversigt af dine tilgængelige retter");
                 kørRetter();
                 break;
             case 5: // log Ud
@@ -102,7 +99,14 @@ public class Program {
 
         private void afslutProgram () {
             nuværendeBruger = null;
-            ui.displayMessage("Du er nu logget ud");
+            gui.displayMessage("Du er nu logget ud");
+        }
+        
+        public void opretBruger()
+        {
+            dbConnector.opretBruger();
+            gui.displayMessage("Brugeren er oprettet");
+            
         }
 
     }

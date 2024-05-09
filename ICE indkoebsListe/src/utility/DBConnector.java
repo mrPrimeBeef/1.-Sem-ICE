@@ -1,8 +1,7 @@
 package utility;
 
 import domæne.Program;
-import domæne.Bruger;
-import utility.TextUI;
+import domain.Bruger;
 
 import java.sql.*;
 
@@ -12,11 +11,11 @@ public class DBConnector {
     Bruger nuværendeBruger;
 
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/icedatabase";
+    static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/ice";
 
     //  Database credentials
     static final String USER = "root";
-    static final String PASS = "Esn64mjy:1";
+    static final String PASS = "toor";
 
     public DBConnector() {
         this.ui = new TextUI();
