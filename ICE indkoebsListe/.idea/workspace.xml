@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="918fcb30-4647-4c8d-aba6-51368ea01a6b" name="Changes" comment="IndkøbsListeKlasse">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domæne/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domæne/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utility/DBConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility/DBConnector.java" afterDir="false" />
-    </list>
+    <list default="true" id="918fcb30-4647-4c8d-aba6-51368ea01a6b" name="Changes" comment="Login med database fungere" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -219,7 +215,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715240082468</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Login med database fungere">
+      <option name="closed" value="true" />
+      <created>1715244817368</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1715244817368</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -248,6 +252,7 @@
     <MESSAGE value="indkøbsListe og package flytning" />
     <MESSAGE value="indkøbsliste" />
     <MESSAGE value="IndkøbsListeKlasse" />
-    <option name="LAST_COMMIT_MESSAGE" value="IndkøbsListeKlasse" />
+    <MESSAGE value="Login med database fungere" />
+    <option name="LAST_COMMIT_MESSAGE" value="Login med database fungere" />
   </component>
 </project>

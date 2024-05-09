@@ -21,9 +21,9 @@ public class IndkøbsListeKlasse {
     public void kørIndkøbsliste() {
 
         // Test
-        Vare vare1 = new Vare(10, "argurk", 1);
-        Vare vare2 = new Vare(2, "æble",1);
-        Vare vare3 = new Vare(12, "mælk",1);
+        Vare vare1 = new Vare("argurk",1 , 10);
+        Vare vare2 = new Vare("æble",1,3);
+        Vare vare3 = new Vare("mælk",1,15);
         indkøbsListe.put(vare1, "Grønt");
         indkøbsListe.put(vare2, "Grønt");
         indkøbsListe.put(vare3, "Mejeri");
@@ -78,7 +78,7 @@ public class IndkøbsListeKlasse {
             String vareNavn = ui.promptText("Skrive varens navn");
             int pris = ui.promptNumeric("Skriv varens pris");
             int mængde = ui.promptNumeric("Mængde?");
-            Vare vare = new Vare(pris, vareNavn,mængde);
+            Vare vare = new Vare(vareNavn,mængde, pris);
             String afdeling = ui.promptText("Skriv hvilken afdeling varen befinder sig i");
 
             indkøbsliste.put(vare, afdeling);

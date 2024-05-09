@@ -7,7 +7,7 @@ public class Vare extends AProdukt{
     //String holdbarHed;
 
 
-    public Vare(int pris, String vareNavn, int mængde) {
+    public Vare(String vareNavn, int mængde, int pris) {
         this.pris = pris;
         this.vareNavn = vareNavn;
         this.mængde = mængde;
