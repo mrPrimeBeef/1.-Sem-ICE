@@ -12,6 +12,7 @@ public class Program {
     private TextUI ui;
     AProdukt produkt;
     IndkøbsListeKlasse indkøbsListeklasse;
+    MadPlanKlasse madPlanKlasse = new MadPlanKlasse();
     ArrayList<Bruger> brugerList;
     ArrayList<String> startMenu;
     ArrayList<String> mainMenu;
@@ -79,8 +80,7 @@ public class Program {
                 indkøbsListeklasse.kørIndkøbsliste();
                 break;
             case 2: // seMadplan
-                //ui.displayMessage("Oversigt af din madplan");
-                kørMadplan();
+                madPlanKlasse.kørMadplan();
                 break;
             case 3: // seKøleskab
                 //ui.displayMessage("Oversigt af dine ingredienser i køleskabet");
@@ -99,9 +99,7 @@ public class Program {
 
 
 
-        public void kørMadplan () {
-            madplan = new HashSet<>();
-        }
+
         public void kørKøleskab () {
             køleskabsListe = new HashSet<>();
         }

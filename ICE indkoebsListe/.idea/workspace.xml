@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="918fcb30-4647-4c8d-aba6-51368ea01a6b" name="Changes" comment="indkøbsliste">
-      <change beforePath="$PROJECT_DIR$/Doc/Dynamic/Usecases.puml" beforeDir="false" afterPath="$PROJECT_DIR$/Doc/Dynamic/Usecases.puml" afterDir="false" />
+    <list default="true" id="918fcb30-4647-4c8d-aba6-51368ea01a6b" name="Changes" comment="IndkøbsListeKlasse">
+      <change afterPath="$PROJECT_DIR$/src/domæne/MadPlanKlasse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/domæne/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domæne/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/produkt/AProdukt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/produkt/AProdukt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/produkt/Ingrediens.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/produkt/Ingrediens.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/produkt/Vare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/produkt/Vare.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="IndkøbsListe" />
+        <entry key="$PROJECT_DIR$/.." value="DevOpBranch" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -65,7 +63,7 @@
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "DevOpBranch",
+    "git-widget-placeholder": "MadPlan",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Rolfj/Desktop/Programs/installs/JDBC driver SQL/mysql-connector-j-8.4.0/mysql-connector-j-8.4.0.jar",
     "node.js.detected.package.eslint": "true",
@@ -213,7 +211,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715179949372</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="IndkøbsListeKlasse">
+      <option name="closed" value="true" />
+      <created>1715240082468</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1715240082468</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -241,6 +247,7 @@
     <MESSAGE value="Text UI" />
     <MESSAGE value="indkøbsListe og package flytning" />
     <MESSAGE value="indkøbsliste" />
-    <option name="LAST_COMMIT_MESSAGE" value="indkøbsliste" />
+    <MESSAGE value="IndkøbsListeKlasse" />
+    <option name="LAST_COMMIT_MESSAGE" value="IndkøbsListeKlasse" />
   </component>
 </project>
