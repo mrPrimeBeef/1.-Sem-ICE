@@ -99,9 +99,9 @@ public class Program {
     private void kørIndkøbsliste() {
 
         // Test
-        Vare vare1 = new Vare(10, "argurk");
-        Vare vare2 = new Vare(2, "æble");
-        Vare vare3 = new Vare(12, "mælk");
+        Vare vare1 = new Vare(10, "argurk", 1);
+        Vare vare2 = new Vare(2, "æble",1);
+        Vare vare3 = new Vare(12, "mælk",1);
         indkøbsListe.put(vare1, "Grønt");
         indkøbsListe.put(vare2, "Grønt");
         indkøbsListe.put(vare3, "Mejeri");
@@ -155,7 +155,8 @@ public class Program {
         while (input == 1) {
             String vareNavn = ui.promptText("Skrive varens navn");
             int pris = ui.promptNumeric("Skriv varens pris");
-            Vare vare = new Vare(pris, vareNavn);
+            int mængde = ui.promptNumeric("Mængde?");
+            Vare vare = new Vare(pris, vareNavn,mængde);
             String afdeling = ui.promptText("Skriv hvilken afdeling varen befinder sig i");
 
             indkøbsliste.put(vare, afdeling);

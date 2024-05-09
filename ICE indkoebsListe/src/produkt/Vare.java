@@ -2,17 +2,19 @@ package produkt;
 
 public class Vare extends AProdukt{
     private int pris;
-    String vareNavn;
+    private String vareNavn;
+    private int mængde;
     //String holdbarHed;
 
-    public Vare(int pris, String vareNavn) {
+
+    public Vare(int pris, String vareNavn, int mængde) {
         this.pris = pris;
         this.vareNavn = vareNavn;
-        //this.holdbarHed = holdbarHed;
+        this.mængde = mængde;
     }
 
     @Override
     public String toString() {
-        return "" + vareNavn;
+        return "" + vareNavn + ". Mængde: " + mængde;
     }
 }

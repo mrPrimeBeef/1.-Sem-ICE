@@ -15,7 +15,7 @@ usecase vælgRet
 usecase opretRet
 usecase tilføjTilMadplan
 
-usecase seUge
+usecase tilFøjRet
 
 'seKøleskab
 usecase seFryseliste
@@ -52,28 +52,24 @@ seRet --> vælgRet
 seRet --> tilføjTilMadplan: en ret
 seRet --> opretRet
 
-vælgRet --> seHovedmenu
+
 tilføjTilMadplan --> seHovedmenu
 
-seKøleskab --> seIngredienser
+seKøleskab <--> seIngredienser
 seKøleskab --> seFryseliste
 seFryseliste --> seHovedmenu
-seIngredienser --> seHovedmenu
-
-seMadplan --> seUge
-seUge --> seHovedmenu
 
 
-seIndkøbsliste --> tilføjVare
-seIndkøbsliste --> fjernVare
+seMadplan <--> tilFøjRet
+
+
+seIndkøbsliste <--> tilføjVare
+seIndkøbsliste <--> fjernVare
 seIndkøbsliste --> købVare
 købVare --> tilføjIngrediens
 
 
-tilføjVare --> seHovedmenu
-fjernVare --> seHovedmenu
 
-seIngredienser --> seHovedmenu
 seKøleskab <--> tilføjIngrediens
 
 
