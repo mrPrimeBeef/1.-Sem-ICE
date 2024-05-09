@@ -76,7 +76,6 @@ public class Program {
         menuChoice = ui.promptChoice(mainMenu, "", 1, 5);
         switch (menuChoice) {
             case 1: // se Indkøbslister
-                ui.displayMessage("Oversigt af din indkøbslister");
                 kørIndkøbsliste();
                 break;
             case 2: // seMadplan
@@ -109,10 +108,10 @@ public class Program {
         // Test
 
         ArrayList<String> liste = new ArrayList();
-        liste.add("Indkøbsliste");
+        liste.add("Se Indkøbsliste");
         liste.add("Lav ny");
         liste.add("tilbage");
-        int choice = ui.promptChoice(liste, "\nvælg 1", 1, 3);
+        int choice = ui.promptChoice(liste, "\nvælg 1 handling", 1, 3);
 
         if (choice == 1) {
             brugIndkøbsliste(indkøbsListe);
@@ -135,7 +134,7 @@ public class Program {
         valg.add("Se Indkøbsseddel");
         valg.add("tilbage");
         seIndkøbsListe(indkøbsliste);
-        int input = ui.promptChoice(valg, "\nvælg 1", 1, 5);
+        int input = ui.promptChoice(valg, "\nvælg 1 handling", 1, 5);
 
 
         if (input == 1) {
@@ -152,7 +151,7 @@ public class Program {
         }
     }
 
-    public void føjTilIndkøbsliste(int input, ArrayList<String> valg,HashMap<AProdukt, String> indkøbsliste ) {
+    public void føjTilIndkøbsliste(int input, ArrayList<String> valg,HashMap<AProdukt, String> indkøbsliste) {
         while (input == 1) {
             String vareNavn = ui.promptText("Skrive varens navn");
             int pris = ui.promptNumeric("Skriv varens pris");
@@ -182,14 +181,14 @@ public class Program {
 
    public void sletVare(){
        String slet =  ui.promptText("Hvilken vare til du slette?");
-       // der skal laves Aprodukt
+       // find vare i listen, så den kan slettes
        indkøbsListe.remove(slet);
    }
 
    public void  købVare(){
         String køb =  ui.promptText("Hvilken vare til du købe?");
        // der skal laves Aprodukt
-        køleskabsListe.add(køb);
+        //køleskabsListe.add(køb);
         indkøbsListe.remove(køb);
    }
 

@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="918fcb30-4647-4c8d-aba6-51368ea01a6b" name="Changes" comment="indkøbsliste" />
+    <list default="true" id="918fcb30-4647-4c8d-aba6-51368ea01a6b" name="Changes" comment="indkøbsliste">
+      <change beforePath="$PROJECT_DIR$/src/domæne/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domæne/Program.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -51,7 +53,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
-    "Application.RunEveryWhere.executor": "Run",
+    "Application.RunEveryWhere.executor": "Debug",
     "DefaultPlantUmlFileTemplate": "UML Use Case",
     "Downloaded.Files.Path.Enabled": "false",
     "Repository.Attach.Annotations": "false",
@@ -117,6 +119,7 @@
       <workItem from="1715069788639" duration="40000" />
       <workItem from="1715069869767" duration="13806000" />
       <workItem from="1715151951006" duration="4222000" />
+      <workItem from="1715237204734" duration="662000" />
     </task>
     <task id="LOCAL-00001" summary="KlasseDiagram v1.puml">
       <option name="closed" value="true" />
