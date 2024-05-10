@@ -19,22 +19,34 @@ public class Controller {
             String brugernavn = this.form.hentBrugernavn().trim();
             String kodeord = this.form.hentKodeord().trim();
 
-            // simple validations
+            // simple validations checking null input
             if(brugernavn.isEmpty()) {
                 JOptionPane.showMessageDialog(this.form, "Brugernavn er påkrævet", "Fejl",
                         JOptionPane.ERROR_MESSAGE);
-                return;
             } else if(kodeord.isEmpty()) {
                 JOptionPane.showMessageDialog(this.form, "Kodeord er påkrævet.", "Fejl",
                         JOptionPane.ERROR_MESSAGE);
-                return;
             }
-
-
             //this.form.reset(true);
         });
 
-        // Kald på DBConnector
+        // log ind bruger
+        this.form.logIndBruger(e -> {
+            String brugernavn = this.form.hentBrugernavn().trim();
+            String kodeord = this.form.hentKodeord().trim();
+
+            // simple validations
+            if (brugernavn.isEmpty()) {
+                JOptionPane.showMessageDialog(this.form, "Brugernavn er påkrævet", "Fejl",
+                        JOptionPane.ERROR_MESSAGE);
+            } else if (kodeord.isEmpty()) {
+                JOptionPane.showMessageDialog(this.form, "Kodeord er påkrævet.", "Fejl",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+
+            // Kald på DBConnector
         Bruger bruger = database.opretBruger();
         if (bruger != null)
         {

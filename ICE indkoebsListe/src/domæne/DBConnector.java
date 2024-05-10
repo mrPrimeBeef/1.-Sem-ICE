@@ -2,7 +2,7 @@ package domæne;
 
 import produkt.AProdukt;
 import produkt.Vare;
-import utility.TextUI;
+//import utility.TextUI;
 import View.Form;
 import javax.swing.*;
 import java.sql.*;
@@ -10,7 +10,6 @@ import java.util.HashMap;
 
 
 public class DBConnector {
-    TextUI ui;
     Bruger nuværendeBruger;
     String brugerNavn;
     String password;
@@ -18,14 +17,14 @@ public class DBConnector {
     private Form form;
 
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/icedatabase";
+    static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/ice";
 
     //  Database credentials
     static final String USER = "root";
-    static final String PASS = "Esn64mjy:1";
+    static final String PASS = "toor";
 
     public DBConnector() {
-        this.ui = new TextUI();
+
     }
 
     public Bruger opretBruger() {
@@ -92,7 +91,7 @@ public class DBConnector {
             JOptionPane.showMessageDialog(this.form, "Fejl under oprettelse af bruger " + e.getMessage());
         }
     }
-
+    /*
     public boolean checkCredentialAvailability(String brugerNavn) {
         try (
                 // Opret forbindelse til databasen
@@ -119,8 +118,8 @@ public class DBConnector {
             JOptionPane.showMessageDialog(this.form, "Fejl under tjek af brugernavn tilgængellighed " + e.getMessage());
             return false; // Returner false i tilfælde af en fejl
         }
-    }
-
+    }*/
+    /*
     public boolean logInd() {
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -158,7 +157,7 @@ public class DBConnector {
                 return false; // Returner false i tilfælde af en fejl
             }
         }
-    }
+    }*/
 
     public void dbConnect() {
 
@@ -215,8 +214,7 @@ public class DBConnector {
 
 
         } catch (SQLException e) {
-            ui.displayMessage("Fejl under indsæt af vare: " + e.getMessage());
-
+            JOptionPane.showMessageDialog(this.form, "Fejl under tilføjelse af vare " + e.getMessage());
         }
     }
 
@@ -247,7 +245,7 @@ public class DBConnector {
                 pstmt.close();
                 conn.close();
             } catch (SQLException e) {
-                ui.displayMessage("Fejl under hentning af vareliste: " + e.getMessage());
+                JOptionPane.showMessageDialog(this.form, "Mislykkedes forsøg på at hente varelisten " + e.getMessage());
             }
             return vareMap;
     }
