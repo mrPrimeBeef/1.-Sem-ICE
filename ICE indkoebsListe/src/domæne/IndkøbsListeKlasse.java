@@ -20,20 +20,19 @@ public class IndkøbsListeKlasse {
     public IndkøbsListeKlasse(DBConnector dbConnector, TextUI ui) {
        this.dbConnector = dbConnector;
        this.ui = ui;
+
+
     }
 
-    public void kørIndkøbsliste() {
+    public void kørIndkøbsliste(ArrayList<String> listeValg, ArrayList<String> valg) {
 
-        ArrayList<String> listeValg = new ArrayList();
-        listeValg.add("Se Indkøbsliste");
-        listeValg.add("Lav ny");
-        listeValg.add("tilbage");
+
         int choice = ui.promptChoice(listeValg, "\nvælg 1 handling", 1, 3);
 
         if (choice == 1) {
-            brugIndkøbsliste();
+            brugIndkøbsliste(valg, listeValg);
         } else if (choice == 2) {
-            lavIndkøbsListe();
+            lavIndkøbsListe(valg, listeValg);
         } else if (choice == 3) {
             program.kørProgram();
         }
@@ -44,34 +43,29 @@ public class IndkøbsListeKlasse {
         ui.displayListHashMap(liste, "");
     }
 
-    public void brugIndkøbsliste() {
-        ArrayList<String> valg = new ArrayList();
-        valg.add("Tiløj vare");
-        valg.add("Slet vare");
-        valg.add("Køb vare");
-        valg.add("Se Indkøbsseddel");
-        valg.add("tilbage");
+    public void brugIndkøbsliste(ArrayList<String> valg, ArrayList<String> listeValg) {
+
         seIndkøbsListe(dbConnector.visIndkøbsListe(dbConnector.getBrugerNavn()));
         int input = ui.promptChoice(valg, "\nvælg 1 handling", 1, 5);
 
 
         if (input == 1) {
-            føjTilIndkøbsliste(input, valg);
+            føjTilIndkøbsliste(input, valg, listeValg);
         } else if (input == 2) {
             sletVare();
-            brugIndkøbsliste();
+            brugIndkøbsliste(valg, listeValg);
         } else if (input == 3) {
             købVare();
         } else if (input == 4) {
             seIndkøbsListe(dbConnector.visIndkøbsListe(dbConnector.getBrugerNavn()));
-            brugIndkøbsliste();
+            brugIndkøbsliste(valg, listeValg);
         } else if (input == 5) {
             Program program = new Program(dbConnector, ui);
             program.kørProgram();
         }
     }
 
-    public void føjTilIndkøbsliste(int input, ArrayList<String> valg) {
+    public void føjTilIndkøbsliste(int input, ArrayList<String> valg,ArrayList<String> listeValg) {
         while (input == 1) {
             String vareNavn = ui.promptText("Skrive varens navn");
             int pris = ui.promptNumeric("Skriv varens pris");
@@ -85,22 +79,24 @@ public class IndkøbsListeKlasse {
 
             input = ui.promptChoice(valg, "", 1, 4);
             if (input == 1) {
-                føjTilIndkøbsliste(input, valg);
+                føjTilIndkøbsliste(input, valg,listeValg);
             } else if (input == 2) {
                 sletVare();
-                brugIndkøbsliste();
+                brugIndkøbsliste(valg, listeValg);
             } else if (input == 3) {
                 købVare();
             } else if (input == 4) {
-                kørIndkøbsliste();
+                kørIndkøbsliste(listeValg, valg);
             } else if (input == 5) {
-                brugIndkøbsliste();
+                brugIndkøbsliste(valg, listeValg);
             }
         }
     }
 
-    public void lavIndkøbsListe(){
-
+    public void lavIndkøbsListe(ArrayList<String> valg,ArrayList<String> listeValg){
+//        String listeNavn = ui.promptText("Skriv navnet på den nye indkøbsliste:");
+//
+//        kørIndkøbsliste(listeValg, valg);
     }
 
     public void sletVare(){
@@ -111,8 +107,7 @@ public class IndkøbsListeKlasse {
 
     public void  købVare(){
         String køb =  ui.promptText("Hvilken vare til du købe?");
-        // der skal laves Aprodukt
+        dbConnector.fjernVAre(køb);
         //køleskabsListe.add(køb);
-        indkøbsListe.remove(køb);
     }
 }

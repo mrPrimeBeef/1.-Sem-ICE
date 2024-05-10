@@ -16,6 +16,8 @@ public class Program {
     private MadPlanKlasse madPlanKlasse;
     private ArrayList<String> startMenu;
     private ArrayList<String> mainMenu;
+    private ArrayList<String> valg;
+    private ArrayList<String> listeValg;
     private HashSet<Ret> retter;
     private HashSet<AProdukt> køleskabsListe = new HashSet<>();
 
@@ -28,20 +30,17 @@ public class Program {
         this.dbConnector = dbConnector;
         this.ui = ui;
 
-
         startMenu = new ArrayList<>();
-
-        startMenu.add("Opret bruger");
-        startMenu.add("Log ind");
+        startMenu.addAll(Arrays.asList("Opret bruger", "Log ind"));
 
         mainMenu = new ArrayList<>();
-        mainMenu.add("Se indkøbsliste");
-        mainMenu.add("Se Madplan");
-        mainMenu.add("Se Køleskab");
-        mainMenu.add("Se retter");
-        mainMenu.add("Log ud");
+        mainMenu.addAll(Arrays.asList("Se indkøbsliste", "Se Madplan","Se Køleskab", "Se retter","Log ud"));
 
+        ArrayList<String> valg = new ArrayList();
+        valg.addAll(Arrays.asList("Tiløj vare","Slet vare", "Køb vare", "Se Indkøbsseddel","tilbage"));
 
+        ArrayList<String> listeValg = new ArrayList();
+        listeValg.addAll(Arrays.asList("Se: Indkøbsliste", "Lav ny","tilbage" ));
     }
 
     //                      Start Program
@@ -54,7 +53,6 @@ public class Program {
 
         switch (choice) {
             case 1:
-                 // Opret en instans af DBConnector-klassen
                 dbConnector.opretBruger();
                 kørProgram();
 
@@ -74,7 +72,7 @@ public class Program {
         menuChoice = ui.promptChoice(mainMenu, "", 1, 5);
         switch (menuChoice) {
             case 1: // se Indkøbslister
-                indkøbsListeklasse.kørIndkøbsliste();
+                indkøbsListeklasse.kørIndkøbsliste(listeValg, valg);
                 break;
             case 2: // seMadplan
                 madPlanKlasse.kørMadplan();
