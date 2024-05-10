@@ -1,6 +1,5 @@
 package utility;
 
-import domæne.Bruger;
 import produkt.AProdukt;
 import produkt.Vare;
 
@@ -10,9 +9,8 @@ import java.util.HashMap;
 
 public class DBConnector {
     TextUI ui;
-    Bruger nuværendeBruger;
     String brugerNavn;
-    Vare vare;
+
 
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/icedatabase";
@@ -25,7 +23,7 @@ public class DBConnector {
         this.ui = new TextUI();
     }
 
-    public Bruger opretBruger() {
+    public void opretBruger() {
         while (true) {
             // Indsamle brugeroplysninger fra brugeren
             String brugerNavn = ui.promptText("Skriv dit brugernavn");
@@ -51,14 +49,11 @@ public class DBConnector {
                    // opretIndkøbsliste(brugerNavn);
 
                     ui.displayMessage("Bruger oprettet");
-                    Bruger bruger = new Bruger(brugerNavn, password);
                     setBrugerNavn(brugerNavn);
 
-                    return bruger;
 
                 } catch (SQLException e) {
                     ui.displayMessage("Fejl under oprettelse af bruger: " + e.getMessage());
-                    return null; // Returner null i tilfælde af en fejl
                 }
             }
         }
@@ -140,7 +135,6 @@ public class DBConnector {
                 if (rs.next()) {
                     // Brugernavn og kodeord findes i databasen
                     ui.displayMessage("Log ind succesfuld");
-                    Bruger bruger = new Bruger(brugerNavn, kodeord);
                     setBrugerNavn(brugerNavn);// Set the current user
 
                     return true;
@@ -276,6 +270,10 @@ public class DBConnector {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void lukDB(){
+
     }
 
 

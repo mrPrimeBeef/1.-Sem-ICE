@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="918fcb30-4647-4c8d-aba6-51368ea01a6b" name="Changes" comment="Indkøbsliste tilføj database og slet fra database" />
+    <list default="true" id="918fcb30-4647-4c8d-aba6-51368ea01a6b" name="Changes" comment="Indkøbsliste tilføj database og slet fra database">
+      <change afterPath="$PROJECT_DIR$/Doc/Static/KlasseDiagram v2.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domæne/Bruger.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domæne/IndkøbsListeKlasse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domæne/IndkøbsListeKlasse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domæne/MadPlanKlasse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domæne/MadPlanKlasse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domæne/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domæne/Program.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utility/DBConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility/DBConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utility/TextUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility/TextUI.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,40 +59,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.RunEveryWhere.executor&quot;: &quot;Run&quot;,
-    &quot;DefaultPlantUmlFileTemplate&quot;: &quot;UML Use Case&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;DevOpBranch&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Rolfj/Desktop/Programs/installs/JDBC driver SQL/mysql-connector-j-8.4.0/mysql-connector-j-8.4.0.jar&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/Rolfj/Documents/GitHub/Cph Busniess Data/1Sem ICE/1.-Sem-ICE/ICE indkoebsListe/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.RunEveryWhere.executor": "Run",
+    "DefaultPlantUmlFileTemplate": "UML Use Case",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "DevOpBranch",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Rolfj/Documents/GitHub/Cph Busniess Data/1Sem ICE/1.-Sem-ICE/ICE indkoebsListe/Doc/Static",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "C:/Users/Rolfj/Documents/GitHub/Cph Busniess Data/1Sem ICE/1.-Sem-ICE/ICE indkoebsListe/src/Main.java",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="utility" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Rolfj\Documents\GitHub\Cph Busniess Data\1Sem ICE\1.-Sem-ICE\ICE indkoebsListe\Doc\Static" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Rolfj\Documents\GitHub\Cph Busniess Data\1Sem ICE\1.-Sem-ICE\ICE indkoebsListe\Opgave" />
@@ -119,6 +133,7 @@
       <workItem from="1715151951006" duration="4222000" />
       <workItem from="1715237204734" duration="662000" />
       <workItem from="1715257776235" duration="3417000" />
+      <workItem from="1715323665059" duration="5473000" />
     </task>
     <task id="LOCAL-00001" summary="KlasseDiagram v1.puml">
       <option name="closed" value="true" />
@@ -240,7 +255,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715257764752</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Only 1 db connector">
+      <option name="closed" value="true" />
+      <created>1715323794524</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1715323794524</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -272,6 +295,7 @@
     <MESSAGE value="Login med database fungere" />
     <MESSAGE value="Opdatering af vare constructor" />
     <MESSAGE value="Gem vare" />
-    <option name="LAST_COMMIT_MESSAGE" value="Gem vare" />
+    <MESSAGE value="Only 1 db connector" />
+    <option name="LAST_COMMIT_MESSAGE" value="Only 1 db connector" />
   </component>
 </project>

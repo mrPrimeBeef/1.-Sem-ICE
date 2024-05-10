@@ -6,7 +6,11 @@ import java.util.*;
 
 
 public class TextUI {
-    private Scanner scanner = new Scanner(System.in);
+    private Scanner scanner;
+
+    public TextUI() {
+        this.scanner = new Scanner(System.in);
+    }
 
     public String promptText(String msg){
         displayMessage(msg);

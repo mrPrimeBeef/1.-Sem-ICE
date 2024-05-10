@@ -9,26 +9,25 @@ import utility.TextUI;
 import java.util.*;
 
 public class Program {
-    private String navn;
-    private Bruger nuværendeBruger;
-    private TextUI ui;
-    private AProdukt produkt;
     private IndkøbsListeKlasse indkøbsListeklasse;
     private DBConnector dbConnector;
+    private TextUI ui;
+    private Program program;
     private MadPlanKlasse madPlanKlasse;
     private ArrayList<String> startMenu;
     private ArrayList<String> mainMenu;
     private HashSet<Ret> retter;
     private HashSet<AProdukt> køleskabsListe = new HashSet<>();
 
-    public Program(DBConnector dbConnector) {
+    public Program(DBConnector dbConnector, TextUI ui) {
 
-        indkøbsListeklasse = new IndkøbsListeKlasse(dbConnector);
-        madPlanKlasse = new MadPlanKlasse(dbConnector);
+        indkøbsListeklasse = new IndkøbsListeKlasse(dbConnector,ui);
+        madPlanKlasse = new MadPlanKlasse(dbConnector,ui);
 
-        this.navn = navn;
 
-        this.ui = new TextUI();
+        this.dbConnector = dbConnector;
+        this.ui = ui;
+
 
         startMenu = new ArrayList<>();
 
@@ -105,8 +104,8 @@ public class Program {
         }
 
         private void afslutProgram () {
-            nuværendeBruger = null;
             ui.displayMessage("Du er nu logget ud");
+
         }
 
     }

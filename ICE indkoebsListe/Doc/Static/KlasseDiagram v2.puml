@@ -1,0 +1,168 @@
+@startuml
+
+
+class Main {
++ static void main(String[] args)
+}
+package domæne{
+
+
+class Program {
+- Bruger nuværendeBruger;
+- IndkøbsListeKlasse indkøbsListeklasse;
+- DBConnector dbConnector;
+- Program program;
+- TextUI ui;
+- MadPlanKlasse madPlanKlasse;
+- ArrayList<String> startMenu;
+- ArrayList<String> mainMenu;
+- HashSet<Ret> retter;
+- HashSet<AProdukt> køleskabsListe
++ Program(DBConnector dbConnector, TextUI ui)
++ void logIndProgram()
++ void kørProgram()
++ void kørKøleskab ()
++ void kørRetter ()
++ afslutProgram ()
+}
+
+class IndkøbsListeKlasse{
+ - Program program
+ - TextUI ui
+ - DBConnector
+ - HashMap<AProdukt, String> indkøbsListe
+
+IndkøbsListeKlasse(DBConnector dbConnector, TextUI ui, Program program);
++ void kørIndkøbsliste()
++ void seIndkøbsListe()
++ void brugIndkøbsliste()
++ void føjTilIndkøbsliste()
++ void lavIndkøbsListe()
++ void sletVare()
++ void  købVare()
+}
+
+class MadPlanKlasse{
+ - Program program
+ - TextUI ui
+ - DBConnector
+ - ArrayList<String> madplan
+ - ArrayList<String> dage
+ - ArrayList<String> valg
+
+MadPlanKlasse(DBConnector dbConnector, TextUI ui, Program program)
++ void kørMadplan()
++ void seMadplan(String msg)
+}
+
+class Ret{
+- String navn
+- int antal
+- String ingrediens1
+- String ingrediens2
+- String ingrediens3
+- String ingrediens4
+- String ingrediens5
+- String ingrediens6
+- String ingrediens7
+- double mængde
+
+Ret(String Navn, String ingrediens)
+
++ double mængde(int antal)
+
++ void toString()
+
+}
+
+
+}
+
+package Produkt {
+class AProdukt{
+- String vareNavn
+- String holdbarhed
+
+}
+
+
+
+class Vare{
+- int pris;
+- String vareNavn;
+- int mængde;
+- String afdeling;
+Vare(String vareNavn, int mængde, int pris, String afdeling)
++ int getPris()
++ String getVareNavn()
++ int getMængde()
++ String getAfdeling()
++ ToString()
+}
+
+class Ingredienser{
++ Ingredienser(String vareNavn, String holdbarhed)
++ ToString()
+}
+}
+
+
+package utilty{
+
+
+class dBconnecter{
+ - TextUI ui;
+ - String brugerNavn;
+DBConnector()
+ + Bruger opretBruger()
+ + void opretKøleskab(String brugerNavn)
+ + void opretIndkøbsliste(String brugerNavn)
+ + boolean checkCredentialAvailability(String brugerNavn)
+ + boolean logInd()
+ + void dbConnect()
+ + setBrugerNavn(String brugerNavn)
+ + String getBrugerNavn()
+ + void gemTilListe(Vare vare)
+ + HashMap<AProdukt, String> visIndkøbsListe(String brugernavn)
+ + void fjernVAre(String vareNavn)
+}
+
+
+class TextUI {
+- Scanner scanner
++ String promptText(String msg)
++ int promptNumeric(String msg)
++ int promptChoice(List<String> optionslist, String msg)
++ void displayList(List<String> list, String msg)
++ void displayMessage(String msg)
+}
+}
+
+
+Main *-- Program
+
+Program *-- IndkøbsListeKlasse
+Program *-- MadPlanKlasse
+Program *-- TextUI
+Program *-- dBconnecter
+Program <|-- AProdukt
+
+
+Program o-- Ret
+
+AProdukt <|-- Ingredienser
+AProdukt <|-- Vare
+
+
+
+'https://devhints.io/plantuml
+'Car <|-- SmallCar      # extension
+'Car *-- Engine         # composition
+'Cars o-- Car           # aggregation
+'Car <|.. SmallCar      # dotted line (use .. instead of --)
+'Car <|--* Car
+
+'-left->
+'-right->
+
+@enduml

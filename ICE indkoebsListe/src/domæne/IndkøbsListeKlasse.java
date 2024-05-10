@@ -12,18 +12,14 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class IndkøbsListeKlasse {
-    Program program;
-    TextUI ui = new TextUI();
-    DBConnector dbConnector;
-    HashSet<Ret> retter;
-    HashSet<String> madplan;
-    HashSet<AProdukt> fryseListe = new HashSet<>();
-    HashSet<AProdukt> køleskabsListe = new HashSet<>();
-    HashMap<AProdukt, String> indkøbsListe = new HashMap<>();
+    private Program program;
+    private TextUI ui;
+    private DBConnector dbConnector;
+    private HashMap<AProdukt, String> indkøbsListe = new HashMap<>();
 
-    public IndkøbsListeKlasse(DBConnector dbConnector) {
+    public IndkøbsListeKlasse(DBConnector dbConnector, TextUI ui) {
        this.dbConnector = dbConnector;
-       program = new Program(dbConnector);
+       this.ui = ui;
     }
 
     public void kørIndkøbsliste() {
@@ -70,6 +66,7 @@ public class IndkøbsListeKlasse {
             seIndkøbsListe(dbConnector.visIndkøbsListe(dbConnector.getBrugerNavn()));
             brugIndkøbsliste();
         } else if (input == 5) {
+            Program program = new Program(dbConnector, ui);
             program.kørProgram();
         }
     }

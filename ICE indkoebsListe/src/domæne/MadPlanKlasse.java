@@ -1,29 +1,27 @@
 package domæne;
 
-import produkt.AProdukt;
-import produkt.Ret;
 import utility.DBConnector;
 import utility.TextUI;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
+
 
 public class MadPlanKlasse {
-    Program program;
-    TextUI ui = new TextUI();
-    HashSet<Ret> retter;
-    ArrayList<String> madplan;
-    ArrayList<String> dage;
-    ArrayList<String> valg;
-    HashSet<AProdukt> fryseListe = new HashSet<>();
-    HashSet<AProdukt> køleskabsListe = new HashSet<>();
-    HashMap<AProdukt, String> indkøbsListe = new HashMap<>();
+    private DBConnector dbConnector;
+    private  Program program;
+    private  TextUI ui;
+    private  ArrayList<String> madplan;
+    private  ArrayList<String> dage;
+    private  ArrayList<String> valg;
 
 
-    public MadPlanKlasse(DBConnector dbConnector) {
+    public MadPlanKlasse(DBConnector dbConnector, TextUI ui) {
         madplan = new ArrayList<>();
+
+
+        this.dbConnector = dbConnector;
+        this.ui = ui;
+
 
         madplan.add("Mandag: ");
         madplan.add("Tirsdag: ");
@@ -63,6 +61,7 @@ public class MadPlanKlasse {
                kørMadplan();
            break;
            case 3:
+               Program program = new Program(dbConnector, ui);
                program.kørProgram();
            break;
        }
