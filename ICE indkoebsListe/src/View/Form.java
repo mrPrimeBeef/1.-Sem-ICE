@@ -25,6 +25,10 @@ public class Form extends JPanel { // Startside
         logIndBrugerKnap = new JButton("Log ind");
         logIndBrugerKnap.setPreferredSize(new Dimension(278, 40));
 
+
+        // database connection
+
+
         // space between fields
         Insets fieldsInset = new Insets(0, 0, 10, 0);
         // space between buttons

@@ -3,7 +3,8 @@ package domæne;
 import produkt.AProdukt;
 import produkt.Vare;
 import utility.TextUI;
-
+import View.Form;
+import javax.swing.*;
 import java.sql.*;
 import java.util.HashMap;
 
@@ -12,7 +13,9 @@ public class DBConnector {
     TextUI ui;
     Bruger nuværendeBruger;
     String brugerNavn;
+    String password;
     Vare vare;
+    private Form form;
 
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/icedatabase";
@@ -28,8 +31,9 @@ public class DBConnector {
     public Bruger opretBruger() {
         while (true) {
             // Indsamle brugeroplysninger fra brugeren
-            String brugerNavn = ui.promptText("Skriv dit brugernavn");
-            String password = ui.promptText("Skriv et kodeord");
+            //String brugerNavn = JOptionPane.showMessageDialog(this.form, "Skriv dit brugernavn");
+            //String password = JOptionPane.showMessageDialog(this.form, "Skriv dit kodeord");
+
 
             // Tjek om brugernavnet allerede eksisterer i databasen
             if (checkCredentialAvailability(brugerNavn)) {
@@ -50,14 +54,14 @@ public class DBConnector {
                   //  opretKøleskab(brugerNavn);
                    // opretIndkøbsliste(brugerNavn);
 
-                    ui.displayMessage("Bruger oprettet");
+                    //ui.displayMessage("Bruger oprettet");
                     Bruger bruger = new Bruger(brugerNavn, password);
                     setBrugerNavn(brugerNavn);
 
                     return bruger;
 
                 } catch (SQLException e) {
-                    ui.displayMessage("Fejl under oprettelse af bruger: " + e.getMessage());
+                    //ui.displayMessage("Fejl under oprettelse af bruger: " + e.getMessage());
                     return null; // Returner null i tilfælde af en fejl
                 }
             }
@@ -73,7 +77,7 @@ public class DBConnector {
             pstmt.setString(1, brugerNavn);
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            ui.displayMessage("Fejl under oprettelse af bruger: " + e.getMessage());
+            JOptionPane.showMessageDialog(this.form, "Fejl under oprettelse af bruger" + e.getMessage());
         }
     }
 
@@ -85,7 +89,7 @@ public class DBConnector {
             pstmt.setString(1, brugerNavn);
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            ui.displayMessage("Fejl under oprettelse af bruger: " + e.getMessage());
+            JOptionPane.showMessageDialog(this.form, "Fejl under oprettelse af bruger " + e.getMessage());
         }
     }
 
@@ -112,7 +116,7 @@ public class DBConnector {
                 }
             }
         } catch (SQLException e) {
-            ui.displayMessage("Fejl under tjek af brugernavn tilgængelighed: " + e.getMessage());
+            JOptionPane.showMessageDialog(this.form, "Fejl under tjek af brugernavn tilgængellighed " + e.getMessage());
             return false; // Returner false i tilfælde af en fejl
         }
     }

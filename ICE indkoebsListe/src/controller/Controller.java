@@ -1,18 +1,17 @@
 package controller;
 
+import domæne.Bruger;
 import domæne.DBConnector;
 import View.Form;
 
 import javax.swing.*;
 
 public class Controller {
-    // database file
-    //private String databaseFile;
     private DBConnector database;
     private Form form;
 
-    public Controller(Form form) {
-        //this.database = new Database();
+    public Controller(Form form, DBConnector database) {
+        this.database = database;
         this.form = form;
 
         // opret bruger
@@ -32,10 +31,18 @@ public class Controller {
             }
 
 
-
-            //this.database.addUser(new User(brugernavn, kodeord));
-            //his.database.saveUser(new File(databaseFile));
-            this.form.reset(true);
+            //this.form.reset(true);
         });
+
+        // Kald på DBConnector
+        Bruger bruger = database.opretBruger();
+        if (bruger != null)
+        {
+            JOptionPane.showMessageDialog(this.form, "Brugeren er oprettet");
+        } else
+        {
+            JOptionPane.showMessageDialog(this.form, "Fejl. prøv igen");
+        }
+        this.form.reset(true);
     }
 }

@@ -1,6 +1,7 @@
-import domæne.Program;
-import domæne.DBConnector;
+
 /*
+//import domæne.Program;
+//import domæne.DBConnector;
 public class Main {
     public static void main(String[] args) {
         DBConnector db = new DBConnector();

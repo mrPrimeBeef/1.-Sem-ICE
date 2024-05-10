@@ -1,7 +1,7 @@
 package View;
 
 import controller.Controller;
-
+import domæne.DBConnector;
 import javax.swing.*;
 import java.awt.*;
 
@@ -14,11 +14,12 @@ public class MainFrame extends JFrame {
         super("Java Swing MVC");
         cardLayout = new CardLayout();
         Form form = new Form();
+        DBConnector database = new DBConnector();
         // sets our layout as a card layout
         setLayout(cardLayout);
 
         // initialize user controller
-        new Controller(form);
+        new Controller(form, database);
 
         // adds view to card layout with unique constraints
         add(form, "form");
