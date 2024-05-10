@@ -33,13 +33,13 @@ public class Program {
         startMenu.addAll(Arrays.asList("Opret bruger", "Log ind"));
 
         mainMenu = new ArrayList<>();
-        mainMenu.addAll(Arrays.asList("Se indkøbsliste", "Se Madplan","Se Køleskab", "Se retter","Log ud"));
+        mainMenu.addAll(Arrays.asList("Se indkøbsliste", "Se Madplan","Se inventar", "Se retter","Log ud"));
 
-        ArrayList<String> valg = new ArrayList();
+        valg = new ArrayList();
         valg.addAll(Arrays.asList("Tiløj vare","Slet vare", "Køb vare", "Se Indkøbsseddel","tilbage"));
 
-        ArrayList<String> listeValg = new ArrayList();
-        listeValg.addAll(Arrays.asList("Se: Indkøbsliste", "Lav ny","tilbage" ));
+        listeValg = new ArrayList();
+        listeValg.addAll(Arrays.asList("Se: Indkøbsliste","tilbage" ));
     }
 
     //                      Start Program
@@ -77,7 +77,6 @@ public class Program {
                 madPlanKlasse.kørMadplan();
                 break;
             case 3: // seInventar
-
                 kørInventar();
                 break;
             case 4: // se Retter
@@ -89,8 +88,6 @@ public class Program {
                 break;
         }
     }
-
-
 
         public void kørInventar() {
 

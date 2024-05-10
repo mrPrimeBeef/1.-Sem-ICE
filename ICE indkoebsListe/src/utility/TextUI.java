@@ -1,15 +1,18 @@
 package utility;
 
 import produkt.AProdukt;
+import produkt.Vare;
 
 import java.util.*;
 
 
 public class TextUI {
     private Scanner scanner;
+    Map<String, List<Vare>> groupedMap;
 
     public TextUI() {
         this.scanner = new Scanner(System.in);
+        groupedMap = new HashMap<>();
     }
 
     public String promptText(String msg){
@@ -63,27 +66,28 @@ public class TextUI {
         }
     }
 
-    public void displayListHashMap(HashMap<AProdukt,String> list, String msg){
-        displayMessage(msg);
+    public void displayListHashMap(HashMap<Vare, String> list) {
+        groupedMap.clear();
+
         int counter = 1;
         // Group the keys by their values
-        Map<String, List<AProdukt>> groupedMap = new HashMap<>();
-        for (Map.Entry<AProdukt, String> entry : list.entrySet()) {
+        for (Map.Entry<Vare, String> entry : list.entrySet()) {
             String value = entry.getValue();
             groupedMap.computeIfAbsent(value, k -> new ArrayList<>()).add(entry.getKey());
         }
-
         // Display the grouped map
-        for (Map.Entry<String, List<AProdukt>> group : groupedMap.entrySet()) {
+        for (Map.Entry<String, List<Vare>> group : groupedMap.entrySet()) {
             System.out.println(group.getKey() + ":");
             for (AProdukt produkt : group.getValue()) {
-
                 System.out.println(counter + ") " + produkt);
-            counter++;
+                counter++;
             }
         }
-
     }
+
+
+
+
 
 
     public void displayMessage(String msg){

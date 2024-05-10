@@ -82,14 +82,6 @@ Ret(String Navn, String ingrediens)
 }
 
 package Produkt {
-class AProdukt{
-- String vareNavn
-- String holdbarhed
-
-}
-
-
-
 class Vare{
 - int pris;
 - String vareNavn;
@@ -103,10 +95,7 @@ Vare(String vareNavn, int mængde, int pris, String afdeling)
 + ToString()
 }
 
-class Ingredienser{
-+ Ingredienser(String vareNavn, String holdbarhed)
-+ ToString()
-}
+
 }
 
 
@@ -149,13 +138,13 @@ Program *-- Inventar
 Program *-- MadPlanKlasse
 Program *-- TextUI
 Program *-- dBconnecter
-Program <|-- AProdukt
+
+Program <|-- Vare
 
 
 Program o-- Ret
 
-AProdukt <|-- Ingredienser
-AProdukt <|-- Vare
+
 
 
 

@@ -1,6 +1,5 @@
 package utility;
 
-import produkt.AProdukt;
 import produkt.Vare;
 
 import java.sql.*;
@@ -10,6 +9,7 @@ import java.util.HashMap;
 public class DBConnector {
     TextUI ui;
     String brugerNavn;
+    HashMap<Vare, String> vareMap;
 
 
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -21,6 +21,7 @@ public class DBConnector {
 
     public DBConnector() {
         this.ui = new TextUI();
+        this.vareMap = new HashMap<>();
     }
 
     public void opretBruger() {
@@ -31,12 +32,12 @@ public class DBConnector {
 
             // Tjek om brugernavnet allerede eksisterer i databasen
             if (checkCredentialAvailability(brugerNavn)) {
-                try (
+                try{
                         // Opret forbindelse til databasen
                         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
                         // SQL-forespørgsel til at indsætte brugeroplysninger i databasen
-                        PreparedStatement pstmt = conn.prepareStatement("INSERT INTO bruger (brugernavn, kodeord) VALUES (?, ?)")
-                ) {
+                        PreparedStatement pstmt = conn.prepareStatement("INSERT INTO bruger (brugernavn, kodeord) VALUES (?, ?)");
+
                     // Sæt parameterne for PreparedStatement
                     pstmt.setString(1, brugerNavn);
                     pstmt.setString(2, password);
@@ -60,29 +61,22 @@ public class DBConnector {
     }
 
 
-    private void opretKøleskab(String brugerNavn) {
-        try (
-                Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-                PreparedStatement pstmt = conn.prepareStatement("INSERT INTO koeleskab (brugernavn) VALUES (?)")
-        ) {
-            pstmt.setString(1, brugerNavn);
+    public void tilføjTilInventarListe(Vare vare) {
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO inventar (brugernavn, varer, mængde, afdeling) VALUES (?, ?, ?, ?)");
+
+            pstmt.setString(1, this.brugerNavn);
+            pstmt.setString(2, vare.getVareNavn());
+            pstmt.setInt(3, vare.getMængde());
+            pstmt.setString(4, vare.getAfdeling());
+
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            ui.displayMessage("Fejl under oprettelse af bruger: " + e.getMessage());
+            ui.displayMessage("Fejl under tilføjelse til inventar: " + e.getMessage());
         }
     }
 
-    private void opretIndkøbsliste(String brugerNavn) {
-        try (
-                Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-                PreparedStatement pstmt = conn.prepareStatement("INSERT INTO liste (brugernavn) VALUES (?)")
-        ) {
-            pstmt.setString(1, brugerNavn);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            ui.displayMessage("Fejl under oprettelse af bruger: " + e.getMessage());
-        }
-    }
 
     public boolean checkCredentialAvailability(String brugerNavn) {
         try (
@@ -210,8 +204,56 @@ public class DBConnector {
         }
     }
 
-    public HashMap<AProdukt, String> visIndkøbsListe(String brugernavn){
-            HashMap<AProdukt, String> vareMap = new HashMap<>();
+    public Vare hentVare(String brugernavn, String vareNavnFraBruger) {
+        try {
+            // Establish connection to the database
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            // Prepare the SQL statement to fetch the item
+            String sql = "SELECT * FROM liste WHERE brugernavn = ? AND varer = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            // Set the parameters for the PreparedStatement
+            pstmt.setString(1, brugernavn);
+            pstmt.setString(2, vareNavnFraBruger);
+
+            // Execute the query
+            ResultSet rs = pstmt.executeQuery();
+
+            // Check if the ResultSet has any rows
+            if (rs.next()) {
+                // If a row is found, fetch item details
+                String vareNavn = rs.getString("varer");
+                int mængde = rs.getInt("mængde");
+                int pris = rs.getInt("pris");
+                String afdeling = rs.getString("afdeling");
+
+                // Close ResultSet, PreparedStatement, and Connection
+                rs.close();
+                pstmt.close();
+                conn.close();
+
+                // Create and return the Vare object
+                return new Vare(vareNavn, mængde, pris, afdeling);
+            } else {
+                // Close ResultSet, PreparedStatement, and Connection
+                rs.close();
+                pstmt.close();
+                conn.close();
+
+                // If no item is found, return null
+                return null;
+            }
+        } catch (SQLException e) {
+            // Handle any SQL exceptions
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+    public HashMap<Vare, String> hentIndkøbsListe(String brugernavn){
+
             try {
                 // Opret forbindelse til databasen
                 Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -242,7 +284,7 @@ public class DBConnector {
             return vareMap;
     }
 
-    public void fjernVAre(String vareNavn) {
+    public void fjernVare(String vareNavn) {
         try {
             // Establish connection to the database
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
