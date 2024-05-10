@@ -23,7 +23,7 @@ public class IndkøbsListeKlasse {
 
     public IndkøbsListeKlasse(DBConnector dbConnector) {
        this.dbConnector = dbConnector;
-       program = new Program();
+       program = new Program(dbConnector);
     }
 
     public void kørIndkøbsliste() {

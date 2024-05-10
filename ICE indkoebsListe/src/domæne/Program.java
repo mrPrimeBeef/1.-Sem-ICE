@@ -21,8 +21,8 @@ public class Program {
     private HashSet<Ret> retter;
     private HashSet<AProdukt> køleskabsListe = new HashSet<>();
 
-    public Program() {
-        dbConnector = new DBConnector();
+    public Program(DBConnector dbConnector) {
+
         indkøbsListeklasse = new IndkøbsListeKlasse(dbConnector);
         madPlanKlasse = new MadPlanKlasse(dbConnector);
 
