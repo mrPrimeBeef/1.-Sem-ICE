@@ -1,0 +1,61 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package View {
+class StartViewForm {
+- JTextField brugernavnFelt
+- JTextField kodeordFelt
+- JButton opretBrugerKnap
+- JButton logIndBrugerKnap
+- JLabel usernameLabel
+- JLabel passwordLabel
++ void LoginForm() {
++ String hentBrugernavn()
++ String hentKodeord()
++ void opretBruger()
++ logIndBruger()
++ void reset(boolean bln)
+}
+
+class MainFrame extends JFrame {
+- CardLayout cardLayout;
++ DBConnector database = new DBConnector();
++ LoginForm form = new LoginForm();
++ MainFrame()
+super("Application")
+
+}
+
+class opretBrugerView {
+}
+class logIndBrugerVindue {
+}
+class HovedMenuView {
+}
+class IndkøbslisteView {
+}
+class MadplanView {
+}
+class KøleskabView {
+}
+class RetView {
+}
+
+}
+
+package controller {
+class Controller {
+- DBConnector database;
+- LoginForm form;
++ Controller(LoginForm form, DBConnector database) {
+this.form.opretBruger()
+this.form.logIndBruger()
+} 'end of constructor
+
+Bruger bruger = database.opretBruger()
+}
+}
+
+
+
+@enduml
