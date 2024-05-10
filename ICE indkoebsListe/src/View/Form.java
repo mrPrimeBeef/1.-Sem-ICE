@@ -14,8 +14,8 @@ public class Form extends JPanel { // Startside
 
     public Form() {
 
-        JLabel firstnameLabel = new JLabel("First Name: ");
-        JLabel lastnameLabel = new JLabel("Last Name: ");
+        JLabel firstnameLabel = new JLabel("Brugernavn: ");
+        JLabel lastnameLabel = new JLabel("Kodeord: ");
 
         brugernavnFelt = new JTextField(25);
         kodeordFelt = new JTextField(25);
@@ -80,11 +80,11 @@ public class Form extends JPanel { // Startside
         return kodeordFelt.getText();
     }
 
-    public void submitUsers(ActionListener actionListener) {
+    public void opretBruger(ActionListener actionListener) {
         opretBrugerKnap.addActionListener(actionListener);
     }
 
-    public void viewUsers(ActionListener actionListener) {
+    public void logIndBruger(ActionListener actionListener) {
         logIndBrugerKnap.addActionListener(actionListener);
     }
 

@@ -18,13 +18,10 @@ public class MainFrame extends JFrame {
         setLayout(cardLayout);
 
         // initialize user controller
-        new UserController(form);
+        new Controller(form);
 
         // adds view to card layout with unique constraints
         add(form, "form");
-        // switch view according to its constraints on click
-        form.viewUsers(e -> cardLayout.show(MainFrame.this.getContentPane(), "user details"));
-        userDetails.backButton(e -> cardLayout.show(MainFrame.this.getContentPane(), "form"));
 
 
         // frame width & height

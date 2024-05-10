@@ -4,7 +4,6 @@ import domæne.DBConnector;
 import View.Form;
 
 import javax.swing.*;
-import java.io.File;
 
 public class Controller {
     // database file
@@ -13,11 +12,11 @@ public class Controller {
     private Form form;
 
     public Controller(Form form) {
-        this.database = new Database();
+        //this.database = new Database();
         this.form = form;
 
-        // submit user
-        this.form.submitUsers(e -> {
+        // opret bruger
+        this.form.opretBruger(e -> {
             String brugernavn = this.form.hentBrugernavn().trim();
             String kodeord = this.form.hentKodeord().trim();
 
@@ -32,14 +31,11 @@ public class Controller {
                 return;
             }
 
+
+
             //this.database.addUser(new User(brugernavn, kodeord));
             //his.database.saveUser(new File(databaseFile));
             this.form.reset(true);
         });
-        /*
-        // load users
-        this.form.viewUsers(e -> {
-            this.userDetails.getUsers(this.database.loadUsers(new File(databaseFile)));
-        });*/
     }
 }

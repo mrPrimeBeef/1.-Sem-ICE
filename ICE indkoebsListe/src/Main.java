@@ -1,6 +1,6 @@
 import domæne.Program;
 import domæne.DBConnector;
-
+/*
 public class Main {
     public static void main(String[] args) {
         DBConnector db = new DBConnector();
@@ -11,14 +11,14 @@ public class Main {
         program.logIndProgram();
     }
 }
+*/
 
-/*
 
 import View.MainFrame;
 
 import javax.swing.*;
 
-public class App {
+public class Main {
     public static void main(String[] args) {
         // runs in AWT thread
         SwingUtilities.invokeLater(MainFrame::new);
@@ -26,4 +26,3 @@ public class App {
 }
 
 
- */
