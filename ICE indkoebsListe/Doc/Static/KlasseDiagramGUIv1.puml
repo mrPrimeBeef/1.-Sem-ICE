@@ -47,12 +47,35 @@ package controller {
 class Controller {
 - DBConnector database;
 - LoginForm form;
-+ Controller(LoginForm form, DBConnector database) {
-this.form.opretBruger()
-this.form.logIndBruger()
-} 'end of constructor
++ Controller(LoginForm form, DBConnector database)
++ Bruger brugerOpret = database.opretBruger()
++ Bruger brugerLogInd = database.logIndBruger()
+}
+}
 
-Bruger bruger = database.opretBruger()
+package domæne {
+class DBConnector {
+- Bruger nuværendeBruger
++ String brugernavn
++ String password
++ Vare vare
+- LoginForm form
+- static final String JDBC_DRIVER
+- static final String DB_URL
+- static final String USER
+- static final String PASS
++ DBConnector()
++ Bruger opretBruger()
+- void opretKøleskab()
+- void opretIndkøbsliste
++ boolean checkCredentialAvailability()
++ void dbConnect()
++ void indstilBrugerNavn(String brugerNavn)
++ String hentBrugernavn()
++ void gemTilListe(Vare vare)
++ hashMap<AProdukt, String> visIndkøbsliste(String brugernavn)>
++ void fjernVare(String vareNavn)
+
 }
 }
 
