@@ -25,14 +25,17 @@ class Program {
 + void kørRetter ()
 + afslutProgram ()
 }
+class Inventar{
+Inventar(DBConnector dbConnector, TextUI ui);
 
+}
 class IndkøbsListeKlasse{
  - Program program
  - TextUI ui
  - DBConnector
  - HashMap<AProdukt, String> indkøbsListe
 
-IndkøbsListeKlasse(DBConnector dbConnector, TextUI ui, Program program);
+IndkøbsListeKlasse(DBConnector dbConnector, TextUI ui);
 + void kørIndkøbsliste()
 + void seIndkøbsListe()
 + void brugIndkøbsliste()
@@ -142,6 +145,7 @@ class TextUI {
 Main *-- Program
 
 Program *-- IndkøbsListeKlasse
+Program *-- Inventar
 Program *-- MadPlanKlasse
 Program *-- TextUI
 Program *-- dBconnecter

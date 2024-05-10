@@ -2,7 +2,6 @@ package domæne;
 
 import produkt.AProdukt;
 import produkt.Ret;
-import produkt.Vare;
 import utility.DBConnector;
 import utility.TextUI;
 
@@ -11,6 +10,7 @@ import java.util.*;
 public class Program {
     private IndkøbsListeKlasse indkøbsListeklasse;
     private DBConnector dbConnector;
+    private Inventar inventar;
     private TextUI ui;
     private Program program;
     private MadPlanKlasse madPlanKlasse;
@@ -19,13 +19,12 @@ public class Program {
     private ArrayList<String> valg;
     private ArrayList<String> listeValg;
     private HashSet<Ret> retter;
-    private HashSet<AProdukt> køleskabsListe = new HashSet<>();
 
     public Program(DBConnector dbConnector, TextUI ui) {
 
         indkøbsListeklasse = new IndkøbsListeKlasse(dbConnector,ui);
         madPlanKlasse = new MadPlanKlasse(dbConnector,ui);
-
+        inventar = new Inventar(dbConnector,ui);
 
         this.dbConnector = dbConnector;
         this.ui = ui;
@@ -77,9 +76,9 @@ public class Program {
             case 2: // seMadplan
                 madPlanKlasse.kørMadplan();
                 break;
-            case 3: // seKøleskab
-                //ui.displayMessage("Oversigt af dine ingredienser i køleskabet");
-                kørKøleskab();
+            case 3: // seInventar
+
+                kørInventar();
                 break;
             case 4: // se Retter
                 //ui.displayMessage("Oversigt af dine tilgængelige retter");
@@ -93,8 +92,8 @@ public class Program {
 
 
 
-        public void kørKøleskab () {
-            køleskabsListe = new HashSet<>();
+        public void kørInventar() {
+
         }
 
         public void kørRetter () {
