@@ -1,20 +1,20 @@
 package model;
 
 public class Bruger {
-    private String brugerNavn;
-    private String kodeOrd;
+    private String username;
+    private String password;
 
 
-    public Bruger(String brugerNavn, String kodeOrd) {
-        this.brugerNavn = brugerNavn;
-        this.kodeOrd = kodeOrd;
+    public Bruger(String username, String password) {
+        this.username = username;
+        this.password = password;
 
     }
-    public String getBrugerNavn() {
-        return brugerNavn;
+    public String getUsername() {
+        return username;
     }
-    public String getKodeOrd() {
-        return kodeOrd;
+    public String getPassword() {
+        return password;
     }
 
 }

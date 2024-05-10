@@ -1,4 +1,4 @@
-package views;
+package View;
 
 public class LoggetIndBruger {
 }
