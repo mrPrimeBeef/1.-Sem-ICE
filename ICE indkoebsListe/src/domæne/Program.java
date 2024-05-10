@@ -2,15 +2,16 @@ package domæne;
 
 import produkt.AProdukt;
 import produkt.Ret;
-import utility.TextUI;
+import View.LoginForm;
 
+import javax.swing.*;
 import java.util.*;
 
 public class Program {
     private String navn;
     private Bruger nuværendeBruger;
-    private TextUI ui;
     private AProdukt produkt;
+    private LoginForm form;
     private IndkøbsListeKlasse indkøbsListeklasse;
     private DBConnector dbConnector;
     private MadPlanKlasse madPlanKlasse;
@@ -25,8 +26,8 @@ public class Program {
         madPlanKlasse = new MadPlanKlasse(dbConnector);
 
         this.navn = navn;
+        this.form = form;
 
-        this.ui = new TextUI();
 
         startMenu = new ArrayList<>();
 
@@ -44,9 +45,9 @@ public class Program {
     }
 
     //                      Start Program
+    /*
     public void logIndProgram() {
 
-        ui.displayMessage("Velkommen");
 
         int choice;
         choice = ui.promptChoice(startMenu, "Opret en bruger eller log ind", 1, 2);
@@ -65,8 +66,8 @@ public class Program {
                 }
                 break;
         }
-    }
-
+    }*/
+    /*
     public void kørProgram() {
         int menuChoice;
 
@@ -90,7 +91,7 @@ public class Program {
                 afslutProgram();
                 break;
         }
-    }
+    }*/
 
 
 
@@ -104,7 +105,7 @@ public class Program {
 
         private void afslutProgram () {
             nuværendeBruger = null;
-            ui.displayMessage("Du er nu logget ud");
+            JOptionPane.showMessageDialog(this.form, "Du er nu logget ud");
         }
 
     }

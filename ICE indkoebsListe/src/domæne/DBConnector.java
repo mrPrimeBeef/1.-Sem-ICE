@@ -3,7 +3,7 @@ package domæne;
 import produkt.AProdukt;
 import produkt.Vare;
 //import utility.TextUI;
-import View.Form;
+import View.LoginForm;
 import javax.swing.*;
 import java.sql.*;
 import java.util.HashMap;
@@ -14,7 +14,7 @@ public class DBConnector {
     String brugerNavn;
     String password;
     Vare vare;
-    private Form form;
+    private LoginForm form;
 
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/ice";
@@ -91,7 +91,7 @@ public class DBConnector {
             JOptionPane.showMessageDialog(this.form, "Fejl under oprettelse af bruger " + e.getMessage());
         }
     }
-    /*
+
     public boolean checkCredentialAvailability(String brugerNavn) {
         try (
                 // Opret forbindelse til databasen
@@ -106,11 +106,11 @@ public class DBConnector {
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     // Brugernavnet findes i databasen
-                    ui.displayMessage(brugerNavn + " er allerede i brug");
+                    JOptionPane.showMessageDialog(this.form, "brugernavn er i brug");
                     return false; // Credential exists
                 } else {
                     // Brugernavnet er ledigt
-                    ui.displayMessage(brugerNavn + " er ledig");
+                    JOptionPane.showMessageDialog(this.form, "Brugernavn er ledigt.");
                     return true; // Credential is available
                 }
             }
@@ -118,7 +118,7 @@ public class DBConnector {
             JOptionPane.showMessageDialog(this.form, "Fejl under tjek af brugernavn tilgængellighed " + e.getMessage());
             return false; // Returner false i tilfælde af en fejl
         }
-    }*/
+    }
     /*
     public boolean logInd() {
         Connection conn = null;

@@ -13,7 +13,7 @@ public class MainFrame extends JFrame {
     public MainFrame() {
         super("Java Swing MVC");
         cardLayout = new CardLayout();
-        Form form = new Form();
+        LoginForm form = new LoginForm();
         DBConnector database = new DBConnector();
         // sets our layout as a card layout
         setLayout(cardLayout);

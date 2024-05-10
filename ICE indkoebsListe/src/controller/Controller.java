@@ -2,15 +2,15 @@ package controller;
 
 import domæne.Bruger;
 import domæne.DBConnector;
-import View.Form;
+import View.LoginForm;
 
 import javax.swing.*;
 
 public class Controller {
     private DBConnector database;
-    private Form form;
+    private LoginForm form;
 
-    public Controller(Form form, DBConnector database) {
+    public Controller(LoginForm form, DBConnector database) {
         this.database = database;
         this.form = form;
 

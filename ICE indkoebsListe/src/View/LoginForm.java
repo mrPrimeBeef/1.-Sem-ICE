@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class Form extends JPanel { // Startside
+public class LoginForm extends JPanel { // Startside
 
     private JTextField brugernavnFelt;
     private JTextField kodeordFelt;
@@ -12,7 +12,7 @@ public class Form extends JPanel { // Startside
     private JButton opretBrugerKnap;
     private JButton logIndBrugerKnap;
 
-    public Form() {
+    public LoginForm() {
 
         JLabel firstnameLabel = new JLabel("Brugernavn: ");
         JLabel lastnameLabel = new JLabel("Kodeord: ");

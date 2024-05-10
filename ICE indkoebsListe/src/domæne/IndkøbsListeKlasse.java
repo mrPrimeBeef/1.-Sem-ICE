@@ -31,20 +31,20 @@ public class IndkøbsListeKlasse {
         listeValg.add("Se Indkøbsliste");
         listeValg.add("Lav ny");
         listeValg.add("tilbage");
-        int choice = ui.promptChoice(listeValg, "\nvælg 1 handling", 1, 3);
+        //int choice = ui.promptChoice(listeValg, "\nvælg 1 handling", 1, 3);
 
         if (choice == 1) {
             brugIndkøbsliste();
         } else if (choice == 2) {
             lavIndkøbsListe();
         } else if (choice == 3) {
-            program.kørProgram();
+           // program.kørProgram();
         }
     }
 
     public void seIndkøbsListe(HashMap<AProdukt, String> liste){
         liste = dbConnector.visIndkøbsListe(dbConnector.getBrugerNavn());
-        ui.displayListHashMap(liste, "");
+        //ui.displayListHashMap(liste, "");
     }
 
     public void brugIndkøbsliste() {
@@ -55,7 +55,7 @@ public class IndkøbsListeKlasse {
         valg.add("Se Indkøbsseddel");
         valg.add("tilbage");
         seIndkøbsListe(dbConnector.visIndkøbsListe(dbConnector.getBrugerNavn()));
-        int input = ui.promptChoice(valg, "\nvælg 1 handling", 1, 5);
+        //int input = ui.promptChoice(valg, "\nvælg 1 handling", 1, 5);
 
 
         if (input == 1) {
@@ -69,7 +69,7 @@ public class IndkøbsListeKlasse {
             seIndkøbsListe(dbConnector.visIndkøbsListe(dbConnector.getBrugerNavn()));
             brugIndkøbsliste();
         } else if (input == 5) {
-            program.kørProgram();
+            //program.kørProgram();
         }
     }
 
@@ -106,15 +106,15 @@ public class IndkøbsListeKlasse {
     }
 
     public void sletVare(){
-        String slet =  ui.promptText("Hvilken vare til du slette?");
-        dbConnector.fjernVAre(slet);
+        //String slet =  ui.promptText("Hvilken vare til du slette?");
+        //dbConnector.fjernVAre(slet);
 
     }
 
     public void  købVare(){
-        String køb =  ui.promptText("Hvilken vare til du købe?");
+        //String køb =  ui.promptText("Hvilken vare til du købe?");
         // der skal laves Aprodukt
         //køleskabsListe.add(køb);
-        indkøbsListe.remove(køb);
+        //indkøbsListe.remove(køb);
     }
 }
