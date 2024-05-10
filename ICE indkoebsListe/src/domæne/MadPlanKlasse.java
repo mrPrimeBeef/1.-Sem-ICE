@@ -2,7 +2,6 @@ package domæne;
 
 import produkt.AProdukt;
 import produkt.Ret;
-import utility.DBConnector;
 import utility.TextUI;
 
 import java.util.ArrayList;

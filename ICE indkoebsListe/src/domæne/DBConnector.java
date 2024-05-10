@@ -1,8 +1,8 @@
-package utility;
+package domæne;
 
-import domæne.Bruger;
 import produkt.AProdukt;
 import produkt.Vare;
+import utility.TextUI;
 
 import java.sql.*;
 import java.util.HashMap;

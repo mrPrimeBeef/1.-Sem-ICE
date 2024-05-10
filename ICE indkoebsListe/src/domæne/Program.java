@@ -2,8 +2,6 @@ package domæne;
 
 import produkt.AProdukt;
 import produkt.Ret;
-import produkt.Vare;
-import utility.DBConnector;
 import utility.TextUI;
 
 import java.util.*;
