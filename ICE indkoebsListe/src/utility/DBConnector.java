@@ -5,6 +5,7 @@ import produkt.Vare;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 
@@ -24,6 +25,7 @@ public class DBConnector {
     public DBConnector() {
         this.ui = new TextUI();
         this.vareMap = new HashMap<>();
+
     }
 
     public void dbConnect() {
@@ -253,7 +255,6 @@ public class DBConnector {
 
 
     public HashMap<Vare, String> hentIndkøbsListe(String brugernavn){
-
             try {
                 // Opret forbindelse til databasen
                 Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -349,64 +350,92 @@ public class DBConnector {
         }
     }
 
+    public void tilføjTilMadplanListe(String retnavn, int indexTal) {
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO madplan (brugernavn, dag, ret) VALUES (?, ?, ?)");
 
-//    public void tilføjTilMadplanListe(Ret ret, int indexTal) {
-//        try {
-//            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-//            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO madplan (brugernavn, dag, ret) VALUES (?, ?, ?)");
-//
-//            pstmt.setString(1, this.brugerNavn);
-//            pstmt.setInt(2, indexTal);
-//            pstmt.setString(3, ret.getNavn());
-//
-//        } catch (SQLException e) {
-//            ui.displayMessage("Fejl under tilføjelse til madplanen: " + e.getMessage());
-//        }
-//    }
-//
-//    public Vare hentRet(String brugernavn, String retNavn) {
-//        try {
-//            // Establish connection to the database
-//            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-//
-//            // Prepare the SQL statement to fetch the item
-//            String sql = "SELECT * FROM retter WHERE brugernavn = ? AND varer = ?";
-//            PreparedStatement pstmt = conn.prepareStatement(sql);
-//
-//            // Set the parameters for the PreparedStatement
-//            pstmt.setString(1, brugernavn);
-//            pstmt.setString(2, retNavn);
-//
-//            // Execute the query
-//            ResultSet rs = pstmt.executeQuery();
-//
-//            // Check if the ResultSet has any rows
-//            if (rs.next()) {
-//                // If a row is found, fetch item details
-//                String retNavn = rs.getString("varer");
-//
-//                // Close ResultSet, PreparedStatement, and Connection
-//                rs.close();
-//                pstmt.close();
-//                conn.close();
-//
-//                // Create and return the Vare object
-//                return new Ret();
-//            } else {
-//                // Close ResultSet, PreparedStatement, and Connection
-//                rs.close();
-//                pstmt.close();
-//                conn.close();
-//
-//                // If no item is found, return null
-//                return null;
-//            }
-//        } catch (SQLException e) {
-//            // Handle any SQL exceptions
-//            e.printStackTrace();
-//            return null;
-//        }
-//    }
+            pstmt.setString(1, this.brugerNavn);
+            pstmt.setInt(2, indexTal); // Index + 1 for at matche med 1-baseret dagnummer
+            pstmt.setString(3, retnavn);
+
+            pstmt.executeUpdate(); // Udfør indsættelsen
+
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            ui.displayMessage("Fejl under tilføjelse til madplanen: " + e.getMessage());
+        }
+    }
+
+    public ArrayList<String> hentMadplan(String brugernavn) {
+        ArrayList<String> madplan = new ArrayList<>();
+        madplan.addAll(Arrays.asList("Mandag: ", "Tirsdag: ", "Onsdag: ", "Torsdag: ","Fredag: ","Lørdag: ","Søndag: " + "\n"));
+
+        try {
+            // Opret forbindelse til databasen
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            // SQL-forespørgsel til at hente madplanen for den angivne bruger
+            PreparedStatement pstmt = conn.prepareStatement("SELECT dag, ret FROM madplan WHERE brugernavn = ?");
+
+            // Sæt parameteren for PreparedStatement
+            pstmt.setString(1, brugernavn);
+
+            // Udfør SQL-forespørgslen
+            ResultSet rs = pstmt.executeQuery();
+
+            // Iterér gennem resultatet og tilføj hver ret til den passende dag i ArrayList
+            while (rs.next()) {
+                int dag = rs.getInt("dag");
+                String ret = rs.getString("ret");
+                int rDag = dag - 1;
+                StringBuilder sb = new StringBuilder();
+                sb.append(madplan.get(rDag) + ret);
+                madplan.set(rDag, madplan.get(rDag) + ret);
+            }
+            // Luk ResultSet, PreparedStatement og Connection
+            rs.close();
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            ui.displayMessage("Fejl under hentning af madplan for ugen: " + e.getMessage());
+        }
+
+        return madplan;
+    }
+
+
+    public void fjernRet(int index) {
+        try {
+            // Opret forbindelse til databasen
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            // Forbered SQL-forespørgslen til at slette posten
+            String sql = "DELETE FROM madplan WHERE dag = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            // Indstil parameteren for PreparedStatement
+            pstmt.setInt(1, index);
+
+            // Udfør sletningsforespørgslen
+            int rowsAffected = pstmt.executeUpdate();
+
+            // Tjek om der blev berørt nogen rækker (dvs. om retten blev slettet succesfuldt)
+            if (rowsAffected > 0) {
+                System.out.println("Retten er blevet fjernet fra madplanen.");
+            } else {
+                System.out.println("Der blev ikke fundet nogen ret på den angivne dag.");
+            }
+
+            // Luk PreparedStatement og Connection
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            // Log fejlen eller vis en fejlbesked
+            System.err.println("Fejl under fjernelse af ret fra madplan: " + e.getMessage());
+        }
+    }
 
 
 
@@ -414,7 +443,5 @@ public class DBConnector {
 
     }
 
-
 }
-
 
