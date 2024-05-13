@@ -1,5 +1,6 @@
 package utility;
 
+import produkt.Ret;
 import produkt.Vare;
 
 import java.sql.*;
@@ -22,6 +23,31 @@ public class DBConnector {
     public DBConnector() {
         this.ui = new TextUI();
         this.vareMap = new HashMap<>();
+    }
+
+    public void dbConnect() {
+
+        System.out.println("\n\n***** MySQL JDBC Connection Testing *****");
+        Connection conn = null;
+        try {
+            //Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            System.out.println("\nDatabase Connection Established...");
+        } catch (
+                Exception ex) {
+            System.err.println("Cannot connect to database server");
+            ex.printStackTrace();
+        } finally {
+            if (conn != null) {
+                try {
+                    System.out.println("\n***** Let terminate the Connection *****");
+                    conn.close();
+                    System.out.println("\nDatabase connection terminated...");
+                } catch (Exception ex) {
+                    System.out.println("Error in connection termination!");
+                }
+            }
+        }
     }
 
     public void opretBruger() {
@@ -59,24 +85,6 @@ public class DBConnector {
             }
         }
     }
-
-
-    public void tilføjTilInventarListe(Vare vare) {
-        try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO inventar (brugernavn, varer, mængde, afdeling) VALUES (?, ?, ?, ?)");
-
-            pstmt.setString(1, this.brugerNavn);
-            pstmt.setString(2, vare.getVareNavn());
-            pstmt.setInt(3, vare.getMængde());
-            pstmt.setString(4, vare.getAfdeling());
-
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            ui.displayMessage("Fejl under tilføjelse til inventar: " + e.getMessage());
-        }
-    }
-
 
     public boolean checkCredentialAvailability(String brugerNavn) {
         try (
@@ -144,31 +152,6 @@ public class DBConnector {
         }
     }
 
-    public void dbConnect() {
-
-        System.out.println("\n\n***** MySQL JDBC Connection Testing *****");
-        Connection conn = null;
-        try {
-            //Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            System.out.println("\nDatabase Connection Established...");
-        } catch (
-                Exception ex) {
-            System.err.println("Cannot connect to database server");
-            ex.printStackTrace();
-        } finally {
-            if (conn != null) {
-                try {
-                    System.out.println("\n***** Let terminate the Connection *****");
-                    conn.close();
-                    System.out.println("\nDatabase connection terminated...");
-                } catch (Exception ex) {
-                    System.out.println("Error in connection termination!");
-                }
-            }
-        }
-    }
-
     public void setBrugerNavn(String brugerNavn) {
         this.brugerNavn = brugerNavn;
     }
@@ -177,6 +160,22 @@ public class DBConnector {
         return brugerNavn;
     }
 
+
+    public void tilføjTilInventarListe(Vare vare) {
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO inventar (brugernavn, varer, mængde, afdeling) VALUES (?, ?, ?, ?)");
+
+            pstmt.setString(1, this.brugerNavn);
+            pstmt.setString(2, vare.getVareNavn());
+            pstmt.setInt(3, vare.getMængde());
+            pstmt.setString(4, vare.getAfdeling());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            ui.displayMessage("Fejl under tilføjelse til inventar: " + e.getMessage());
+        }
+    }
     public void gemTilListe(Vare vare) {
 
 
@@ -313,6 +312,79 @@ public class DBConnector {
             e.printStackTrace();
         }
     }
+
+    public void tilføjTilRetter(Ret ret) {
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO retter (brugernavn, ret) VALUES (?, ?)");
+
+            pstmt.setString(1, this.brugerNavn);
+            pstmt.setString(2, ret.getNavn());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            ui.displayMessage("Fejl under tilføjelse til inventar: " + e.getMessage());
+        }
+    }
+
+//    public void tilføjTilMadplanListe(Ret ret, int indexTal) {
+//        try {
+//            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+//            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO madplan (brugernavn, dag, ret) VALUES (?, ?, ?)");
+//
+//            pstmt.setString(1, this.brugerNavn);
+//            pstmt.setInt(2, indexTal);
+//            pstmt.setString(3, ret.getNavn());
+//
+//        } catch (SQLException e) {
+//            ui.displayMessage("Fejl under tilføjelse til madplanen: " + e.getMessage());
+//        }
+//    }
+//
+//    public Vare hentRet(String brugernavn, String retNavn) {
+//        try {
+//            // Establish connection to the database
+//            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+//
+//            // Prepare the SQL statement to fetch the item
+//            String sql = "SELECT * FROM retter WHERE brugernavn = ? AND varer = ?";
+//            PreparedStatement pstmt = conn.prepareStatement(sql);
+//
+//            // Set the parameters for the PreparedStatement
+//            pstmt.setString(1, brugernavn);
+//            pstmt.setString(2, retNavn);
+//
+//            // Execute the query
+//            ResultSet rs = pstmt.executeQuery();
+//
+//            // Check if the ResultSet has any rows
+//            if (rs.next()) {
+//                // If a row is found, fetch item details
+//                String retNavn = rs.getString("varer");
+//
+//                // Close ResultSet, PreparedStatement, and Connection
+//                rs.close();
+//                pstmt.close();
+//                conn.close();
+//
+//                // Create and return the Vare object
+//                return new Ret();
+//            } else {
+//                // Close ResultSet, PreparedStatement, and Connection
+//                rs.close();
+//                pstmt.close();
+//                conn.close();
+//
+//                // If no item is found, return null
+//                return null;
+//            }
+//        } catch (SQLException e) {
+//            // Handle any SQL exceptions
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
+
 
 
     public void lukDB(){

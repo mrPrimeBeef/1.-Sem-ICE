@@ -1,5 +1,6 @@
 package domæne;
 
+import produkt.Ret;
 import utility.DBConnector;
 import utility.TextUI;
 import java.util.ArrayList;
@@ -17,28 +18,18 @@ public class MadPlanKlasse {
 
     public MadPlanKlasse(DBConnector dbConnector, TextUI ui) {
         madplan = new ArrayList<>();
-
-
-        this.dbConnector = dbConnector;
-        this.ui = ui;
-
-
-        madplan.add("Mandag: ");
-        madplan.add("Tirsdag: ");
-        madplan.add("Onsdag: ");
-        madplan.add("Torsdag: ");
-        madplan.add("Fredag: ");
-        madplan.add("Lørdag: ");
-        madplan.add("Søndag: " + "\n");
+        madplan.addAll(Arrays.asList("Mandag: ", "Tirsdag: ", "Onsdag: ", "Torsdag: ","Fredag: ","Lørdag: ","Søndag: " + "\n"));
 
         dage = new ArrayList<>();
         dage.addAll(Arrays.asList("Mandag: ", "Tirsdag: ", "Onsdag: ", "Torsdag: ","Fredag: ","Lørdag: ","Søndag: " + "\n"));
 
-        valg = new ArrayList<>();
+        this.dbConnector = dbConnector;
+        this.ui = ui;
 
-        valg.add("Tilføj ret");
-        valg.add("Slet ret");
-        valg.add("Tilbage");
+        valg = new ArrayList<>();
+        valg.addAll(Arrays.asList("Tilføj ret", "Slet ret", "Tilbage"));
+
+
 
     }
 
@@ -52,6 +43,8 @@ public class MadPlanKlasse {
            case 1:
                ret = ui.promptText("Skriv navnet på retten").toLowerCase();
                choice = ui.promptChoice(madplan,"Hvilken dag skal retten på?",1,7);
+//               Ret ret1 = dbConnector.hentRet(dbConnector.getBrugerNavn(), ret);
+//               dbConnector.tilføjTilMadplanListe(ret1,choice);
                madplan.set(choice-1, madplan.get(choice-1) + ret);
                kørMadplan();
            break;

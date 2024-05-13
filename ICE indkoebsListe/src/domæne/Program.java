@@ -1,6 +1,5 @@
 package domæne;
 
-import produkt.AProdukt;
 import produkt.Ret;
 import utility.DBConnector;
 import utility.TextUI;
@@ -14,6 +13,7 @@ public class Program {
     private TextUI ui;
     private Program program;
     private MadPlanKlasse madPlanKlasse;
+    private domæne.seRetter seRetter;
     private ArrayList<String> startMenu;
     private ArrayList<String> mainMenu;
     private ArrayList<String> valg;
@@ -25,6 +25,7 @@ public class Program {
         indkøbsListeklasse = new IndkøbsListeKlasse(dbConnector,ui);
         madPlanKlasse = new MadPlanKlasse(dbConnector,ui);
         inventar = new Inventar(dbConnector,ui);
+        seRetter = new seRetter(dbConnector,ui);
 
         this.dbConnector = dbConnector;
         this.ui = ui;
@@ -77,11 +78,10 @@ public class Program {
                 madPlanKlasse.kørMadplan();
                 break;
             case 3: // seInventar
-                kørInventar();
+                //kørInventar();
                 break;
-            case 4: // se Retter
-                //ui.displayMessage("Oversigt af dine tilgængelige retter");
-                kørRetter();
+            case 4: // se seRetter
+                seRetter.kørRetter();
                 break;
             case 5: // log Ud
                 afslutProgram();
@@ -89,13 +89,6 @@ public class Program {
         }
     }
 
-        public void kørInventar() {
-
-        }
-
-        public void kørRetter () {
-            retter = new HashSet<>();
-        }
 
         private void afslutProgram () {
             ui.displayMessage("Du er nu logget ud");
