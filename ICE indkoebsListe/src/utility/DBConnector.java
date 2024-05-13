@@ -437,7 +437,52 @@ public class DBConnector {
         }
     }
 
+    public HashMap<String, ArrayList<String>> visRetter(String brugernavn) {
+        HashMap<String, ArrayList<String>> retterOgIngredienser = new HashMap<>();
 
+        ResultSet rs = null;
+
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            String sql = "SELECT r.navn AS ret_navn, i.navn AS ingrediens_navn " +
+                    "FROM retter r " +
+                    "JOIN ingredienser i ON r.navn = i.ret_navn " +
+                    "WHERE r.brugernavn = ?";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            // Indstil parameteren for PreparedStatement
+            pstmt.setString(1, brugernavn);
+
+            // Udfør SQL-forespørgslen
+            rs = pstmt.executeQuery();
+
+            // Iterér gennem resultatsættet og opret en mappe med retter og deres ingredienser
+            while (rs.next()) {
+                String retNavn = rs.getString("ret_navn");
+                String ingrediensNavn = rs.getString("ingrediens_navn");
+
+                // Hent eller opret en ArrayList for ingredienserne for den aktuelle ret
+                ArrayList<String> ingredienser = retterOgIngredienser.getOrDefault(retNavn, new ArrayList<>());
+
+                // Tilføj den aktuelle ingrediens til ArrayListen
+                ingredienser.add(ingrediensNavn);
+
+                // Opdater HashMap med retter og ingredienser
+                retterOgIngredienser.put(retNavn, ingredienser);
+            }
+
+            // Luk ResultSet, PreparedStatement og Connection
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            ui.displayMessage("Der er fejl i at vise retterne: " + e.getMessage());
+        }
+        return retterOgIngredienser;
+    }
 
     public void lukDB(){
 

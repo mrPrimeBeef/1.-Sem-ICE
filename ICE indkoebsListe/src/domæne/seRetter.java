@@ -29,7 +29,8 @@ public class seRetter {
         int input = ui.promptChoice(valg, "Vælge 1 handling",1,3);
         switch (input) {
             case 1:
-
+                ui.printRetterOgIngredienser(dbConnector.visRetter(dbConnector.getBrugerNavn()));
+                kørRetter();
                 break;
             case 2:
                 String ingrediens;
@@ -44,7 +45,6 @@ public class seRetter {
                 dbConnector.tilføjTilRetter(ret);
                 dbConnector.tilføjTilIngredienser(retNavn, ingredienser);
                 kørRetter();
-
                 break;
 
                 case 3:
