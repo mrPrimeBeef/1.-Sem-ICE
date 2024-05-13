@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="918fcb30-4647-4c8d-aba6-51368ea01a6b" name="Changes" comment="fjern af ubrugte arraylists">
+    <list default="true" id="918fcb30-4647-4c8d-aba6-51368ea01a6b" name="Changes" comment="Småædringer">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domæne/IndkøbsListeKlasse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domæne/IndkøbsListeKlasse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domæne/MadPlanKlasse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domæne/MadplanKlasse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domæne/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domæne/Program.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domæne/MadplanKlasse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domæne/MadplanKlasse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utility/DBConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility/DBConnector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utility/TextUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility/TextUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -300,7 +297,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715600256619</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Småædringer">
+      <option name="closed" value="true" />
+      <created>1715606871588</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1715606871588</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -338,6 +343,7 @@
     <MESSAGE value="Tilføj retter" />
     <MESSAGE value="Tilføj retter og ingredienser virker i mysql" />
     <MESSAGE value="fjern af ubrugte arraylists" />
-    <option name="LAST_COMMIT_MESSAGE" value="fjern af ubrugte arraylists" />
+    <MESSAGE value="Småædringer" />
+    <option name="LAST_COMMIT_MESSAGE" value="Småædringer" />
   </component>
 </project>

@@ -386,19 +386,25 @@ public class DBConnector {
 
             // Udfør SQL-forespørgslen
             ResultSet rs = pstmt.executeQuery();
-
+            int rDag = 0;
+            int count = 0;
             // Iterér gennem resultatet og tilføj hver ret til den passende dag i ArrayList
             while (rs.next()) {
                 int dag = rs.getInt("dag");
                 String ret = rs.getString("ret");
-                int rDag = dag - 1;
+                rDag = dag - 1;
                 StringBuilder sb = new StringBuilder();
                 if (madplan.get(rDag).equals(madplan2.get(rDag))) {
                     sb.append(madplan.get(rDag) + ret);
                     madplan.set(rDag, madplan.get(rDag) + ret);
+                } else {
+                    if(count < 1) {
+                        ui.displayMessage("Der er noget på dagen");
+                        count++;
+                    }
                 }
-                ui.displayMessage("Der er noget på den her dag");
             }
+
             // Luk ResultSet, PreparedStatement og Connection
             rs.close();
             pstmt.close();

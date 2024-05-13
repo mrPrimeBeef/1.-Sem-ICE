@@ -28,29 +28,12 @@ public class MadplanKlasse {
     public void kørMadplan() {
        int choice;
         String ret;
-        ui.displayList(dbConnector.hentMadplan(dbConnector.getBrugerNavn()),"Her er planen for ugen");
+        ui.displayList(dbConnector.hentMadplan(dbConnector.getBrugerNavn()),"Her er planen for ugen: ");
        int input = ui.promptChoice(valg, "Vælge 1 handling",1,3);
 
        switch (input) {
            case 1:
                ret = ui.promptText("Skriv navnet på retten").toLowerCase();
-
-               if (dbConnector.findesRetten(dbConnector.getBrugerNavn())) {
-                   ArrayList<String> valgAfRet = new ArrayList<>();
-                   valgAfRet.addAll(Arrays.asList("ja", "nej"));
-
-                   int input2 = ui.promptChoice(valgAfRet, "Er det retten?",1,2);
-                   switch (input2) {
-                       case 1:
-                           choice = ui.promptChoice(dbConnector.hentMadplan(dbConnector.getBrugerNavn()),"Hvilken dag skal retten på?",1,dbConnector.hentMadplan(dbConnector.getBrugerNavn()).size());
-                           dbConnector.tilføjTilMadplanListe(ret,choice);
-                       break;
-                       case 2:
-                           kørMadplan();
-                       break;
-                   }
-               }
-
                choice = ui.promptChoice(dbConnector.hentMadplan(dbConnector.getBrugerNavn()),"Hvilken dag skal retten på?",1,dbConnector.hentMadplan(dbConnector.getBrugerNavn()).size());
                dbConnector.tilføjTilMadplanListe(ret,choice);
                kørMadplan();
