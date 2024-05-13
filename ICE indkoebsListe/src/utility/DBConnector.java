@@ -4,6 +4,7 @@ import produkt.Ret;
 import produkt.Vare;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -316,16 +317,38 @@ public class DBConnector {
     public void tilføjTilRetter(Ret ret) {
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO retter (brugernavn, ret) VALUES (?, ?)");
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO retter (brugernavn, navn) VALUES (?, ?)");
 
             pstmt.setString(1, this.brugerNavn);
             pstmt.setString(2, ret.getNavn());
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            ui.displayMessage("Fejl under tilføjelse til inventar: " + e.getMessage());
+            ui.displayMessage("Fejl under tilføjelse til retter: " + e.getMessage());
         }
     }
+
+    public void tilføjTilIngredienser(String retNavn, ArrayList<String> ingredienser) {
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO Ingredienser (navn, ret_navn) VALUES (?, ?)");
+
+            // Gennemløb ingredienslisten og indsæt hver ingrediens i databasen
+            for (String navn : ingredienser) {
+                pstmt.setString(1, navn); // Indstil navnet på ingrediensen
+                pstmt.setString(2, retNavn); // Indstil navnet på retten
+                pstmt.executeUpdate(); // Udfør indsættelsen
+            }
+
+            // Luk PreparedStatement og Connection
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            // Håndter fejl
+            e.printStackTrace();
+        }
+    }
+
 
 //    public void tilføjTilMadplanListe(Ret ret, int indexTal) {
 //        try {

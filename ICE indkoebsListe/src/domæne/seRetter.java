@@ -20,12 +20,13 @@ public class seRetter {
         this.ui = ui;
 
         valg = new ArrayList<>();
-        valg.addAll(Arrays.asList("se seRetter: ", "Tilføj ret" + "\n"));
+        valg.addAll(Arrays.asList("Se retter: ", "Tilføj ret", "Tilbage" + "\n"));
         valg1 = new ArrayList<>();
         valg1.addAll(Arrays.asList("ja", "nej" + "\n"));
+        ingredienser = new ArrayList<>();
     }
     public void kørRetter(){
-        int input = ui.promptChoice(valg, "Vælge 1 handling",1,2);
+        int input = ui.promptChoice(valg, "Vælge 1 handling",1,3);
         switch (input) {
             case 1:
 
@@ -40,9 +41,15 @@ public class seRetter {
                 choice = ui.promptChoice(valg1, "Er der flere?",1,2);
             }
                 Ret ret = new Ret(retNavn, ingredienser);
-
                 dbConnector.tilføjTilRetter(ret);
+                dbConnector.tilføjTilIngredienser(retNavn, ingredienser);
+                kørRetter();
 
+                break;
+
+                case 3:
+                program = new Program(dbConnector, ui);
+                program.kørProgram();
                 break;
         }
 

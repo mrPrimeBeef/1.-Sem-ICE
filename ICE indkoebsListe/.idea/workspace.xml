@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="918fcb30-4647-4c8d-aba6-51368ea01a6b" name="Changes" comment="Køb af vare og visning af liste ikke dobbler">
-      <change afterPath="$PROJECT_DIR$/src/domæne/seRetter.java" afterDir="false" />
+    <list default="true" id="918fcb30-4647-4c8d-aba6-51368ea01a6b" name="Changes" comment="Tilføj retter">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domæne/MadPlanKlasse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domæne/MadPlanKlasse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domæne/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domæne/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/produkt/Ret.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/produkt/Ret.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domæne/seRetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domæne/seRetter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utility/DBConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility/DBConnector.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -130,7 +127,7 @@
       <workItem from="1715237204734" duration="662000" />
       <workItem from="1715257776235" duration="3417000" />
       <workItem from="1715323665059" duration="5473000" />
-      <workItem from="1715583353912" duration="6924000" />
+      <workItem from="1715583353912" duration="9300000" />
     </task>
     <task id="LOCAL-00001" summary="KlasseDiagram v1.puml">
       <option name="closed" value="true" />
@@ -276,7 +273,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715345183189</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Tilføj retter">
+      <option name="closed" value="true" />
+      <created>1715591364882</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1715591364882</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -311,6 +316,7 @@
     <MESSAGE value="Only 1 db connector" />
     <MESSAGE value="clean up" />
     <MESSAGE value="Køb af vare og visning af liste ikke dobbler" />
-    <option name="LAST_COMMIT_MESSAGE" value="Køb af vare og visning af liste ikke dobbler" />
+    <MESSAGE value="Tilføj retter" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tilføj retter" />
   </component>
 </project>
