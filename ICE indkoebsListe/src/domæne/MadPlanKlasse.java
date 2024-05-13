@@ -18,19 +18,11 @@ public class MadPlanKlasse {
 
 
     public MadPlanKlasse(DBConnector dbConnector, TextUI ui) {
-        madplan = new ArrayList<>();
-        madplan.addAll(Arrays.asList("Mandag: ", "Tirsdag: ", "Onsdag: ", "Torsdag: ","Fredag: ","Lørdag: ","Søndag: " + "\n"));
-
-        dage = new ArrayList<>();
-        dage.addAll(Arrays.asList("Mandag: ", "Tirsdag: ", "Onsdag: ", "Torsdag: ","Fredag: ","Lørdag: ","Søndag: " + "\n"));
-
         this.dbConnector = dbConnector;
         this.ui = ui;
 
         valg = new ArrayList<>();
         valg.addAll(Arrays.asList("Tilføj ret", "Slet ret", "Tilbage"));
-
-
 
     }
 
