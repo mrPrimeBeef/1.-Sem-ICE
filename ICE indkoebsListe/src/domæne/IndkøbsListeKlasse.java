@@ -23,14 +23,6 @@ public class IndkøbsListeKlasse {
     public void kørIndkøbsliste(ArrayList<String> listeValg, ArrayList<String> valg) {
         Program program = new Program(dbConnector, ui);
         brugIndkøbsliste(valg, listeValg, program);
-
-//        int choice = ui.promptChoice(listeValg, "\nvælg 1 handling", 1, 2);
-//
-//        if (choice == 1) {
-//            brugIndkøbsliste(valg, listeValg, program);
-//        } else if (choice == 2) {
-//            program.kørProgram();
-//        }
     }
 
 

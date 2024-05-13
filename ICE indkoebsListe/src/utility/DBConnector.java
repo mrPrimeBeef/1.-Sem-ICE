@@ -321,7 +321,7 @@ public class DBConnector {
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO retter (brugernavn, navn) VALUES (?, ?)");
 
             pstmt.setString(1, this.brugerNavn);
-            pstmt.setString(2, ret.getNavn());
+            pstmt.setString(2, ret.getNavn().toLowerCase());
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -371,6 +371,8 @@ public class DBConnector {
     public ArrayList<String> hentMadplan(String brugernavn) {
         ArrayList<String> madplan = new ArrayList<>();
         madplan.addAll(Arrays.asList("Mandag: ", "Tirsdag: ", "Onsdag: ", "Torsdag: ","Fredag: ","Lørdag: ","Søndag: " + "\n"));
+        ArrayList<String> madplan2 = new ArrayList<>();
+        madplan2.addAll(Arrays.asList("Mandag: ", "Tirsdag: ", "Onsdag: ", "Torsdag: ","Fredag: ","Lørdag: ","Søndag: " + "\n"));
 
         try {
             // Opret forbindelse til databasen
@@ -391,8 +393,11 @@ public class DBConnector {
                 String ret = rs.getString("ret");
                 int rDag = dag - 1;
                 StringBuilder sb = new StringBuilder();
-                sb.append(madplan.get(rDag) + ret);
-                madplan.set(rDag, madplan.get(rDag) + ret);
+                if (madplan.get(rDag).equals(madplan2.get(rDag))) {
+                    sb.append(madplan.get(rDag) + ret);
+                    madplan.set(rDag, madplan.get(rDag) + ret);
+                }
+                ui.displayMessage("Der er noget på den her dag");
             }
             // Luk ResultSet, PreparedStatement og Connection
             rs.close();
@@ -484,9 +489,53 @@ public class DBConnector {
         return retterOgIngredienser;
     }
 
-    public void lukDB(){
+    public boolean findesRetten(String navn) {
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM retter WHERE navn = ?");
+            pstmt.setString(1, navn);
 
+            ResultSet rs = pstmt.executeQuery();
+            boolean retExists = rs.next(); // Check if any rows were returned
+
+            // Close ResultSet, PreparedStatement, and Connection
+            rs.close();
+            pstmt.close();
+            conn.close();
+
+            return retExists;
+        } catch (SQLException e) {
+            ui.displayMessage("Fejl under søgning efter ret: " + e.getMessage());
+            return false; // Return false in case of an error
+        }
     }
+
+    public ArrayList<String> hentAlleRetter() {
+        ArrayList<String> retterListe = new ArrayList<>();
+
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            PreparedStatement pstmt = conn.prepareStatement("SELECT navn FROM retter");
+            ResultSet rs = pstmt.executeQuery();
+
+            // Iterér gennem resultatsættet og tilføj navnene på retterne til ArrayList
+            while (rs.next()) {
+                String retNavn = rs.getString("navn");
+                retterListe.add(retNavn);
+            }
+
+            // Luk ResultSet, PreparedStatement og Connection
+            rs.close();
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            ui.displayMessage("Fejl under hentning af retter: " + e.getMessage());
+        }
+
+        return retterListe;
+    }
+
+
 
 }
 

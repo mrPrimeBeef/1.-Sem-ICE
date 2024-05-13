@@ -99,6 +99,20 @@ public class TextUI {
         }
     }
 
+    public String søgtekst(String msg){
+
+        String vare = promptText(msg);
+        String searchPattern = String.format("[a-z]+n");
+        if (!vare.matches(searchPattern)) {
+            displayMessage(vare + " blev ikke fundet, desværre - søg igen.");
+            søgtekst(msg); // rekursiv
+        } else {
+            return vare;
+        }
+
+        return vare;
+    }
+
     public void displayMessage(String msg){
         System.out.println(msg);
     }

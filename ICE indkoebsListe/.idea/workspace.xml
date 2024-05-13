@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="918fcb30-4647-4c8d-aba6-51368ea01a6b" name="Changes" comment="fjern af ubrugte arraylists">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domæne/seRetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domæne/seRetter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domæne/IndkøbsListeKlasse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domæne/IndkøbsListeKlasse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domæne/MadPlanKlasse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domæne/MadplanKlasse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domæne/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domæne/Program.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utility/DBConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility/DBConnector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utility/TextUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility/TextUI.java" afterDir="false" />
     </list>
@@ -64,7 +66,7 @@
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "se-Retter",
+    "git-widget-placeholder": "Tilføj-til-indkøb-efter-valgt-ret",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Rolfj/Documents/GitHub/Cph Busniess Data/1Sem ICE/1.-Sem-ICE/ICE indkoebsListe/Doc/Static",
     "node.js.detected.package.eslint": "true",

@@ -12,7 +12,7 @@ public class Program {
     private Inventar inventar;
     private TextUI ui;
     private Program program;
-    private MadPlanKlasse madPlanKlasse;
+    private MadplanKlasse madPlanKlasse;
     private domæne.seRetter seRetter;
     private ArrayList<String> startMenu;
     private ArrayList<String> mainMenu;
@@ -23,7 +23,7 @@ public class Program {
     public Program(DBConnector dbConnector, TextUI ui) {
 
         indkøbsListeklasse = new IndkøbsListeKlasse(dbConnector,ui);
-        madPlanKlasse = new MadPlanKlasse(dbConnector,ui);
+        madPlanKlasse = new MadplanKlasse(dbConnector,ui);
         inventar = new Inventar(dbConnector,ui);
         seRetter = new seRetter(dbConnector,ui);
 
