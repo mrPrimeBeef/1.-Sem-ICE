@@ -104,10 +104,33 @@ public class TextUI {
         }
     }
 
+    public void printRetterOgIngredienser(HashMap<String, ArrayList<String>> retterOgIngredienser) {
+        for (Map.Entry<String, ArrayList<String>> entry : retterOgIngredienser.entrySet()) {
+            String retNavn = entry.getKey();
+            ArrayList<String> ingredienser = entry.getValue();
 
+            System.out.println("Ret: " + retNavn);
+            System.out.println("Ingredienser:");
+            for (String ingrediensNavn : ingredienser) {
+                System.out.println("- " + ingrediensNavn);
+            }
+            System.out.println();
+        }
+    }
 
+    public String søgtekst(String msg){
 
+        String vare = promptText(msg);
+        String searchPattern = String.format("[a-z]+n");
+        if (!vare.matches(searchPattern)) {
+            displayMessage(vare + " blev ikke fundet, desværre - søg igen.");
+            søgtekst(msg); // rekursiv
+        } else {
+            return vare;
+        }
 
+        return vare;
+    }
 
     public void displayMessage(String msg){
         System.out.println(msg);
