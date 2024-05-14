@@ -93,15 +93,16 @@ public class IndkøbsListeKlasse {
 
     public void sletVare(){
         String slet =  ui.promptText("Hvilken vare til du slette?");
-        dbConnector.fjernVare(slet.toLowerCase());
+        int antal = ui.promptNumeric("Hvor mange?");
+        dbConnector.fjernVare(slet.toLowerCase(), antal);
 
     }
 
     public void  købVare(ArrayList<String> valg,ArrayList<String> listeValg, Program program){
         String køb =  ui.promptText("Hvilken vare har du købt?").toLowerCase();
         Vare vare = dbConnector.hentVare(dbConnector.getBrugerNavn(), køb);
-        dbConnector.tilføjTilInventarListe(vare);
-        dbConnector.fjernVare(køb);
+        dbConnector.tilføjTilInventarListe(vare,dbConnector.hentMængde(køb));
+        dbConnector.fjernVareKøb(køb);
         brugIndkøbsliste(valg, listeValg, program);
     }
 }

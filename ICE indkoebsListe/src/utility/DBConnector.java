@@ -166,6 +166,25 @@ public class DBConnector {
     }
 
 
+    public void tilføjTilInventarListe(Vare vare, int mængde) {
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO inventar (brugernavn, varer, mængde, afdeling) VALUES (?, ?, ?, ?)");
+
+            pstmt.setString(1, this.brugerNavn);
+            pstmt.setString(2, vare.getVareNavn());
+            pstmt.setInt(3, mængde);
+            pstmt.setString(4, vare.getAfdeling());
+
+            ui.displayMessage("Din vare er blevet tilføjet \n");
+            pstmt.executeUpdate();
+
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            ui.displayMessage("Fejl under tilføjelse til inventar: " + e.getMessage());
+        }
+    }
     public void tilføjTilInventarListe(Vare vare) {
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -213,6 +232,39 @@ public class DBConnector {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public int hentMængde(String vareNavn) {
+        int mængde = -1; // Standard værdi, hvis varen ikke findes
+
+        try {
+            // Establish connection to the database
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            // Prepare the SQL statement to select the quantity of the item
+            String sql = "SELECT mængde FROM liste WHERE varer = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            // Set the parameter for the PreparedStatement
+            pstmt.setString(1, vareNavn);
+
+            // Execute the query and get the result
+            ResultSet rs = pstmt.executeQuery();
+
+            // Check if a result is returned
+            if (rs.next()) {
+                mængde = rs.getInt("mængde"); // Get the quantity from the result
+            }
+
+            // Close ResultSet, PreparedStatement, and Connection
+            rs.close();
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return mængde;
     }
 
 
@@ -352,7 +404,78 @@ public class DBConnector {
             return vareMap;
     }
 
-    public void fjernVare(String vareNavn) {
+    public void fjernVare(String vareNavn, int antal) {
+        try {
+            // Establish connection to the database
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            // Prepare the SQL statement to check the quantity of the item
+            String checkQuantitySql = "SELECT mængde FROM liste WHERE varer = ?";
+            PreparedStatement checkQuantityPstmt = conn.prepareStatement(checkQuantitySql);
+
+            // Set the parameter for the PreparedStatement
+            checkQuantityPstmt.setString(1, vareNavn);
+
+            // Execute the query and get the result
+            ResultSet rs = checkQuantityPstmt.executeQuery();
+
+            if (rs.next()) {
+                int currentQuantity = rs.getInt("mængde");
+
+                if (currentQuantity <= antal) {
+                    // Prepare the SQL statement to delete the item
+                    String deleteSql = "DELETE FROM liste WHERE varer = ?";
+                    PreparedStatement deletePstmt = conn.prepareStatement(deleteSql);
+
+                    // Set the parameter for the PreparedStatement
+                    deletePstmt.setString(1, vareNavn);
+
+                    // Execute the delete statement
+                    int rowsAffected = deletePstmt.executeUpdate();
+
+                    if (rowsAffected > 0) {
+                        System.out.println("Varen er slettet.");
+                    } else {
+                        System.out.println("Varen blev ikke fundet.");
+                    }
+
+                    // Close the delete PreparedStatement
+                    deletePstmt.close();
+                } else {
+                    // Prepare the SQL statement to update the quantity
+                    String updateSql = "UPDATE liste SET mængde = mængde - ? WHERE varer = ?";
+                    PreparedStatement updatePstmt = conn.prepareStatement(updateSql);
+
+                    // Set the parameters for the PreparedStatement
+                    updatePstmt.setInt(1, antal);
+                    updatePstmt.setString(2, vareNavn);
+
+                    // Execute the update statement
+                    int rowsAffected = updatePstmt.executeUpdate();
+
+                    if (rowsAffected > 0) {
+                        System.out.println("Mængden er nedjusteret med " + antal + ".");
+                    } else {
+                        System.out.println("Varen blev ikke fundet.");
+                    }
+
+                    // Close the update PreparedStatement
+                    updatePstmt.close();
+                }
+            } else {
+                System.out.println("Varen blev ikke fundet.");
+            }
+
+            // Close ResultSet, PreparedStatement, and Connection
+            rs.close();
+            checkQuantityPstmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void fjernVareKøb(String vareNavn) {
         try {
             // Establish connection to the database
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -381,6 +504,8 @@ public class DBConnector {
             e.printStackTrace();
         }
     }
+
+
 
     public void tilføjTilRetter(Ret ret) {
         try {
