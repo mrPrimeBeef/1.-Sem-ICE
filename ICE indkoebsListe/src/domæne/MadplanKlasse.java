@@ -54,7 +54,7 @@ public class MadplanKlasse {
 
     public void tilføjTilIndskøbslisten(ArrayList<Vare> ingredienser){
         for (Vare element : ingredienser) {
-
+            dbConnector.gemTilListe(element);
         }
     }
 

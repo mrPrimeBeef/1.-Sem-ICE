@@ -54,7 +54,7 @@ public class DBConnector {
     }
 
     public void opretBruger() {
-        while (true) {
+
             // Indsamle brugeroplysninger fra brugeren
             String brugerNavn = ui.promptText("Skriv dit brugernavn");
             String password = ui.promptText("Skriv et kodeord");
@@ -86,7 +86,9 @@ public class DBConnector {
                     ui.displayMessage("Fejl under oprettelse af bruger: " + e.getMessage());
                 }
             }
-        }
+            else {
+                opretBruger();
+            }
     }
 
     public boolean checkCredentialAvailability(String brugerNavn) {
@@ -329,15 +331,18 @@ public class DBConnector {
         }
     }
 
-    public void tilføjTilIngredienser(String retNavn, ArrayList<String> ingredienser) {
+    public void tilføjTilIngredienser(String retNavn, ArrayList<String> ingredienser, ArrayList<String> mængder) {
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO Ingredienser (navn, ret_navn) VALUES (?, ?)");
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO Ingredienser (navn, mængde, ret_navn) VALUES (?, ?, ?)");
 
             // Gennemløb ingredienslisten og indsæt hver ingrediens i databasen
-            for (String navn : ingredienser) {
+            for (int i = 0; i < ingredienser.size(); i++) {
+                String navn = ingredienser.get(i);
+                String mængde = mængder.get(i);
                 pstmt.setString(1, navn); // Indstil navnet på ingrediensen
-                pstmt.setString(2, retNavn); // Indstil navnet på retten
+                pstmt.setString(2, mængde); // Indstil mængden af ingrediensen
+                pstmt.setString(3, retNavn); // Indstil navnet på retten
                 pstmt.executeUpdate(); // Udfør indsættelsen
             }
 
@@ -354,7 +359,11 @@ public class DBConnector {
         ArrayList<Vare> ingredienser = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
              PreparedStatement checkRetPstmt = conn.prepareStatement("SELECT COUNT(*) FROM retter WHERE navn = ?");
-             PreparedStatement getIngredienserPstmt = conn.prepareStatement("SELECT navn, mængde, pris, afdeling FROM Ingredienser WHERE ret_navn = ?")) {
+             PreparedStatement getIngredienserPstmt = conn.prepareStatement(
+                     "SELECT v.navn, i.mængde, v.pris, v.afdeling " +
+                             "FROM ingredienser i " +
+                             "JOIN varer v ON i.navn = v.navn " +
+                             "WHERE i.ret_navn = ?")) {
 
             // Check if the dish exists
             checkRetPstmt.setString(1, retNavn);
@@ -378,7 +387,6 @@ public class DBConnector {
         }
         return ingredienser;
     }
-
 
     public void tilføjTilMadplanListe(String retnavn, int indexTal) {
         try {
@@ -486,7 +494,7 @@ public class DBConnector {
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
-            String sql = "SELECT r.navn AS ret_navn, i.navn AS ingrediens_navn " +
+            String sql = "SELECT r.navn AS ret_navn, i.navn AS ingrediens_navn, i.mængde AS ingrediens_mængde " +
                     "FROM retter r " +
                     "JOIN ingredienser i ON r.navn = i.ret_navn " +
                     "WHERE r.brugernavn = ?";
@@ -503,12 +511,13 @@ public class DBConnector {
             while (rs.next()) {
                 String retNavn = rs.getString("ret_navn");
                 String ingrediensNavn = rs.getString("ingrediens_navn");
+                int ingrediensMængde = rs.getInt("ingrediens_mængde");
 
                 // Hent eller opret en ArrayList for ingredienserne for den aktuelle ret
                 ArrayList<String> ingredienser = retterOgIngredienser.getOrDefault(retNavn, new ArrayList<>());
 
                 // Tilføj den aktuelle ingrediens til ArrayListen
-                ingredienser.add(ingrediensNavn);
+                ingredienser.add(ingrediensNavn + " (" + ingrediensMængde + ")");
 
                 // Opdater HashMap med retter og ingredienser
                 retterOgIngredienser.put(retNavn, ingredienser);
@@ -524,6 +533,7 @@ public class DBConnector {
         }
         return retterOgIngredienser;
     }
+
 
 
     public ArrayList<String> hentAlleRetter() {

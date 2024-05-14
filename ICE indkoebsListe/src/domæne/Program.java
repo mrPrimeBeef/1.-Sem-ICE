@@ -54,7 +54,10 @@ public class Program {
         switch (choice) {
             case 1:
                 dbConnector.opretBruger();
-                kørProgram();
+                ui.displayMessage("Log ind");
+                if(dbConnector.logInd()){
+                    kørProgram();
+                }
 
                 break;
             case 2:
