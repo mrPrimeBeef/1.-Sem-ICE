@@ -20,7 +20,7 @@ public class seRetter {
         this.ui = ui;
 
         valg = new ArrayList<>();
-        valg.addAll(Arrays.asList("Se retter: ", "Tilføj ret", "Tilbage" + "\n"));
+        valg.addAll(Arrays.asList("Se retter", "Tilføj ret", "Tilbage" + "\n"));
         valg1 = new ArrayList<>();
         valg1.addAll(Arrays.asList("ja", "nej" + "\n"));
         ingredienser = new ArrayList<>();
@@ -41,9 +41,9 @@ public class seRetter {
                 ingredienser.add(ingrediens);
                 choice = ui.promptChoice(valg1, "Er der flere?",1,2);
             }
-                Ret ret = new Ret(retNavn, ingredienser);
+                Ret ret = new Ret(retNavn.toLowerCase(), ingredienser);
                 dbConnector.tilføjTilRetter(ret);
-                dbConnector.tilføjTilIngredienser(retNavn, ingredienser);
+                dbConnector.tilføjTilIngredienser(retNavn.toLowerCase(), ingredienser);
                 kørRetter();
                 break;
 

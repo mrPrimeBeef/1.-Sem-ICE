@@ -1,5 +1,6 @@
 package domæne;
 
+import produkt.Vare;
 import utility.DBConnector;
 import utility.TextUI;
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class MadplanKlasse {
        switch (input) {
            case 1:
                ret = ui.promptText("Skriv navnet på retten").toLowerCase();
+               tilføjTilIndskøbslisten(dbConnector.hentIngredienser(ret));
                choice = ui.promptChoice(dbConnector.hentMadplan(dbConnector.getBrugerNavn()),"Hvilken dag skal retten på?",1,dbConnector.hentMadplan(dbConnector.getBrugerNavn()).size());
                dbConnector.tilføjTilMadplanListe(ret,choice);
                kørMadplan();
@@ -48,6 +50,12 @@ public class MadplanKlasse {
                program.kørProgram();
            break;
        }
+    }
+
+    public void tilføjTilIndskøbslisten(ArrayList<Vare> ingredienser){
+        for (Vare element : ingredienser) {
+
+        }
     }
 
 }

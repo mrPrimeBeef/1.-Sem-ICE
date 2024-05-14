@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="918fcb30-4647-4c8d-aba6-51368ea01a6b" name="Changes" comment="Småædringer">
+    <list default="true" id="918fcb30-4647-4c8d-aba6-51368ea01a6b" name="Changes" comment="der kan ikke tilføjes til dage hvor der allerede er noget">
+      <change afterPath="$PROJECT_DIR$/Data/vare.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domæne/IndkøbsListeKlasse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domæne/IndkøbsListeKlasse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/domæne/MadplanKlasse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domæne/MadplanKlasse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domæne/seRetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domæne/seRetter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/produkt/Vare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/produkt/Vare.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utility/DBConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility/DBConnector.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -63,7 +68,7 @@
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Tilføj-til-indkøb-efter-valgt-ret",
+    "git-widget-placeholder": "opret-fra-seRetter",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Rolfj/Documents/GitHub/Cph Busniess Data/1Sem ICE/1.-Sem-ICE/ICE indkoebsListe/Doc/Static",
     "node.js.detected.package.eslint": "true",
@@ -128,6 +133,7 @@
       <workItem from="1715257776235" duration="3417000" />
       <workItem from="1715323665059" duration="5473000" />
       <workItem from="1715583353912" duration="14934000" />
+      <workItem from="1715670213319" duration="4961000" />
     </task>
     <task id="LOCAL-00001" summary="KlasseDiagram v1.puml">
       <option name="closed" value="true" />

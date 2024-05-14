@@ -37,7 +37,7 @@ public class IndkøbsListeKlasse {
 
         switch (input) {
             case 1:
-                føjTilIndkøbsliste(input, valg, listeValg, program);
+                brugIndkøbsliste(input, valg, listeValg, program);
                 break;
             case 2:
                 sletVare();
@@ -58,16 +58,20 @@ public class IndkøbsListeKlasse {
         }
     }
 
+    public void føjTilIndkøbsListe(){
+        String vareNavn = ui.promptText("Skriv varens navn").toLowerCase();
+        int pris = ui.promptNumeric("Skriv varens pris");
+        int mængde = ui.promptNumeric("Mængde?");
+        String afdeling = ui.promptText("Skriv hvilken afdeling varen befinder sig i").toLowerCase();
+        Vare vare = new Vare(vareNavn, mængde, pris, afdeling);
 
-    public void føjTilIndkøbsliste(int input, ArrayList<String> valg, ArrayList<String> listeValg, Program program) {
+        dbConnector.gemTilListe(vare);
+    }
+
+
+    public void brugIndkøbsliste(int input, ArrayList<String> valg, ArrayList<String> listeValg, Program program) {
         do {
-            String vareNavn = ui.promptText("Skriv varens navn").toLowerCase();
-            int pris = ui.promptNumeric("Skriv varens pris");
-            int mængde = ui.promptNumeric("Mængde?");
-            String afdeling = ui.promptText("Skriv hvilken afdeling varen befinder sig i").toLowerCase();
-            Vare vare = new Vare(vareNavn, mængde, pris, afdeling);
-
-            dbConnector.gemTilListe(vare);
+            føjTilIndkøbsListe();
 
             input = ui.promptChoice(valg, "", 1, 4);
 
@@ -86,12 +90,6 @@ public class IndkøbsListeKlasse {
         } while (input == 1);
     }
 
-
-    //public void lavIndkøbsListe(ArrayList<String> valg,ArrayList<String> listeValg){
-//        String listeNavn = ui.promptText("Skriv navnet på den nye indkøbsliste:");
-//
-//        kørIndkøbsliste(listeValg, valg);
-   // }
 
     public void sletVare(){
         String slet =  ui.promptText("Hvilken vare til du slette?");

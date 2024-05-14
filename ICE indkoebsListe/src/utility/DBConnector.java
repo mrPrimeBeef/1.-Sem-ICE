@@ -350,6 +350,36 @@ public class DBConnector {
         }
     }
 
+    public ArrayList<Vare> hentIngredienser(String retNavn) {
+        ArrayList<Vare> ingredienser = new ArrayList<>();
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+             PreparedStatement checkRetPstmt = conn.prepareStatement("SELECT COUNT(*) FROM retter WHERE navn = ?");
+             PreparedStatement getIngredienserPstmt = conn.prepareStatement("SELECT navn, mængde, pris, afdeling FROM Ingredienser WHERE ret_navn = ?")) {
+
+            // Check if the dish exists
+            checkRetPstmt.setString(1, retNavn);
+            try (ResultSet rs = checkRetPstmt.executeQuery()) {
+                if (rs.next() && rs.getInt(1) > 0) {
+                    // Dish exists, fetch ingredients
+                    getIngredienserPstmt.setString(1, retNavn);
+                    try (ResultSet ingredienserRs = getIngredienserPstmt.executeQuery()) {
+                        while (ingredienserRs.next()) {
+                            String navn = ingredienserRs.getString("navn");
+                            int mængde = ingredienserRs.getInt("mængde");
+                            int pris = ingredienserRs.getInt("pris");
+                            String afdeling = ingredienserRs.getString("afdeling");
+                            ingredienser.add(new Vare(navn, mængde, pris, afdeling));
+                        }
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle the error
+        }
+        return ingredienser;
+    }
+
+
     public void tilføjTilMadplanListe(String retnavn, int indexTal) {
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -495,26 +525,6 @@ public class DBConnector {
         return retterOgIngredienser;
     }
 
-    public boolean findesRetten(String navn) {
-        try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM retter WHERE navn = ?");
-            pstmt.setString(1, navn);
-
-            ResultSet rs = pstmt.executeQuery();
-            boolean retExists = rs.next(); // Check if any rows were returned
-
-            // Close ResultSet, PreparedStatement, and Connection
-            rs.close();
-            pstmt.close();
-            conn.close();
-
-            return retExists;
-        } catch (SQLException e) {
-            ui.displayMessage("Fejl under søgning efter ret: " + e.getMessage());
-            return false; // Return false in case of an error
-        }
-    }
 
     public ArrayList<String> hentAlleRetter() {
         ArrayList<String> retterListe = new ArrayList<>();

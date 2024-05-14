@@ -5,7 +5,6 @@ public class Vare extends AProdukt{
     private String vareNavn;
     private int mængde;
     private String afdeling;
-    //String holdbarHed;
 
 
     public Vare(String vareNavn, int mængde, int pris, String afdeling) {
