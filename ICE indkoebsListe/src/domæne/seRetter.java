@@ -6,6 +6,7 @@ import utility.TextUI;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class seRetter {
     private DBConnector dbConnector;
@@ -51,6 +52,21 @@ public class seRetter {
                 program = new Program(dbConnector, ui);
                 program.kørProgram();
                 break;
+        }
+
+    }
+
+    private void søgRet(String søgRet)
+    {
+        List<String> retter = dbConnector.hentAlleRetter();
+        String regex;
+
+        søgRet = ui.promptText("Søg efter en ret: ");
+        if (!søgRet.matches(regex))
+        {
+
+        } else {
+
         }
 
     }
