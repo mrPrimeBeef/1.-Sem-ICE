@@ -14,6 +14,13 @@ public class Vare extends AProdukt{
         this.afdeling = afdeling;
     }
 
+    public Vare(String vareNavn, int mængde, String afdeling) {
+        this.vareNavn = vareNavn;
+        this.mængde = mængde;
+        this.afdeling = afdeling;
+    }
+
+
     public int getPris() {
         return pris;
     }
