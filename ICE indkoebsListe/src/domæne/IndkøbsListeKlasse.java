@@ -73,7 +73,7 @@ public class IndkøbsListeKlasse {
         do {
             føjTilIndkøbsListe();
 
-            input = ui.promptChoice(valg, "", 1, 4);
+            input = ui.promptChoice(valg, "", 1, 5);
 
             if (input == 1) {
 
