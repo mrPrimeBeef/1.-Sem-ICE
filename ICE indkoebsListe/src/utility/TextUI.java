@@ -47,6 +47,25 @@ public class TextUI {
             return Integer.parseInt(valg);
         }
     }
+    public String søgVare()
+    {
+        ArrayList<String> list = new ArrayList<>();
+        list.addAll(Arrays.asList("vareZ", "vareO", "Ols", "pa"));
+
+        String vare = promptText("Søg efter en vare: ");
+        String searchPattern = String.format("[a-z]+n");
+        if (!vare.matches(searchPattern))
+        {
+            displayMessage("Søger efter" + vare + "\n");
+            displayMessage(vare + " blev ikke fundet, desværre - søg igen.");
+            søgVare(); // rekursiv
+        } else {
+            System.out.println("success");
+            return vare;
+        }
+
+        return vare;
+    }
     public int promptChoice(ArrayList<String> optionslist, String msg, int min, int max){
         displayMessage(msg);
         displayList(optionslist, "");
