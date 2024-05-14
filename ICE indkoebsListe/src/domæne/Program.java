@@ -18,7 +18,6 @@ public class Program {
     private ArrayList<String> mainMenu;
     private ArrayList<String> valg;
     private ArrayList<String> listeValg;
-    private HashSet<Ret> retter;
 
     public Program(DBConnector dbConnector, TextUI ui) {
 

@@ -1,0 +1,190 @@
+@startuml
+
+
+class Main {
++ static void main(String[] args)
+}
+package domæne{
+
+
+class Program {
+- IndkøbsListeKlasse indkøbsListeklasse;
+- DBConnector dbConnector;
+- Inventar inventar;
+- TextUI ui;
+- Program program;
+- MadPlanKlasse madPlanKlasse;
+- SeRetter seRetter;
+- ArrayList<String> startMenu;
+- ArrayList<String> mainMenu;
+- ArrayList<String> valg;
+- ArrayList<String> listeValg;
+
++ Program(DBConnector dbConnector, TextUI ui)
++ void logIndProgram()
++ void kørProgram()
++ afslutProgram ()
+}
+
+class seRetter{
+- DBConnector dbConnector;
+- Program program;
+- TextUI ui;
+- ArrayList<String> valg
+- ArrayList<String> valg1
+- ArrayList<String> ingredienser
+- ArrayList<String> mængder
++ seRetter(DBConnector dbConnector, TextUI ui)
++ void kørRetter()
+
+}
+class Inventar{
+- DBConnector dbConnector;
+- Program program;
+- TextUI ui;
+- ArrayList<String> valg
++ Inventar(DBConnector dbConnector, TextUI ui);
++ void kørInventar()
++ void sletVareInventar()
+
+}
+class IndkøbsListeKlasse{
+ - Program program
+ - TextUI ui
+ - DBConnector dbConnector
+
+IndkøbsListeKlasse(DBConnector dbConnector, TextUI ui);
++ void kørIndkøbsliste(Arraylist<String> listeValg, ArrayList<String> valg)
++ void brugIndkøbsliste(Arraylist<String> valg, ArrayList<String> listeValg, Program program)
++ void føjTilIndkøbsliste()
++ void indkøbsliste(int input, Arraylist<String> valg, ArrayList<String> listeValg, Program program)
++ void sletVare()
++ void købVare(Arraylist<String> valg, ArrayList<String> listeValg, Program program)
+}
+
+class MadPlanKlasse{
+ - DBConnector dbConnector
+ - Program program
+ - TextUI ui
+ - ArrayList<String> valg
+
+MadPlanKlasse(DBConnector dbConnector, TextUI ui)
++ void kørMadplan()
++ void tilføjTilIndkøbsListen(Arraylist<Vare> ingredienser)
+}
+
+
+}
+
+package Produkt {
+class Vare{
+- int pris;
+- String vareNavn;
+- int mængde;
+- String afdeling;
+Vare(String vareNavn, int mængde, int pris, String afdeling)
+Vare(String vareNavn, int mængde, String afdeling)
++ int getPris()
++ String getVareNavn()
++ int getMængde()
++ String getAfdeling()
++ ToString()
+}
+class Ret{
+- String navn
+- List<String> ingredienser
+
+Ret(String Navn, List<String> ingredienser)
+
++ String getNavn()
++ List<String> getIngredienser()
+}
+
+}
+
+
+package utilty{
+
+
+class dBconnecter{
+ - TextUI ui;
+ - String brugerNavn;
+ - HashMap vareMap
+ - String JDBC_DRIVER
+ - String DB_URL
+ - String USER
+ - String PASS
+
+DBConnector()
+ + dbConnect()
+ + void opretBruger()
+ + boolean checkCredentialAvailability(String brugerNavn)
+ + boolean logInd()
+ + void setBrugerNavn(String brugerNavn)
+ + String getBrugerNavn()
+ + void tilføjTilInventarListe(Vare vare, int mængde)
+ + void fjernInventar(String vareNavn, int antal)
+ + int hentMængde(String vareNavn)
+ + HashMap hentInventar(String brugerNavn)
+ + void gemTilListe(Vare vare)
+ + Vare hentVare(String brugerNavn, String vareNavnFraBruger)
+ + HashMap hentInkøbsliste(String brugerNavn)
+ + void fjernVare(String vareNavn, int antal)
+ + void fjernVareKøb(String vareNavn)
+ + void tilføjTilRetter(Ret ret)
+ + void tilføjTilIngredienser(String retNavn, ArrayList<String> ingredienser, ArrayList<String> mængder)
+ + ArrayList<Vare> hentIngredienser(String retNavn)
+ + void tilføjTilMadplanListe(String retNavn, int indexTal)
+ + ArrayList<String> hentMadplan(String brugerNavn)
+ + void fjernRet(int index)
+ + HashMap visRetter(String brugerNavn)
+ + ArrayList<String> hentAlleRetter()
+}
+
+
+class TextUI {
+- Scanner scanner
+- Map groupedMap
+TextUI()
++ String promptText(String msg)
++ int promptNumeric(String msg)
++ int validerInput(int min, int max)
++ int promptChoice(List<String> optionslist, String msg, int min, int max)
++ void displayList(List<String> list, String msg)
++ void displayListHashMap(HashMap<Vare, String> list)
++ void printRetterOgIngredienser(HashMap<String, ArrayList<String>> retterOgingredienser)
++ String søgTekst(String msg)
++ void displayMessage(String msg)
+}
+}
+
+
+Main *-- Program
+
+Program *-- IndkøbsListeKlasse
+Program *-- Inventar
+Program *-- MadPlanKlasse
+Program *-- seRetter
+Program *-- TextUI
+Program *-- dBconnecter
+
+Program <|-- Vare
+
+
+Program o-- Ret
+
+
+
+
+
+'https://devhints.io/plantuml
+'Car <|-- SmallCar      # extension
+'Car *-- Engine         # composition
+'Cars o-- Car           # aggregation
+'Car <|.. SmallCar      # dotted line (use .. instead of --)
+'Car <|--* Car
+
+'-left->
+'-right->
+
+@enduml

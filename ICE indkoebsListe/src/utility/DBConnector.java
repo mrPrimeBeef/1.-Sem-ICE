@@ -185,25 +185,6 @@ public class DBConnector {
             ui.displayMessage("Fejl under tilføjelse til inventar: " + e.getMessage());
         }
     }
-    public void tilføjTilInventarListe(Vare vare) {
-        try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO inventar (brugernavn, varer, mængde, afdeling) VALUES (?, ?, ?, ?)");
-
-            pstmt.setString(1, this.brugerNavn);
-            pstmt.setString(2, vare.getVareNavn());
-            pstmt.setInt(3, vare.getMængde());
-            pstmt.setString(4, vare.getAfdeling());
-
-            ui.displayMessage("Din vare er blevet tilføjet \n");
-            pstmt.executeUpdate();
-
-            pstmt.close();
-            conn.close();
-        } catch (SQLException e) {
-            ui.displayMessage("Fejl under tilføjelse til inventar: " + e.getMessage());
-        }
-    }
     public void fjernInventar(String vareNavn, int antal) {
         try {
             // Establish connection to the database
@@ -310,14 +291,14 @@ public class DBConnector {
     }
 
 
-    public HashMap<Vare, String> hentInventar(String brugernavn) {
+    public HashMap<Vare, String> hentInventar(String brugerNavn) {
         HashMap<Vare, String> inventarMap = new HashMap<>();
 
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM inventar WHERE brugernavn = ?");
 
-            pstmt.setString(1, brugernavn);
+            pstmt.setString(1, brugerNavn);
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {

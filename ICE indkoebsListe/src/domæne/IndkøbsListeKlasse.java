@@ -22,11 +22,11 @@ public class IndkøbsListeKlasse {
 
     public void kørIndkøbsliste(ArrayList<String> listeValg, ArrayList<String> valg) {
         Program program = new Program(dbConnector, ui);
-        brugIndkøbsliste(valg, listeValg, program);
+        indkøbsListe(valg, listeValg, program);
     }
 
 
-    public void brugIndkøbsliste(ArrayList<String> valg, ArrayList<String> listeValg, Program program) {
+    public void indkøbsListe(ArrayList<String> valg, ArrayList<String> listeValg, Program program) {
 
         HashMap<Vare, String> list = dbConnector.hentIndkøbsListe(dbConnector.getBrugerNavn());
         ui.displayListHashMap(list);
@@ -37,17 +37,17 @@ public class IndkøbsListeKlasse {
 
         switch (input) {
             case 1:
-                brugIndkøbsliste(input, valg, listeValg, program);
+                indkøbsListe(input, valg, listeValg, program);
                 break;
             case 2:
                 sletVare();
-                brugIndkøbsliste(valg, listeValg, program);
+                indkøbsListe(valg, listeValg, program);
                 break;
             case 3:
                 købVare(valg, listeValg, program);
                 break;
             case 4:
-                brugIndkøbsliste(valg, listeValg, program);
+                indkøbsListe(valg, listeValg, program);
                 break;
             case 5:
                 program.kørProgram();
@@ -69,7 +69,7 @@ public class IndkøbsListeKlasse {
     }
 
 
-    public void brugIndkøbsliste(int input, ArrayList<String> valg, ArrayList<String> listeValg, Program program) {
+    public void indkøbsListe(int input, ArrayList<String> valg, ArrayList<String> listeValg, Program program) {
         do {
             føjTilIndkøbsListe();
 
@@ -79,13 +79,13 @@ public class IndkøbsListeKlasse {
 
             } else if (input == 2) {
                 sletVare();
-                brugIndkøbsliste(valg, listeValg, program);
+                indkøbsListe(valg, listeValg, program);
             } else if (input == 3) {
                 købVare(valg, listeValg, program);
             } else if (input == 4) {
                 kørIndkøbsliste(listeValg, valg);
             } else if (input == 5) {
-                brugIndkøbsliste(valg, listeValg, program);
+                indkøbsListe(valg, listeValg, program);
             }
         } while (input == 1);
     }
@@ -103,6 +103,6 @@ public class IndkøbsListeKlasse {
         Vare vare = dbConnector.hentVare(dbConnector.getBrugerNavn(), køb);
         dbConnector.tilføjTilInventarListe(vare,dbConnector.hentMængde(køb));
         dbConnector.fjernVareKøb(køb);
-        brugIndkøbsliste(valg, listeValg, program);
+        indkøbsListe(valg, listeValg, program);
     }
 }

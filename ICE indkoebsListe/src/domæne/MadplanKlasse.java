@@ -11,10 +11,7 @@ public class MadplanKlasse {
     private DBConnector dbConnector;
     private  Program program;
     private  TextUI ui;
-    private  ArrayList<String> madplan;
-    private  ArrayList<String> dage;
     private  ArrayList<String> valg;
-    private ArrayList<String> retter;
 
 
     public MadplanKlasse(DBConnector dbConnector, TextUI ui) {
