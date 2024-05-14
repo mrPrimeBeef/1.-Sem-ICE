@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="918fcb30-4647-4c8d-aba6-51368ea01a6b" name="Changes" comment="fuld funktionel program, med mangler hist og her">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domæne/IndkøbsListeKlasse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domæne/IndkøbsListeKlasse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domæne/Inventar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domæne/Inventar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utility/DBConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility/DBConnector.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

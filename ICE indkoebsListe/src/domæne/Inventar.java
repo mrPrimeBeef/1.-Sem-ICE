@@ -38,7 +38,7 @@ public class Inventar {
                 String afdeling = ui.promptText("Skriv hvilken afdeling varen befinder sig i").toLowerCase();
                 Vare vare = new Vare(vareNavn, mængde, afdeling);
 
-                dbConnector.tilføjTilInventarListe(vare);
+                dbConnector.tilføjTilInventarListe(vare, mængde);
                 kørInventar();
                 break;
             case 2:
@@ -58,7 +58,8 @@ public class Inventar {
 
     public void sletVareInventar(){
         String inventarslet =  ui.promptText("Hvilken vare vil du slette?");
-        dbConnector.fjernInventar(inventarslet.toLowerCase());
+        int antal = ui.promptNumeric("hvor mange vil du slette?");
+        dbConnector.fjernInventar(inventarslet.toLowerCase(),antal);
 
     }
 

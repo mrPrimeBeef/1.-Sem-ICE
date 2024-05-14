@@ -204,35 +204,77 @@ public class DBConnector {
             ui.displayMessage("Fejl under tilføjelse til inventar: " + e.getMessage());
         }
     }
-    public void fjernInventar(String vareNavn) {
+    public void fjernInventar(String vareNavn, int antal) {
         try {
             // Establish connection to the database
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
-            // Prepare the SQL statement to delete the item
-            String sql = "DELETE FROM inventar WHERE varer = ?";
-            PreparedStatement pstmt = conn.prepareStatement(sql);
+            // Prepare the SQL statement to check the quantity of the item
+            String checkQuantitySql = "SELECT mængde FROM inventar WHERE varer = ?";
+            PreparedStatement checkQuantityPstmt = conn.prepareStatement(checkQuantitySql);
 
             // Set the parameter for the PreparedStatement
-            pstmt.setString(1, vareNavn);
+            checkQuantityPstmt.setString(1, vareNavn);
 
-            // Execute the delete statement
-            int rowsAffected = pstmt.executeUpdate();
+            // Execute the query and get the result
+            ResultSet rs = checkQuantityPstmt.executeQuery();
 
-            // Check if any rows were affected (i.e., if the item was deleted successfully)
-            if (rowsAffected > 0) {
-                System.out.println("varen er slettet.");
+            if (rs.next()) {
+                int currentQuantity = rs.getInt("mængde");
+
+                if (currentQuantity <= antal) {
+                    // Prepare the SQL statement to delete the item
+                    String deleteSql = "DELETE FROM inventar WHERE varer = ?";
+                    PreparedStatement deletePstmt = conn.prepareStatement(deleteSql);
+
+                    // Set the parameter for the PreparedStatement
+                    deletePstmt.setString(1, vareNavn);
+
+                    // Execute the delete statement
+                    int rowsAffected = deletePstmt.executeUpdate();
+
+                    if (rowsAffected > 0) {
+                        System.out.println("Varen er slettet.");
+                    } else {
+                        System.out.println("Varen blev ikke fundet.");
+                    }
+
+                    // Close the delete PreparedStatement
+                    deletePstmt.close();
+                } else {
+                    // Prepare the SQL statement to update the quantity
+                    String updateSql = "UPDATE inventar SET mængde = mængde - ? WHERE varer = ?";
+                    PreparedStatement updatePstmt = conn.prepareStatement(updateSql);
+
+                    // Set the parameters for the PreparedStatement
+                    updatePstmt.setInt(1, antal);
+                    updatePstmt.setString(2, vareNavn);
+
+                    // Execute the update statement
+                    int rowsAffected = updatePstmt.executeUpdate();
+
+                    if (rowsAffected > 0) {
+                        System.out.println("Mængden er nedjusteret med " + antal + ".");
+                    } else {
+                        System.out.println("Varen blev ikke fundet.");
+                    }
+
+                    // Close the update PreparedStatement
+                    updatePstmt.close();
+                }
             } else {
-                System.out.println("varen er ikke fundet.");
+                System.out.println("Varen blev ikke fundet.");
             }
 
-            // Close PreparedStatement and Connection
-            pstmt.close();
+            // Close ResultSet, PreparedStatement, and Connection
+            rs.close();
+            checkQuantityPstmt.close();
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
     public int hentMængde(String vareNavn) {
         int mængde = -1; // Standard værdi, hvis varen ikke findes
