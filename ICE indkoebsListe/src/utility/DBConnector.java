@@ -16,11 +16,11 @@ public class DBConnector {
 
 
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/icedatabase";
+    static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/icer";
 
     //  Database credentials
     static final String USER = "root";
-    static final String PASS = "Esn64mjy:1";
+    static final String PASS = "atx33xmw!";
 
     public DBConnector() {
         this.ui = new TextUI();
@@ -174,11 +174,75 @@ public class DBConnector {
             pstmt.setInt(3, vare.getMængde());
             pstmt.setString(4, vare.getAfdeling());
 
+            ui.displayMessage("Din vare er blevet tilføjet \n");
             pstmt.executeUpdate();
+
+            pstmt.close();
+            conn.close();
         } catch (SQLException e) {
             ui.displayMessage("Fejl under tilføjelse til inventar: " + e.getMessage());
         }
     }
+    public void fjernInventar(String vareNavn) {
+        try {
+            // Establish connection to the database
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            // Prepare the SQL statement to delete the item
+            String sql = "DELETE FROM inventar WHERE varer = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            // Set the parameter for the PreparedStatement
+            pstmt.setString(1, vareNavn);
+
+            // Execute the delete statement
+            int rowsAffected = pstmt.executeUpdate();
+
+            // Check if any rows were affected (i.e., if the item was deleted successfully)
+            if (rowsAffected > 0) {
+                System.out.println("varen er slettet.");
+            } else {
+                System.out.println("varen er ikke fundet.");
+            }
+
+            // Close PreparedStatement and Connection
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public HashMap<Vare, String> hentInventar(String brugernavn) {
+        HashMap<Vare, String> inventarMap = new HashMap<>();
+
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM inventar WHERE brugernavn = ?");
+
+            pstmt.setString(1, brugernavn);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                String vareNavn = rs.getString("varer");
+                int mængde = rs.getInt("mængde");
+                String afdeling = rs.getString("afdeling");
+
+                Vare vare = new Vare(vareNavn, mængde, afdeling);
+                inventarMap.put(vare, afdeling);
+            }
+
+            rs.close();
+            pstmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return inventarMap;
+    }
+
+
     public void gemTilListe(Vare vare) {
 
 
@@ -199,7 +263,8 @@ public class DBConnector {
             // Udfør SQL-forespørgslen for at indsætte brugeren i databasen
             pstmt.executeUpdate();
 
-
+            pstmt.close();
+            conn.close();
         } catch (SQLException e) {
             ui.displayMessage("Fejl under indsæt af vare: " + e.getMessage());
 

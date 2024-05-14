@@ -78,7 +78,7 @@ public class Program {
                 madPlanKlasse.kørMadplan();
                 break;
             case 3: // seInventar
-                //kørInventar();
+                inventar.kørInventar();
                 break;
             case 4: // se seRetter
                 seRetter.kørRetter();
