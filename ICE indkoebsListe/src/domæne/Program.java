@@ -33,7 +33,7 @@ public class Program {
         startMenu.addAll(Arrays.asList("Opret bruger", "Log ind"));
 
         mainMenu = new ArrayList<>();
-        mainMenu.addAll(Arrays.asList("Se indkøbsliste", "Se Madplan","Se inventar", "Se retter","Log ud"));
+        mainMenu.addAll(Arrays.asList("Se indkøbsliste", "Se Madplan","Se inventar", "Retter","Log ud"));
 
         valg = new ArrayList();
         valg.addAll(Arrays.asList("Tiløj vare","Slet vare", "Køb vare", "Se Indkøbsseddel","tilbage"));

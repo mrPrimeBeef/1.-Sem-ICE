@@ -559,21 +559,6 @@ public class DBConnector {
     }
 
 
-
-//    public void tilføjTilRetter(Ret ret) {
-//        try {
-//            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-//            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO retter (brugernavn, navn) VALUES (?, ?)");
-//
-//            pstmt.setString(1, this.brugerNavn);
-//            pstmt.setString(2, ret.getNavn().toLowerCase());
-//
-//            pstmt.executeUpdate();
-//        } catch (SQLException e) {
-//            ui.displayMessage("Fejl under tilføjelse til retter: " + e.getMessage());
-//        }
-//    }
-
     public void tilføjRet(Ret ret, String brugerNavn, boolean isGlobal) {
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS)) {
             String sql = "INSERT INTO retter (brugernavn, navn, global) VALUES (?, ?, ?)";
@@ -653,20 +638,69 @@ public class DBConnector {
     public void tilføjTilMadplanListe(String retnavn, int indexTal) {
         try {
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO madplan (brugernavn, dag, ret) VALUES (?, ?, ?)");
 
-            pstmt.setString(1, this.brugerNavn);
-            pstmt.setInt(2, indexTal); // Index + 1 for at matche med 1-baseret dagnummer
-            pstmt.setString(3, retnavn);
+            // Forbered en SELECT-forespørgsel for at hente den nuværende ret
+            PreparedStatement selectPstmt = conn.prepareStatement("SELECT ret FROM madplan WHERE brugernavn = ? AND dag = ?");
+            selectPstmt.setString(1, this.brugerNavn);
+            selectPstmt.setInt(2, indexTal);
 
-            pstmt.executeUpdate(); // Udfør indsættelsen
+            // Udfør SELECT-forespørgslen
+            ResultSet rs = selectPstmt.executeQuery();
 
-            pstmt.close();
+            String nuværendeRet = null;
+
+            // Hvis der findes en nuværende ret, gem navnet på den
+            if (rs.next()) {
+                nuværendeRet = rs.getString("ret");
+            }
+
+            // Luk ResultSet og PreparedStatement for SELECT-forespørgslen
+            rs.close();
+            selectPstmt.close();
+
+            // Forbered opdateringsforespørgslen til at ændre retten
+            PreparedStatement updatePstmt = conn.prepareStatement("UPDATE madplan SET ret = ? WHERE brugernavn = ? AND dag = ?");
+            updatePstmt.setString(1, retnavn);
+            updatePstmt.setString(2, this.brugerNavn);
+            updatePstmt.setInt(3, indexTal);
+
+            // Udfør opdateringen og gem antallet af berørte rækker
+            int rowsAffected = updatePstmt.executeUpdate();
+
+            // Hvis ingen eksisterende ret blev opdateret, skal vi indsætte en ny ret
+            if (rowsAffected == 0) {
+                updatePstmt.close(); // Luk PreparedStatement for opdateringsforespørgslen
+
+                // Forbered indsættelsesforespørgslen
+                PreparedStatement insertPstmt = conn.prepareStatement("INSERT INTO madplan (brugernavn, dag, ret) VALUES (?, ?, ?)");
+                insertPstmt.setString(1, this.brugerNavn);
+                insertPstmt.setInt(2, indexTal);
+                insertPstmt.setString(3, retnavn);
+
+                // Udfør indsættelsen
+                insertPstmt.executeUpdate();
+
+                // Luk PreparedStatement for indsættelsesforespørgslen
+                insertPstmt.close();
+            }
+
+            // Luk PreparedStatement for opdateringsforespørgslen
+            updatePstmt.close();
+
+            // Luk forbindelsen til databasen
             conn.close();
+
+            // Hvis der var en nuværende ret, kan du gøre noget med den her, f.eks. slette den fra indkøbslisten
+            if (nuværendeRet != null) {
+                ArrayList<Vare> vareListe = hentIngredienser(nuværendeRet);
+                opdaterIndkøbslisten(vareListe);
+                fjernNulMængdeVarerFraIndkøbslisten();
+            }
         } catch (SQLException e) {
             ui.displayMessage("Fejl under tilføjelse til madplanen: " + e.getMessage());
         }
     }
+
 
     public void fjernFraMadplanListe(String retnavn, int indexTal) {
         try {
@@ -733,14 +767,7 @@ public class DBConnector {
             PreparedStatement deletePstmt = conn.prepareStatement(deleteSql);
 
             // Udfør sletningsforespørgslen
-            int rowsAffected = deletePstmt.executeUpdate();
-
-            // Tjek om der blev berørt nogen rækker (dvs. om varer blev slettet succesfuldt)
-            if (rowsAffected > 0) {
-                System.out.println("Varer med nul mængde er blevet fjernet fra indkøbslisten.");
-            } else {
-                System.out.println("Der blev ikke fundet varer med nul mængde i indkøbslisten.");
-            }
+            deletePstmt.executeUpdate();
 
             // Luk PreparedStatement for sletning
             deletePstmt.close();
@@ -860,9 +887,6 @@ public class DBConnector {
         return removedRetNavn;
     }
 
-
-
-
     public HashMap<String, ArrayList<String>> visRetter(String brugernavn) {
         HashMap<String, ArrayList<String>> retterOgIngredienser = new HashMap<>();
 
@@ -910,33 +934,5 @@ public class DBConnector {
         }
         return retterOgIngredienser;
     }
-
-    public ArrayList<String> hentAlleRetter() {
-        ArrayList<String> retterListe = new ArrayList<>();
-
-        try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            PreparedStatement pstmt = conn.prepareStatement("SELECT navn FROM retter");
-            ResultSet rs = pstmt.executeQuery();
-
-            // Iterér gennem resultatsættet og tilføj navnene på retterne til ArrayList
-            while (rs.next()) {
-                String retNavn = rs.getString("navn");
-                retterListe.add(retNavn);
-            }
-
-            // Luk ResultSet, PreparedStatement og Connection
-            rs.close();
-            pstmt.close();
-            conn.close();
-        } catch (SQLException e) {
-            ui.displayMessage("Fejl under hentning af retter: " + e.getMessage());
-        }
-
-        return retterListe;
     }
-
-
-
-}
 
