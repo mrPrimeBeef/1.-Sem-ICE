@@ -1014,7 +1014,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </schema>
     <schema id="294" parent="1" name="icedatabase">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2024-05-14.10:15:48</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2024-05-15.08:37:31</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <user id="295" parent="1" name="mysql.infoschema">
@@ -1211,30 +1211,40 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <index id="339" parent="305" name="PRIMARY">
+    <column id="339" parent="305" name="global">
+      <DasType>tinyint(1)|0s</DasType>
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <index id="340" parent="305" name="PRIMARY">
       <ColNames>navn</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="340" parent="305" name="PRIMARY">
+    <key id="341" parent="305" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="341" parent="306" name="Navn">
+    <column id="342" parent="306" name="navn">
       <DasType>varchar(255)|0s</DasType>
+      <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="342" parent="306" name="Mængde">
+    <column id="343" parent="306" name="mængde">
       <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="343" parent="306" name="Pris">
+    <column id="344" parent="306" name="pris">
       <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="344" parent="306" name="Afdeling">
+    <column id="345" parent="306" name="afdeling">
       <DasType>varchar(255)|0s</DasType>
+      <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
   </database-model>

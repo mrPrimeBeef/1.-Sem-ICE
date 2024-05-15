@@ -530,17 +530,36 @@ public class DBConnector {
 
 
 
-    public void tilføjTilRetter(Ret ret) {
-        try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO retter (brugernavn, navn) VALUES (?, ?)");
+//    public void tilføjTilRetter(Ret ret) {
+//        try {
+//            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+//            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO retter (brugernavn, navn) VALUES (?, ?)");
+//
+//            pstmt.setString(1, this.brugerNavn);
+//            pstmt.setString(2, ret.getNavn().toLowerCase());
+//
+//            pstmt.executeUpdate();
+//        } catch (SQLException e) {
+//            ui.displayMessage("Fejl under tilføjelse til retter: " + e.getMessage());
+//        }
+//    }
 
-            pstmt.setString(1, this.brugerNavn);
+    public void tilføjRet(Ret ret, String brugerNavn, boolean isGlobal) {
+        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS)) {
+            String sql = "INSERT INTO retter (brugernavn, navn, global) VALUES (?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            if (isGlobal) {
+                pstmt.setNull(1, java.sql.Types.VARCHAR);  // NULL for globale retter
+            } else {
+                pstmt.setString(1, brugerNavn);
+            }
             pstmt.setString(2, ret.getNavn().toLowerCase());
+            pstmt.setBoolean(3, isGlobal);
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            ui.displayMessage("Fejl under tilføjelse til retter: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -710,7 +729,7 @@ public class DBConnector {
             String sql = "SELECT r.navn AS ret_navn, i.navn AS ingrediens_navn, i.mængde AS ingrediens_mængde " +
                     "FROM retter r " +
                     "JOIN ingredienser i ON r.navn = i.ret_navn " +
-                    "WHERE r.brugernavn = ?";
+                    "WHERE r.brugernavn = ? OR r.global = TRUE";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
@@ -746,6 +765,7 @@ public class DBConnector {
         }
         return retterOgIngredienser;
     }
+
 
 
 

@@ -24,7 +24,7 @@ public class Program {
         indkøbsListeklasse = new IndkøbsListeKlasse(dbConnector,ui);
         madPlanKlasse = new MadplanKlasse(dbConnector,ui);
         inventar = new Inventar(dbConnector,ui);
-        seRetter = new seRetter(dbConnector,ui);
+        seRetter = new seRetter(dbConnector,ui, madPlanKlasse);
 
         this.dbConnector = dbConnector;
         this.ui = ui;
