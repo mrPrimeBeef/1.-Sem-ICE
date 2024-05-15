@@ -321,32 +321,62 @@ public class DBConnector {
 
 
     public void gemTilListe(Vare vare) {
-
-
         try {
             // Opret forbindelse til databasen
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            // SQL-forespørgsel til at indsætte brugeroplysninger i databasen
 
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO liste (brugernavn, Varer, mængde, pris, afdeling) VALUES (?, ?, ?, ?, ?)");
+            // SQL-forespørgsel til at kontrollere, om varenavnet allerede findes
+            String checkIfExistsQuery = "SELECT mængde FROM liste WHERE brugernavn = ? AND Varer = ?";
+            PreparedStatement checkIfExistsStmt = conn.prepareStatement(checkIfExistsQuery);
+            checkIfExistsStmt.setString(1, this.brugerNavn);
+            checkIfExistsStmt.setString(2, vare.getVareNavn());
 
-            // Sæt parameterne for PreparedStatement
-           pstmt.setString(1, this.brugerNavn);
-            pstmt.setString(2, vare.getVareNavn());
-            pstmt.setInt(3, vare.getMængde());
-            pstmt.setInt(4, vare.getPris());
-            pstmt.setString(5, vare.getAfdeling());
+            // Udfør SQL-forespørgslen for at kontrollere, om varenavnet allerede findes
+            ResultSet rs = checkIfExistsStmt.executeQuery();
 
-            // Udfør SQL-forespørgslen for at indsætte brugeren i databasen
-            pstmt.executeUpdate();
+            // Hvis varenavnet allerede findes
+            if (rs.next()) {
+                int currentQuantity = rs.getInt("mængde");
 
-            pstmt.close();
+                // Opdater mængden i databasen med 1
+                PreparedStatement updateStmt = conn.prepareStatement("UPDATE liste SET mængde = ? WHERE brugernavn = ? AND Varer = ?");
+                updateStmt.setInt(1, currentQuantity + 1);
+                updateStmt.setString(2, this.brugerNavn);
+                updateStmt.setString(3, vare.getVareNavn());
+                updateStmt.executeUpdate();
+
+                System.out.println("Mængden for varen " + vare.getVareNavn() + " er øget med 1.");
+            } else {
+                // Luk resultatsættet og forberedt udsagnet
+                rs.close();
+                checkIfExistsStmt.close();
+
+                // Indsæt varen i databasen, da den ikke findes endnu
+                PreparedStatement insertStmt = conn.prepareStatement("INSERT INTO liste (brugernavn, Varer, mængde, pris, afdeling) VALUES (?, ?, ?, ?, ?)");
+                insertStmt.setString(1, this.brugerNavn);
+                insertStmt.setString(2, vare.getVareNavn());
+                insertStmt.setInt(3, vare.getMængde());
+                insertStmt.setInt(4, vare.getPris());
+                insertStmt.setString(5, vare.getAfdeling());
+
+                // Udfør SQL-forespørgslen for at indsætte varen i databasen
+                insertStmt.executeUpdate();
+
+                // Vis en bekræftelsesbesked
+                System.out.println("Varen " + vare.getVareNavn() + " er blevet tilføjet til listen.");
+
+                // Luk PreparedStatement
+                insertStmt.close();
+            }
+
+            // Luk resultatsættet og forbindelsen
+            rs.close();
             conn.close();
         } catch (SQLException e) {
             ui.displayMessage("Fejl under indsæt af vare: " + e.getMessage());
-
         }
     }
+
 
     public Vare hentVare(String brugernavn, String vareNavnFraBruger) {
         try {
