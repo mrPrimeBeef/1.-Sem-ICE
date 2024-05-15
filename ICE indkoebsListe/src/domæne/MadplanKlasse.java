@@ -1,5 +1,6 @@
 package domæne;
 
+import produkt.Ret;
 import produkt.Vare;
 import utility.DBConnector;
 import utility.TextUI;
@@ -32,14 +33,17 @@ public class MadplanKlasse {
        switch (input) {
            case 1:
                ret = ui.promptText("Skriv navnet på retten").toLowerCase();
-               tilføjTilIndskøbslisten(dbConnector.hentIngredienser(ret));
                choice = ui.promptChoice(dbConnector.hentMadplan(dbConnector.getBrugerNavn()),"Hvilken dag skal retten på?",1,dbConnector.hentMadplan(dbConnector.getBrugerNavn()).size());
                dbConnector.tilføjTilMadplanListe(ret,choice);
+               tilføjTilIndskøbslisten(dbConnector.hentIngredienser(ret));
                kørMadplan();
            break;
            case 2:
                choice = ui.promptChoice(dbConnector.hentMadplan(dbConnector.getBrugerNavn()),"Hvilken dag skal retten fjernes fra?",1,dbConnector.hentMadplan(dbConnector.getBrugerNavn()).size());
-               dbConnector.fjernRet(choice);
+               String fjernedRet = dbConnector.fjernRet(choice);
+               dbConnector.fjernFraMadplanListe(fjernedRet, choice);
+               dbConnector.opdaterIndkøbslisten(dbConnector.hentIngredienser(fjernedRet));
+               dbConnector.fjernNulMængdeVarerFraIndkøbslisten();
                kørMadplan();
            break;
            case 3:

@@ -668,6 +668,91 @@ public class DBConnector {
         }
     }
 
+    public void fjernFraMadplanListe(String retnavn, int indexTal) {
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            PreparedStatement pstmt = conn.prepareStatement("DELETE FROM madplan WHERE brugernavn = ? AND dag = ? AND ret = ?");
+
+            pstmt.setString(1, this.brugerNavn);
+            pstmt.setInt(2, indexTal); // Index + 1 for at matche med 1-baseret dagnummer
+            pstmt.setString(3, retnavn);
+
+            pstmt.executeUpdate(); // Udfør indsættelsen
+
+            pstmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            ui.displayMessage("Fejl under fjernelse fra madplanen: " + e.getMessage());
+        }
+    }
+
+    public void opdaterIndkøbslisten(ArrayList<Vare> vareListe) {
+        try {
+            // Opret forbindelse til databasen
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            // For hver vare i arraylisten
+            for (Vare vare : vareListe) {
+                // Forbered SQL-forespørgslen til at opdatere mængden af varen
+                String updateSql = "UPDATE liste SET mængde = mængde - 1 WHERE Varer = ? AND mængde > 0";
+                PreparedStatement updatePstmt = conn.prepareStatement(updateSql);
+
+                // Indstil parameteren for PreparedStatement med navnet på varen
+                updatePstmt.setString(1, vare.getVareNavn());
+
+                // Udfør opdateringsforespørgslen
+                int rowsAffected = updatePstmt.executeUpdate();
+
+                // Tjek om der blev berørt nogen rækker (dvs. om mængden blev opdateret)
+                if (rowsAffected > 0) {
+                    System.out.println("Mængden af varen \"" + vare.getVareNavn() + "\" er blevet opdateret.");
+                } else {
+                    System.out.println("Varen \"" + vare.getVareNavn() + "\" blev ikke fundet i indkøbslisten " +
+                            "eller mængden er allerede nul.");
+                }
+
+                // Luk PreparedStatement for opdatering
+                updatePstmt.close();
+            }
+
+            // Luk forbindelsen til databasen
+            conn.close();
+        } catch (SQLException e) {
+            // Log fejlen eller vis en fejlbesked
+            System.err.println("Fejl under opdatering af indkøbslisten: " + e.getMessage());
+        }
+    }
+
+    public void fjernNulMængdeVarerFraIndkøbslisten() {
+        try {
+            // Opret forbindelse til databasen
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            // Forbered SQL-forespørgslen til at slette varer med nulmængde fra indkøbslisten
+            String deleteSql = "DELETE FROM liste WHERE mængde = 0";
+            PreparedStatement deletePstmt = conn.prepareStatement(deleteSql);
+
+            // Udfør sletningsforespørgslen
+            int rowsAffected = deletePstmt.executeUpdate();
+
+            // Tjek om der blev berørt nogen rækker (dvs. om varer blev slettet succesfuldt)
+            if (rowsAffected > 0) {
+                System.out.println("Varer med nul mængde er blevet fjernet fra indkøbslisten.");
+            } else {
+                System.out.println("Der blev ikke fundet varer med nul mængde i indkøbslisten.");
+            }
+
+            // Luk PreparedStatement for sletning
+            deletePstmt.close();
+
+            // Luk forbindelsen til databasen
+            conn.close();
+        } catch (SQLException e) {
+            // Log fejlen eller vis en fejlbesked
+            System.err.println("Fejl under fjernelse af varer med nul mængde fra indkøbslisten: " + e.getMessage());
+        }
+    }
+
     public ArrayList<String> hentMadplan(String brugernavn) {
         ArrayList<String> madplan = new ArrayList<>();
         madplan.addAll(Arrays.asList("Mandag: ", "Tirsdag: ", "Onsdag: ", "Torsdag: ","Fredag: ","Lørdag: ","Søndag: " + "\n"));
@@ -717,36 +802,66 @@ public class DBConnector {
     }
 
 
-    public void fjernRet(int index) {
+    public String fjernRet(int index) {
+        String removedRetNavn = null; // Variabel til at gemme navnet på den fjernede ret
+
         try {
             // Opret forbindelse til databasen
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
-            // Forbered SQL-forespørgslen til at slette posten
-            String sql = "DELETE FROM madplan WHERE dag = ?";
-            PreparedStatement pstmt = conn.prepareStatement(sql);
+            // Forbered SQL-forespørgslen til at hente rettens navn baseret på indeks
+            String selectSql = "SELECT ret FROM madplan WHERE dag = ?";
+            PreparedStatement selectPstmt = conn.prepareStatement(selectSql);
+            selectPstmt.setInt(1, index);
 
-            // Indstil parameteren for PreparedStatement
-            pstmt.setInt(1, index);
+            // Udfør forespørgslen for at hente rettens navn
+            ResultSet rs = selectPstmt.executeQuery();
 
-            // Udfør sletningsforespørgslen
-            int rowsAffected = pstmt.executeUpdate();
-
-            // Tjek om der blev berørt nogen rækker (dvs. om retten blev slettet succesfuldt)
-            if (rowsAffected > 0) {
-                System.out.println("Retten er blevet fjernet fra madplanen.");
-            } else {
-                System.out.println("Der blev ikke fundet nogen ret på den angivne dag.");
+            // Hvis der blev returneret en række, gemmes rettens navn før sletning
+            if (rs.next()) {
+                removedRetNavn = rs.getString("ret");
             }
 
-            // Luk PreparedStatement og Connection
-            pstmt.close();
+            // Luk ResultSet og PreparedStatement for at hente rettens navn
+            rs.close();
+            selectPstmt.close();
+
+            // Hvis rettens navn blev fundet og gemt, fortsættes med at slette den
+            if (removedRetNavn != null) {
+                // Forbered SQL-forespørgslen til at slette retten
+                String deleteSql = "DELETE FROM madplan WHERE dag = ?";
+                PreparedStatement deletePstmt = conn.prepareStatement(deleteSql);
+
+                // Indstil parameteren for PreparedStatement
+                deletePstmt.setInt(1, index);
+
+                // Udfør sletningsforespørgslen
+                int rowsAffected = deletePstmt.executeUpdate();
+
+                // Tjek om der blev berørt nogen rækker (dvs. om retten blev slettet succesfuldt)
+                if (rowsAffected > 0) {
+                    System.out.println("Retten \"" + removedRetNavn + "\" er blevet fjernet fra madplanen.");
+                } else {
+                    System.out.println("Der blev ikke fundet nogen ret på den angivne dag.");
+                }
+
+                // Luk PreparedStatement for sletning
+                deletePstmt.close();
+            }
+
+            // Luk forbindelsen til databasen
             conn.close();
         } catch (SQLException e) {
             // Log fejlen eller vis en fejlbesked
             System.err.println("Fejl under fjernelse af ret fra madplan: " + e.getMessage());
         }
+
+        // Returner navnet på den fjernede ret (kan være null, hvis ingen ret blev fjernet)
+        return removedRetNavn;
     }
+
+
+
 
     public HashMap<String, ArrayList<String>> visRetter(String brugernavn) {
         HashMap<String, ArrayList<String>> retterOgIngredienser = new HashMap<>();
@@ -795,9 +910,6 @@ public class DBConnector {
         }
         return retterOgIngredienser;
     }
-
-
-
 
     public ArrayList<String> hentAlleRetter() {
         ArrayList<String> retterListe = new ArrayList<>();
