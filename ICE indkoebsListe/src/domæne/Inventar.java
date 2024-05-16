@@ -28,7 +28,7 @@ public class Inventar {
         HashMap<Vare, String> inventarList = dbConnector.hentInventar(dbConnector.getBrugerNavn());
         ui.displayListHashMap(inventarList);
        // inventarList.clear();
-        int input = ui.promptChoice(valg, "Vælg en handling", 1, 4);
+        int input = ui.promptChoice(valg, "Vælg en handling", 1, valg.size());
 
 
         switch (input) {
