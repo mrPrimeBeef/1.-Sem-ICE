@@ -690,7 +690,7 @@ public class DBConnector {
             // Luk forbindelsen til databasen
             conn.close();
 
-            // Hvis der var en nuværende ret, kan du gøre noget med den her, f.eks. slette den fra indkøbslisten
+            // Hvis der var en nuværende ret
             if (nuværendeRet != null) {
                 ArrayList<Vare> vareListe = hentIngredienser(nuværendeRet);
                 opdaterIndkøbslisten(vareListe);
