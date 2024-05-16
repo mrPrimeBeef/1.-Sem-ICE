@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="918fcb30-4647-4c8d-aba6-51368ea01a6b" name="Changes" comment="fjern fra indkøbsliste når man fjerner fra madplan">
+    <list default="true" id="918fcb30-4647-4c8d-aba6-51368ea01a6b" name="Changes" comment="madplan til indkøbsliste kan opdateret dag med ret på">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/6baea64a-232e-4b61-bf89-2e3797b36cba.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/6baea64a-232e-4b61-bf89-2e3797b36cba.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domæne/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domæne/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utility/DBConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility/DBConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Opgave/funktionelle krav v1.docx" beforeDir="false" afterPath="$PROJECT_DIR$/Opgave/funktionelle krav v1.docx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="main" />
+        <entry key="$PROJECT_DIR$/.." value="DevOpBranch" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -64,7 +63,7 @@
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "DevOpBranch",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Rolfj/Documents/GitHub/Cph Busniess Data/1Sem ICE/1.-Sem-ICE/ICE indkoebsListe/Doc/Static",
     "node.js.detected.package.eslint": "true",
@@ -131,6 +130,7 @@
       <workItem from="1715583353912" duration="14934000" />
       <workItem from="1715670213319" duration="4961000" />
       <workItem from="1715757971394" duration="4270000" />
+      <workItem from="1715843061271" duration="855000" />
     </task>
     <task id="LOCAL-00001" summary="KlasseDiagram v1.puml">
       <option name="closed" value="true" />
