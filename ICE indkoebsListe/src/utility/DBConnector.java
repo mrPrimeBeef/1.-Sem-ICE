@@ -630,7 +630,7 @@ public class DBConnector {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Handle the error
+            e.printStackTrace();
         }
         return ingredienser;
     }
@@ -708,7 +708,7 @@ public class DBConnector {
             PreparedStatement pstmt = conn.prepareStatement("DELETE FROM madplan WHERE brugernavn = ? AND dag = ? AND ret = ?");
 
             pstmt.setString(1, this.brugerNavn);
-            pstmt.setInt(2, indexTal); // Index + 1 for at matche med 1-baseret dagnummer
+            pstmt.setInt(2, indexTal);
             pstmt.setString(3, retnavn);
 
             pstmt.executeUpdate(); // Udfør indsættelsen
@@ -776,7 +776,7 @@ public class DBConnector {
             conn.close();
         } catch (SQLException e) {
             // Log fejlen eller vis en fejlbesked
-            System.err.println("Fejl under fjernelse af varer med nul mængde fra indkøbslisten: " + e.getMessage());
+            //System.err.println("Fejl under fjernelse af varer med nul mængde fra indkøbslisten: " + e.getMessage());
         }
     }
 

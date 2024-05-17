@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="918fcb30-4647-4c8d-aba6-51368ea01a6b" name="Changes" comment="Færdig">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6baea64a-232e-4b61-bf89-2e3797b36cba.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/6baea64a-232e-4b61-bf89-2e3797b36cba.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_09_05_2024_10_26_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_09_05_2024_10_26__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_09_05_2024_10_26_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_09_05_2024_10_26__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utility/DBConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility/DBConnector.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +135,9 @@
       <workItem from="1715670213319" duration="4961000" />
       <workItem from="1715757971394" duration="4270000" />
       <workItem from="1715843061271" duration="855000" />
-      <workItem from="1715846984897" duration="2587000" />
+      <workItem from="1715846984897" duration="4218000" />
+      <workItem from="1715852454461" duration="1559000" />
+      <workItem from="1715928493294" duration="2717000" />
     </task>
     <task id="LOCAL-00001" summary="KlasseDiagram v1.puml">
       <option name="closed" value="true" />
@@ -347,7 +355,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715846861254</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Færdig">
+      <option name="closed" value="true" />
+      <created>1715850818433</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1715850818433</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
